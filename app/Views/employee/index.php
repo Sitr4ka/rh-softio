@@ -1,5 +1,7 @@
 <?= $this->extend('base') ?>
 
+<?= $this->section('title') ?> RH | Softio<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <main class="main container-fluid">
     <header class="mt-3 mx-4">
@@ -16,60 +18,74 @@
             </div>
         </nav>
     </header>
+
+    <!-- Message alert -->
+    <?php
+    if (session()->getFlashdata("status")) {
+    ?>
+        <div class="alert alert-success alert-dismissible fade show mx-4 mt-2" role="alert">
+            <?php echo session()->getFlashdata("status"); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php
+    }
+    ?>
+    
     <div class="tab-content pt-3" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
             aria-labelledby="nav-home-tab" tabindex="0">
-            <form class="px-4" action="">
+
+            <form class="px-4" action="<?= base_url('employee/add') ?>" method="post">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
-                    <div class="col py-1">
-                        <label for="lastName">Nom</label>
+                    <div class="col">
+                        <label for="lastName" class="form-label">Nom</label>
                         <input type="text" class="form-control" name="lastName"
                             placeholder="Entrez votre nom" aria-label="Nom" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="firstName">Prénoms</label>
+                    <div class="col">
+                        <label for="firstName" class="form-label">Prénoms</label>
                         <input type="text" class="form-control" name="firstName"
                             placeholder="Entrez vos prénoms" aria-label="Last name" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="address">Adresse</label>
+                    <div class="col">
+                        <label for="address" class="form-label">Adresse</label>
                         <input type="text" class="form-control" name="address"
                             placeholder="Entrez votre adresse" aria-label="First name" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="contact">Contact</label>
+                    <div class="col">
+                        <label for="contact" class="form-label">Contact</label>
                         <input type="text" class="form-control" name="contact"
                             placeholder="Entrez votre numéro" aria-label="Last name" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="email">Email</label>
+                    <div class="col">
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email"
                             placeholder="Entrez votre email" aria-label="First name" required>
                     </div>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
-                    <div class="col py-1">
-                        <label for="cinNum">Num CIN</label>
-                        <input type="text" class="form-control" name="cinNum"
+                    <div class="col">
+                        <label for="numCin" class="form-label">Num CIN</label>
+                        <input type="text" class="form-control" name="numCin"
                             placeholder="Entrez votre numéro CIN" aria-label="First name" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="dateDelivrance">Date de délivrance</label>
-                        <input type="date" class="form-control" name="dateDelivrance"
+                    <div class="col">
+                        <label for="dateCin" class="form-label">Date de délivrance</label>
+                        <input type="date" class="form-control" name="dateCin"
                             aria-label="Last name" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="lieuDélivrance">Lieu</label>
-                        <input type="text" class="form-control" name="address"
+                    <div class="col">
+                        <label for="lieuCin" class="form-label">Lieu</label>
+                        <input type="text" class="form-control" name="lieuCin"
                             placeholder="Entrez le lieu de délivrance" aria-label="First name" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="nationalite">Nationalité</label>
+                    <div class="col">
+                        <label for="nationalite" class="form-label">Nationalité</label>
                         <input type="text" class="form-control" name="nationalite"
                             placeholder="Entrez votre nationalité" aria-label="Last name" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="etatCivil">Etat Civil</label>
+                    <div class="col">
+                        <label for="etatCivil" class="form-label">Etat Civil</label>
                         <select class="form-select" name="etatCivil"
                             aria-label="Default select example">
                             <option selected>Célibataire</option>
@@ -78,19 +94,19 @@
                     </div>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
-                    <div class="col py-1">
-                        <label for="urgenceName">Nom Urgence</label>
-                        <input type="text" class="form-control" name="urgencame"
+                    <div class="col">
+                        <label for="urgenceName" class="form-label">Nom Urgence</label>
+                        <input type="text" class="form-control" name="urgenceName"
                             placeholder="Entrez un nom d'urgence" aria-label="Nom Urgence" required>
                     </div>
-                    <div class="col py-1">
-                        <label for="urgenceNum">Contact d'Urgence</label>
+                    <div class="col">
+                        <label for="urgenceNum" class="form-label">Contact d'Urgence</label>
                         <input type="text" class="form-control" name="urgenceNum"
                             placeholder="Entrez le numéro d'urgence" aria-label="Contact d'Urgence"
                             required>
                     </div>
-                    <div class="col py-1">
-                        <label for="urgenceRelation">Relation</label>
+                    <div class="col">
+                        <label for="urgenceRelation" class="form-label">Relation</label>
                         <input type="text" class="form-control" name="urgenceRelation"
                             placeholder="Relation avec l'urgence" aria-label="Relation" required>
                     </div>
@@ -100,6 +116,7 @@
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
             </form>
+
             <div class="p-4">
                 <table class="table table-borderless table-hover table-striped mt-3 ">
                     <thead>

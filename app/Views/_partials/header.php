@@ -8,8 +8,8 @@
         </div>
     </div>
     <div class="setting-panel d-flex align-items-center justify-content-evenly">
-        <div class="color-theme border border-1 text-center align-content-center">
-            <span class="">
+        <div class="color-theme border border-1 text-center align-content-center pt-1">
+            <span>
                 <i class="fa-solid fa-palette text-light"></i>
             </span>
         </div>
