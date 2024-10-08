@@ -8,8 +8,14 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-//CREATE
+// CREATE
 $routes->post('employee/add', [Employee::class, 'add']);
 
-//READ
+// READ
 $routes->get('employee/index', [Employee::class, 'index']);
+
+// UPDATE
+$routes->put('employee/update/(:num)', [Employee::class, 'update']);
+
+// DELETE
+$routes->get('employee/delete/(:num)', [Employee::class, 'delete']);

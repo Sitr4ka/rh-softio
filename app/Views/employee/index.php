@@ -30,7 +30,7 @@
     <?php
     }
     ?>
-    
+
     <div class="tab-content pt-3" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
             aria-labelledby="nav-home-tab" tabindex="0">
@@ -141,17 +141,40 @@
                                 <td> <?= $employee['contact']     ?> </td>
                                 <td> <?= $employee['mail']        ?> </td>
                                 <td class="d-flex gap-2">
-                                    <a href="<?= base_url('employee/delete/' . $employee['idInfoPerso']) ?>" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
 
-                                    <!-- Button trigger modal -->
+                                    <!-- Delete Button modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+
+                                    <!-- Edit Button modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<?= $employee['idInfoPerso'] ?>">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                 </td>
                             </tr>
-                            <!-- Modal -->
+                            <!-- Deletion Modal -->
+                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Voulez vous vraiment supprimer cet employé ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                            <a href="<?= base_url('employee/delete/' . $employee['idInfoPerso']) ?>" class="btn btn-primary">
+                                                Continuer
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Edit Modal -->
                             <div class="modal fade" id="editModal<?= $employee['idInfoPerso'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -171,8 +194,8 @@
                                                     <input type="text" name="firstName" id="firstName" class="form form-control" value="<?= $employee['prenom'] ?>">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="adresse" class="form-label">Adresse</label>
-                                                    <input type="text" name="adresse" id="adresse" class="form form-control" value="<?= $employee['adresse'] ?>">
+                                                    <label for="address" class="form-label">Adresse</label>
+                                                    <input type="text" name="address" id="address" class="form form-control" value="<?= $employee['adresse'] ?>">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="contact" class="form-label">Contact</label>
@@ -211,8 +234,8 @@
                                                     <input type="text" name="urgenceNum" id="urgenceNum" class="form form-control" value="<?= $employee['contactUrgence'] ?>">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="relation" class="form-label">Relation</label>
-                                                    <input type="text" name="relation" id="relation" class="form form-control" value="<?= $employee['relation'] ?>">
+                                                    <label for="urgenceRelation" class="form-label">Relation</label>
+                                                    <input type="text" name="urgenceRelation" id="urgenceRelation" class="form form-control" value="<?= $employee['relation'] ?>">
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
@@ -229,6 +252,7 @@
                 </table>
             </div>
         </div>
+
         <div class="tab-pane fade text-black" id="nav-profile" role="tabpanel"
             aria-labelledby="nav-profile-tab" tabindex="0">
             <!-- Add Professional Informations -->
