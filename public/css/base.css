@@ -43,8 +43,9 @@ body {
 
 .header .left-panel .hamburger {
     cursor: pointer;
-    color: white;
+    color: rgba(255, 255, 255, 0.925);
     z-index: 2;
+    transform: scale(.9);
 }
 
 .logo img {
