@@ -20,7 +20,7 @@
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
             aria-labelledby="nav-home-tab" tabindex="0">
             <form class="px-4" action="">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-5 gy-3 mb-3">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
                     <div class="col py-1">
                         <label for="lastName">Nom</label>
                         <input type="text" class="form-control" name="lastName"
@@ -47,7 +47,7 @@
                             placeholder="Entrez votre email" aria-label="First name" required>
                     </div>
                 </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-5 gy-3 mb-3">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
                     <div class="col py-1">
                         <label for="cinNum">Num CIN</label>
                         <input type="text" class="form-control" name="cinNum"
@@ -77,7 +77,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-5 gy-3 mb-3">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
                     <div class="col py-1">
                         <label for="urgenceName">Nom Urgence</label>
                         <input type="text" class="form-control" name="urgencame"
@@ -101,7 +101,7 @@
                 </div>
             </form>
             <div class="p-4">
-                <table class="table table-bordered table-hover table-striped mt-3 ">
+                <table class="table table-borderless table-hover table-striped mt-3 ">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -449,12 +449,12 @@
 <?= $this->endSection() ?>
 
 
-<?= $this->section('stylesheet')?>
+<?= $this->section('stylesheet') ?>
 <style>
-.main {
-    min-height: calc(100vh - 60px);
-    max-height: calc(100vh - 60px);
-    overflow-y: auto;
-}
+    .main {
+        min-height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
 </style>
 <?= $this->endSection() ?>
