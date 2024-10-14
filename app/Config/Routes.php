@@ -1,12 +1,16 @@
 <?php
 
 use App\Controllers\Employee;
+use App\Controllers\InfoPro;
 use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+
+
+// Personal information CRUD
 
 // CREATE
 $routes->post('employee/add', [Employee::class, 'add']);
@@ -19,3 +23,9 @@ $routes->put('employee/update/(:num)', [Employee::class, 'update']);
 
 // DELETE
 $routes->get('employee/delete/(:num)', [Employee::class, 'delete']);
+
+
+// Profesional informations CRUD
+
+//CREATE
+$routes->post('employee/infopro/add', [InfoPro::class , 'add']);

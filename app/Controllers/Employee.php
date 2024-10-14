@@ -4,14 +4,19 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\InfoPersoModel;
+use App\Models\InfoProModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Employee extends BaseController
 {
     public function index(): string
     {
-        $model = new InfoPersoModel();
-        $data['employees'] = $model->getAll();
+        $employee = new InfoPersoModel();
+        $infoPro = new InfoProModel();
+
+        $data['employees'] = $employee->getAll();
+        $data['infoPros'] = $infoPro->getAll();
+
         return view('employee/index', $data);
     }
 
@@ -67,4 +72,5 @@ class Employee extends BaseController
         $model->update($id, $data);
         return redirect('employee/index')->with('status', 'Modification réussi');
     }
+
 }

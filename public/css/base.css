@@ -114,7 +114,7 @@ body {
 }
 
 .sidebar .nav-link:hover {
-    color: var(--secondary-color);
+    color: var(--tertiary-color);
 }
 
 .sidebar .active {
