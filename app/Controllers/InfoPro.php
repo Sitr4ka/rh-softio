@@ -63,6 +63,7 @@ class InfoPro extends BaseController
             'workingHours' => $this->request->getPost('workingHours')
         ];
 
+        
         $employees->update($id, $data);
         return redirect('employee/index')->with('status', 'Modification réussi');
 
