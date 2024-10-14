@@ -29,3 +29,6 @@ $routes->get('employee/delete/(:num)', [Employee::class, 'delete']);
 
 //CREATE
 $routes->post('employee/infopro/add', [InfoPro::class , 'add']);
+
+// UPDATE
+$routes->put('employee/infopro/update/(:segment)', [InfoPro::class, 'update']);

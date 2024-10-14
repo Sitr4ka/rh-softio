@@ -354,12 +354,12 @@
                         ?>
                             <tr>
                                 <td> <?= $infoPro['idInfoPerso'] ?></td>
-                                <td> <?= $infoPro['employeeNumber'] ?></td>
-                                <td> <?= $infoPro['positionHeld'] ?></td>
-                                <td> <?= $infoPro['hireDate'] ?></td>
-                                <td> <?= $infoPro['contractEndDate'] ?></td>
-                                <td> <?= $infoPro['workingHours'] ?></td>
-                                <td class="d-flex gap-2">
+                                <td class="text-center"> <?= $infoPro['employeeNumber'] ?></td>
+                                <td class="text-center"> <?= $infoPro['positionHeld'] ?></td>
+                                <td class="text-center"> <?= $infoPro['hireDate'] ?></td>
+                                <td class="text-center"> <?= $infoPro['contractEndDate'] ?></td>
+                                <td class="text-center"> <?= $infoPro['workingHours'] ?></td>
+                                <td class="d-flex gap-2 justify-content-center">
 
                                     <!-- Delete Button modal -->
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteInfoPro">
@@ -367,7 +367,7 @@
                                     </button>
 
                                     <!-- Edit Button modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editInfoPro<?= $employee['idInfoPerso'] ?>">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editInfoPro<?= $infoPro['employeeNumber'] ?>">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                 </td>
@@ -394,7 +394,7 @@
                             </div>
 
                             <!--Edit Modal -->
-                            <div class="modal fade" id="editInfoPro<?= $infoPro['idInfoPerso'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="editInfoPro<?= $infoPro['employeeNumber'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -402,66 +402,70 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="<?= base_url('employee/update/' . $infoPro['idInfoPerso']) ?>" method="post">
+                                            <form action="<?= base_url('employee/infopro/update/' . $infoPro['employeeNumber']) ?>" method="post">
                                                 <input type="hidden" name="_method" value="PUT">
-                                                <div class="">
-                                                    <label for="lastName" class="form-label">Nom</label>
-                                                    <input type="text" name="lastName" id="lastName" class="form form-control" value="<?= $employee['nom'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="employeeNumber" class="form-label">N° Matricule</label>
+                                                    <input type="text" class="form-control" name="employeeNumber" value="<?= $infoPro['employeeNumber'] ?>"
+                                                        placeholder="" aria-label="" required>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="firstName" class="form-label">Prénoms</label>
-                                                    <input type="text" name="firstName" id="firstName" class="form form-control" value="<?= $employee['prenom'] ?>">
+                                                <div class="col">
+                                                    <label for="classification" class="form-label">Classification</label>
+                                                    <input type="text" class="form-control" name="classification" value="<?= $infoPro['classification'] ?>"
+                                                        placeholder="" aria-label="">
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="address" class="form-label">Adresse</label>
-                                                    <input type="text" name="address" id="address" class="form form-control" value="<?= $employee['adresse'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="status" class="form-label">Etat</label>
+                                                    <select type="text" class="form-select" name="status" value="<?= $infoPro['status'] ?>"
+                                                        placeholder="" aria-label="" required>
+                                                        <option value="en service">en service</option>
+                                                        <option value="débauché">débauché</option>
+                                                    </select>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="contact" class="form-label">Contact</label>
-                                                    <input type="text" name="contact" id="contact" class="form form-control" value="<?= $employee['contact'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="contractType" class="form-label">Contrat</label>
+                                                    <select type="text" class="form-select" name="contractType" value="<?= $infoPro['contractType'] ?>"
+                                                        placeholder="" aria-label="" required>
+                                                        <option value="CDD">CDD</option>
+                                                        <option value="CDI">CDI</option>
+                                                    </select>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="email" class="form-label">Email</label>
-                                                    <input type="email" name="email" id="email" class="form form-control" value="<?= $employee['mail'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="hireDate" class="form-label">Début</label>
+                                                    <input type="date" class="form-control" name="hireDate" value="<?= $infoPro['hireDate'] ?>"
+                                                        aria-label="" required>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="numCin" class="form-label">CIN</label>
-                                                    <input type="text" name="numCin" id="numCin" class="form form-control" value="<?= $employee['numeroCin'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="contractEndDate" class="form-label">Fin</label>
+                                                    <input type="date" class="form-control" name="contractEndDate" value="<?= $infoPro['contractEndDate'] ?>"
+                                                        aria-label="">
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="dateCin" class="form-label">Date</label>
-                                                    <input type="date" name="dateCin" id="dateCin" class="form form-control" value="<?= $employee['dateCin'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="department" class="form-label">Service</label>
+                                                    <input type="text" class="form-control" name="department" value="<?= $infoPro['department'] ?>"
+                                                        placeholder="" aria-label="">
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="lieuCin" class="form-label">Lieu</label>
-                                                    <input type="text" name="lieuCin" id="lieuCin" class="form form-control" value="<?= $employee['lieuCin'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="workLocation" class="form-label">Lieu</label>
+                                                    <input type="text" class="form-control" name="workLocation" value="<?= $infoPro['workLocation'] ?>"
+                                                        placeholder="" aria-label="" required>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="nationalite" class="form-label">Nationalité</label>
-                                                    <input type="text" name="nationalite" id="nationalite" class="form form-control" value="<?= $employee['nationalité'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="positionHeld" class="form-label">Poste</label>
+                                                    <input type="text" class="form-control" name="positionHeld" value="<?= $infoPro['positionHeld'] ?>"
+                                                        placeholder="" aria-label="" required>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="etatCivil" class="form-label">Etat Civil</label>
-                                                    <input type="text" name="etatCivil" id="etatCivil" class="form form-control" value="<?= $employee['etatCivil'] ?>">
+                                                <div class="col mb-4">
+                                                    <label for="workingHours" class="form-label">Heures de travail</label>
+                                                    <input type="number" class="form-control" name="workingHours" value="<?= $infoPro['workingHours'] ?>"
+                                                        placeholder="" aria-label="" required>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="urgenceName" class="form-label">Urgence</label>
-                                                    <input type="text" name="urgenceName" id="urgenceName" class="form form-control" value="<?= $employee['nomUrgence'] ?>">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="urgenceNum" class="form-label">Contact Urgence</label>
-                                                    <input type="text" name="urgenceNum" id="urgenceNum" class="form form-control" value="<?= $employee['contactUrgence'] ?>">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="urgenceRelation" class="form-label">Relation</label>
-                                                    <input type="text" name="urgenceRelation" id="urgenceRelation" class="form form-control" value="<?= $employee['relation'] ?>">
-                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                            <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                                        </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

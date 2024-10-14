@@ -44,4 +44,27 @@ class InfoPro extends BaseController
 
         }
     }
+
+    public function update($employeeNumber = null)
+    {
+        $employees = new InfoProModel();
+        $employee = $employees->where('employeeNumber', $employeeNumber)->first();
+        $id = $employee['idInfoPro'];
+        $data = [
+            'employeeNumber'=> $this->request->getPost('employeeNumber'),
+            'contractType' => $this->request->getPost('contractType'),
+            'classification' => $this->request->getPost('classification'),
+            'hireDate' => $this->request->getPost('hireDate'),
+            'contractEndDate' => $this->request->getPost('contractEndDate'),
+            'status' => $this->request->getPost('status'),
+            'department' => $this->request->getPost('department'),
+            'workLocation' => $this->request->getPost('workLocation'),
+            'positionHeld' => $this->request->getPost('positionHeld'),
+            'workingHours' => $this->request->getPost('workingHours')
+        ];
+
+        $employees->update($id, $data);
+        return redirect('employee/index')->with('status', 'Modification réussi');
+
+    }
 }
