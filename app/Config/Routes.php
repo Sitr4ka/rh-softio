@@ -2,16 +2,22 @@
 
 use App\Controllers\Employee;
 use App\Controllers\InfoPro;
+use App\Controllers\Home;
 use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
  * 
  */
-// $routes->get('/', 'Home::index');
 
 
 // Personal information CRUD
+
+
+//AUTHENTIFICATION
+$routes->get('auth/login', [Home::class, 'login']);
+$routes->get('auth/register', [Home::class, 'register']);
+$routes->post('home/registration', [Home::class, 'registration']);
 
 // CREATE
 $routes->post('employee/add', [Employee::class, 'add']);

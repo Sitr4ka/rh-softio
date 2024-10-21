@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Employee extends BaseController
 {
+
     public function index(): string
     {
         $employee = new InfoPersoModel();
