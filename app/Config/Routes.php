@@ -6,8 +6,9 @@ use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
+ * 
  */
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
 
 
 // Personal information CRUD
@@ -16,7 +17,7 @@ $routes->get('/', 'Home::index');
 $routes->post('employee/add', [Employee::class, 'add']);
 
 // READ
-$routes->get('employee/index', [Employee::class, 'index']);
+$routes->get('/', [Employee::class, 'index']);
 
 // UPDATE
 $routes->put('employee/update/(:num)', [Employee::class, 'update']);
@@ -32,3 +33,6 @@ $routes->post('employee/infopro/add', [InfoPro::class , 'add']);
 
 // UPDATE
 $routes->put('employee/infopro/update/(:segment)', [InfoPro::class, 'update']);
+
+// DELETE
+$routes->get('employee/infopro/delete/(:num)',[InfoPro::class, 'delete']);

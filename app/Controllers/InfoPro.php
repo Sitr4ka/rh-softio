@@ -23,12 +23,10 @@ class InfoPro extends BaseController
             $infoPro = new InfoProModel();
             $data = [
                 'idInfoPerso' => $employeeId,
-                'employeeNumber'=> $this->request->getPost('employeeNumber'),
                 'contractType' => $this->request->getPost('contractType'),
                 'classification' => $this->request->getPost('classification'),
                 'hireDate' => $this->request->getPost('hireDate'),
                 'contractEndDate' => $this->request->getPost('contractEndDate'),
-                'status' => $this->request->getPost('status'),
                 'department' => $this->request->getPost('department'),
                 'workLocation' => $this->request->getPost('workLocation'),
                 'positionHeld' => $this->request->getPost('positionHeld'),
@@ -36,11 +34,11 @@ class InfoPro extends BaseController
             ];
 
             $infoPro->save($data);
-            return redirect('employee/index')->with('status', 'Enregistrement des informations professionnelles réussi');
+            return redirect('/')->with('status', 'Enregistrement des informations professionnelles réussi');
 
         } else {
 
-            return redirect('employee/index')->with('status', 'Employé non trouvé');
+            return redirect('/')->with('status', 'Employé non trouvé');
 
         }
     }
@@ -48,10 +46,9 @@ class InfoPro extends BaseController
     public function update($employeeNumber = null)
     {
         $employees = new InfoProModel();
-        $employee = $employees->where('employeeNumber', $employeeNumber)->first();
+        $employee = $employees->where('idInfoPro', $employeeNumber)->first();
         $id = $employee['idInfoPro'];
         $data = [
-            'employeeNumber'=> $this->request->getPost('employeeNumber'),
             'contractType' => $this->request->getPost('contractType'),
             'classification' => $this->request->getPost('classification'),
             'hireDate' => $this->request->getPost('hireDate'),
@@ -65,7 +62,15 @@ class InfoPro extends BaseController
 
         
         $employees->update($id, $data);
-        return redirect('employee/index')->with('status', 'Modification réussi');
+        return redirect('/')->with('status', 'Modification réussi');
 
+    }
+    
+    public function delete($id = null) 
+    {
+        $model = new InfoProModel();
+        $model->delete($id);
+
+        return redirect()->back()->with('status', 'Suppression réussi');
     }
 }

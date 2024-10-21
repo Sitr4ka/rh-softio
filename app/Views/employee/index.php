@@ -30,6 +30,18 @@
     <?php
     }
     ?>
+    
+    <?php
+        if (session()->getFlashdata("error")) {
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show mx-4 mt-2" role="alert">
+                <?php echo session()->getFlashdata("status"); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        }
+    ?>
+    
 
     <div class="tab-content pt-3" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
@@ -144,7 +156,7 @@
                                 <td class="d-flex gap-2">
 
                                     <!-- Delete Button modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $employee['idInfoPerso'] ?>">
                                         <i class="fa fa-trash"></i>
                                     </button>
 
@@ -155,7 +167,7 @@
                                 </td>
                             </tr>
                             <!-- Deletion Modal -->
-                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal<?= $employee['idInfoPerso'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -259,20 +271,10 @@
 
             <!-- Add Professional Informations -->
             <form class="px-4" action="<?= base_url('employee/infopro/add') ?>" method="post">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
-                    <div class="col">
-                        <label for="employeeNumber" class="form-label">N° Matricule</label>
-                        <input type="text" class="form-control" name="employeeNumber"
-                            placeholder="" aria-label="" required>
-                    </div>
+                <div class="row row-cols-1 gy-2 mb-3">
                     <div class="col">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email"
-                            placeholder="" aria-label="" required>
-                    </div>
-                    <div class="col">
-                        <label for="contact" class="form-label">Contact</label>
-                        <input type="text" class="form-control" name="contact"
                             placeholder="" aria-label="" required>
                     </div>
                     <div class="col">
@@ -280,16 +282,6 @@
                         <input type="text" class="form-control" name="classification"
                             placeholder="" aria-label="">
                     </div>
-                    <div class="col">
-                        <label for="status" class="form-label">Etat</label>
-                        <select type="text" class="form-select" name="status"
-                            placeholder="" aria-label="" required>
-                            <option value="en service">en service</option>
-                            <option value="débauché">débauché</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
                     <div class="col">
                         <label for="contractType" class="form-label">Contrat</label>
                         <select type="text" class="form-select" name="contractType"
@@ -318,8 +310,6 @@
                         <input type="text" class="form-control" name="workLocation"
                             placeholder="" aria-label="" required>
                     </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
                     <div class="col">
                         <label for="positionHeld" class="form-label">Poste</label>
                         <input type="text" class="form-control" name="positionHeld"
@@ -354,7 +344,7 @@
                         ?>
                             <tr>
                                 <td> <?= $infoPro['idInfoPerso'] ?></td>
-                                <td class="text-center"> <?= $infoPro['employeeNumber'] ?></td>
+                                <td class="text-center"> <?= $infoPro['idInfoPro'] ?></td>
                                 <td class="text-center"> <?= $infoPro['positionHeld'] ?></td>
                                 <td class="text-center"> <?= $infoPro['hireDate'] ?></td>
                                 <td class="text-center"> <?= $infoPro['contractEndDate'] ?></td>
@@ -362,18 +352,18 @@
                                 <td class="d-flex gap-2 justify-content-center">
 
                                     <!-- Delete Button modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteInfoPro">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteInfoPro<?= $infoPro['idInfoPro'] ?>">
                                         <i class="fa fa-trash"></i>
                                     </button>
 
                                     <!-- Edit Button modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editInfoPro<?= $infoPro['employeeNumber'] ?>">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editInfoPro<?= $infoPro['idInfoPro'] ?>">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                 </td>
                             </tr>
                             <!-- Deletion Modal -->
-                            <div class="modal fade" id="deleteInfoPro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteInfoPro<?= $infoPro['idInfoPro'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -385,7 +375,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                            <a href="<?= base_url('employee/delete/' . $infoPro['idInfoPerso']) ?>" class="btn btn-primary">
+                                            <a href="<?= base_url('employee/infopro/delete/' . $infoPro['idInfoPro']) ?>" class="btn btn-primary">
                                                 Continuer
                                             </a>
                                         </div>
@@ -394,7 +384,7 @@
                             </div>
 
                             <!--Edit Modal -->
-                            <div class="modal fade" id="editInfoPro<?= $infoPro['employeeNumber'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="editInfoPro<?= $infoPro['idInfoPro'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -402,12 +392,12 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="<?= base_url('employee/infopro/update/' . $infoPro['employeeNumber']) ?>" method="post">
+                                            <form action="<?= base_url('employee/infopro/update/' . $infoPro['idInfoPro']) ?>" method="post">
                                                 <input type="hidden" name="_method" value="PUT">
                                                 <div class="col mb-4">
                                                     <label for="employeeNumber" class="form-label">N° Matricule</label>
-                                                    <input type="text" class="form-control" name="employeeNumber" value="<?= $infoPro['employeeNumber'] ?>"
-                                                        placeholder="" aria-label="" required>
+                                                    <input type="text" class="form-control" name="employeeNumber" value="<?= $infoPro['idInfoPro'] ?>"
+                                                        placeholder="" aria-label="" disabled>
                                                 </div>
                                                 <div class="col">
                                                     <label for="classification" class="form-label">Classification</label>
@@ -481,45 +471,49 @@
 
 
 <?= $this->section('stylesheet') ?>
-<style>
-    :root {
-        --primary-color: #4c4a4d;
-        --secondary-color: #5c5560;
-        --tertiary-color: #ecf0f1;
 
-        --text-color: #bdb6c0;
-    }
-
-    .main {
-        min-height: calc(100vh - 60px);
-        max-height: calc(100vh - 60px);
-        overflow-y: auto;
-    }
-
-    .tab-pane label {
-        padding-bottom: 5px;
-    }
-
-    .nav-tabs .nav-link {
-        background: white;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        color: var(--primary-color);
-    }
-
-    .nav-tabs .nav-link:hover {
-        color: white;
-        background: var(--secondary-color);
-        opacity: .5;
-        border-top-right-radius: 15px;
-        border-top-left-radius: 15px;
-    }
-
-    .nav-tabs .nav-link.active {
-        color: white;
-        background: var(--secondary-color);
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-</style>
+    <style>
+        :root {
+            --primary-color: #4c4a4d;
+            --secondary-color: #5c5560;
+            --tertiary-color: #ecf0f1;
+    
+            --text-color: #bdb6c0;
+        }
+    
+        .main {
+            min-height: calc(100vh - 60px);
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+    
+        .tab-pane label {
+            padding-bottom: 5px;
+        }
+    
+        .nav-tabs .nav-link {
+            background: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            color: var(--primary-color);
+        }
+    
+        .nav-tabs .nav-link:hover {
+            color: white;
+            background: var(--secondary-color);
+            opacity: .5;
+            border-top-right-radius: 15px;
+            border-top-left-radius: 15px;
+        }
+    
+        .nav-tabs .nav-link.active {
+            color: white;
+            background: var(--secondary-color);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+    </style>
+    
 <?= $this->endSection() ?>
+
+
