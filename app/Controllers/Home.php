@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Hash;
 use App\Models\UserModel;
 
 class Home extends BaseController
@@ -32,10 +33,12 @@ class Home extends BaseController
             return view('auth/register', ['validation' => $this->validator]);
         } else {
             $user = new UserModel();
+            
+            $password = $this->request->getPost('password');
             $data = [
                 'username' => $this->request->getPost('username'),
                 'email' => $this->request->getPost('email'),
-                'password' => $this->request->getPost('password'),
+                'password' => Hash::make($password),
             ];
 
             $user->save($data);
