@@ -7,7 +7,7 @@ use App\Models\UserModel;
 class Home extends BaseController
 {
     public function __construct() {
-        helper(['url', 'form']);
+        helper(['url', 'Form']);
     }
 
     public function login(): string
@@ -31,7 +31,15 @@ class Home extends BaseController
         if(!$validation) {
             return view('auth/register', ['validation' => $this->validator]);
         } else {
-            echo 'form validated successfully';
+            $user = new UserModel();
+            $data = [
+                'username' => $this->request->getPost('username'),
+                'email' => $this->request->getPost('email'),
+                'password' => $this->request->getPost('password'),
+            ];
+
+            $user->save($data);
+            return redirect('/')->with('status', 'Utilisateur enregistré avec success');
         }
     }
 
