@@ -61,7 +61,7 @@
             </div>
             <div class="form w-50  d-flex flex-column justify-content-center px-4">
                 <div class="form-title">
-                    <h2 class="align-self-start ms-5">Connexion</h2>
+                    <h3 class="align-self-start">Connexion</h3>
                     <hr>
                 </div>
                 <form action="<?= base_url('home/registration'); ?>" method="post">

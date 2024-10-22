@@ -61,22 +61,31 @@
             </div>
             <div class="form w-50  d-flex flex-column justify-content-center px-4">
                 <div class="form-title">
-                    <h2 class="align-self-start ms-5">Inscription</h2>
+                    <h3 class="align-self-start mt-4">Inscription</h3>
                     <hr>
                 </div>
                 <form action="<?= base_url('home/registration'); ?>" method="post">
                     <?= csrf_field(); ?>
                     <div class="mb-3">
                         <label for="username" class="form-label">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="username" name="username">
+                        <span class="text-danger ">
+                            <?= isset($validation) ? display_error($validation, 'username') : '' ?>
+                        </span>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="email" name="email">
+                        <span class="text-danger ">
+                            <?= isset($validation) ? display_error($validation, 'email') : '' ?>
+                        </span>
                     </div>
-                    <div class="mb-3">
+                    <div>
                         <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" aria-describedby="emailHelp">
+                        <input type="password" class="form-control" id="password" name="password">
+                        <span class="text-danger ">
+                            <?= isset($validation) ? display_error($validation, 'password') : '' ?>
+                        </span>
                     </div>
                     <div class="mb-3 d-flex align-items-center">
                         <button type="submit" class="btn btn-primary w-50 m-2">Submit</button>
