@@ -23,7 +23,7 @@ class Home extends BaseController
     public function registration() {
         
         $validation = $this->validate([
-            'username' => 'required',
+            'username' => 'required|is_unique[users.username]',
             'email' => 'required|valid_email|is_unique[users.email]',
             'password' => 'required|min_length[5]|max_length[12]',
         ]);
@@ -39,7 +39,7 @@ class Home extends BaseController
             ];
 
             $user->save($data);
-            return redirect('/')->with('status', 'Utilisateur enregistré avec success');
+            return redirect('auth/login')->with('status', 'Utilisateur enregistré avec success');
         }
     }
 
