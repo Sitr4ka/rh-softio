@@ -64,28 +64,38 @@
                     <h3 class="align-self-start mt-4">Inscription</h3>
                     <hr>
                 </div>
-                <form action="<?= base_url('home/registration'); ?>" method="post">
+                <form action="<?= base_url('auth/registration'); ?>" method="post">
                     <?= csrf_field(); ?>
+
+                    <!-- Check if there are errors -->
+                    <?php $errors = session()->getFlashdata('errors'); ?>
+
                     <div class="mb-3">
                         <label for="username" class="form-label">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" id="username" name="username">
-                        <span class="text-danger ">
-                            <?= isset($validation) ? display_error($validation, 'username') : '' ?>
-                        </span>
+                        <input type="text" class="form-control" id="username" name="username" value="<?= old('username') ?>">
+                        <?php if (isset($errors['username'])): ?>
+                            <span class="text-danger">
+                                <?= esc($errors['username']) ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                        <span class="text-danger ">
-                            <?= isset($validation) ? display_error($validation, 'email') : '' ?>
-                        </span>
+                        <input type="email" class="form-control" id="email" name="email" value="<?= old('email') ?>">
+                        <?php if (isset($errors['email'])): ?>
+                            <span class="text-danger">
+                                <?= esc($errors['email']) ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <div>
                         <label for="password" class="form-label">Mot de passe</label>
                         <input type="password" class="form-control" id="password" name="password">
-                        <span class="text-danger ">
-                            <?= isset($validation) ? display_error($validation, 'password') : '' ?>
-                        </span>
+                        <?php if (isset($errors['password'])): ?>
+                            <span class="text-danger">
+                                <?= esc($errors['password']) ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <div class="mb-3 d-flex align-items-center">
                         <button type="submit" class="btn btn-primary w-50 m-2">Submit</button>

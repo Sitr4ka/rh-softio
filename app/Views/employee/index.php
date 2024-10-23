@@ -31,18 +31,6 @@
     }
     ?>
     
-    <?php
-        if (session()->getFlashdata("error")) {
-        ?>
-            <div class="alert alert-warning alert-dismissible fade show mx-4 mt-2" role="alert">
-                <?php echo session()->getFlashdata("status"); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php
-        }
-    ?>
-    
-
     <div class="tab-content pt-3" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
             aria-labelledby="nav-home-tab" tabindex="0">

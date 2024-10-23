@@ -2,7 +2,7 @@
 
 use App\Controllers\Employee;
 use App\Controllers\InfoPro;
-use App\Controllers\Home;
+use App\Controllers\Auth;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -15,9 +15,10 @@ use CodeIgniter\Router\RouteCollection;
 
 
 //AUTHENTIFICATION
-$routes->get('auth/login', [Home::class, 'login']);
-$routes->get('auth/register', [Home::class, 'register']);
-$routes->post('home/registration', [Home::class, 'registration']);
+$routes->get('auth/login', [Auth::class, 'login']);
+$routes->post('auth', [Auth::class, 'auth']);
+$routes->get('auth/register', [Auth::class, 'register']);
+$routes->post('auth/registration', [Auth::class, 'registration']);
 
 // CREATE
 $routes->post('employee/add', [Employee::class, 'add']);

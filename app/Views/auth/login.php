@@ -63,16 +63,37 @@
                 <div class="form-title">
                     <h3 class="align-self-start">Connexion</h3>
                     <hr>
+                    <?php
+                    if (session()->getFlashdata("status")) {
+                    ?>
+                        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                            <?php echo session()->getFlashdata("status"); ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php
+                    }
+                    ?>
+
+                    <?php
+                    if (session()->getFlashdata("errors")) {
+                    ?>
+                        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                            <?php echo session()->getFlashdata("errors"); ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
-                <form action="<?= base_url('home/registration'); ?>" method="post">
+                <form action="<?= base_url('auth'); ?>" method="post">
                     <?= csrf_field(); ?>
                     <div class="mb-3">
                         <label for="username" class="form-label">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" aria-describedby="emailHelp">
+                        <input type="password" class="form-control" id="password" name="password" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 d-flex align-items-center">
                         <button type="submit" class="btn btn-primary w-50 m-2">Submit</button>
