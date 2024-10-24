@@ -19,12 +19,17 @@ $routes->get('auth/login', [Auth::class, 'login']);
 $routes->post('auth', [Auth::class, 'auth']);
 $routes->get('auth/register', [Auth::class, 'register']);
 $routes->post('auth/registration', [Auth::class, 'registration']);
+// Redirige vers auth/login
+$routes->get('/', function() {
+    return redirect()->to('/auth/login');
+});
+
 
 // CREATE
 $routes->post('employee/add', [Employee::class, 'add']);
 
 // READ
-$routes->get('/', [Employee::class, 'index']);
+$routes->get('home', [Employee::class, 'index']);
 
 // UPDATE
 $routes->put('employee/update/(:num)', [Employee::class, 'update']);

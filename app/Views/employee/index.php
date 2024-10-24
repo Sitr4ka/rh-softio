@@ -30,13 +30,14 @@
     <?php
     }
     ?>
-    
+
     <div class="tab-content pt-3" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
             aria-labelledby="nav-home-tab" tabindex="0">
 
             <!-- Add Personal Informations -->
             <form class="px-4" action="<?= base_url('employee/add') ?>" method="post">
+
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
                     <div class="col">
                         <label for="lastName" class="form-label">Nom</label>
@@ -460,48 +461,46 @@
 
 <?= $this->section('stylesheet') ?>
 
-    <style>
-        :root {
-            --primary-color: #4c4a4d;
-            --secondary-color: #5c5560;
-            --tertiary-color: #ecf0f1;
-    
-            --text-color: #bdb6c0;
-        }
-    
-        .main {
-            min-height: calc(100vh - 60px);
-            max-height: calc(100vh - 60px);
-            overflow-y: auto;
-        }
-    
-        .tab-pane label {
-            padding-bottom: 5px;
-        }
-    
-        .nav-tabs .nav-link {
-            background: white;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-            color: var(--primary-color);
-        }
-    
-        .nav-tabs .nav-link:hover {
-            color: white;
-            background: var(--secondary-color);
-            opacity: .5;
-            border-top-right-radius: 15px;
-            border-top-left-radius: 15px;
-        }
-    
-        .nav-tabs .nav-link.active {
-            color: white;
-            background: var(--secondary-color);
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
-    </style>
-    
+<style>
+    :root {
+        --primary-color: #4c4a4d;
+        --secondary-color: #5c5560;
+        --tertiary-color: #ecf0f1;
+
+        --text-color: #bdb6c0;
+    }
+
+    .main {
+        min-height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+
+    .tab-pane label {
+        padding-bottom: 5px;
+    }
+
+    .nav-tabs .nav-link {
+        background: white;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        color: var(--primary-color);
+    }
+
+    .nav-tabs .nav-link:hover {
+        color: white;
+        background: var(--secondary-color);
+        opacity: .5;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: white;
+        background: var(--secondary-color);
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+</style>
+
 <?= $this->endSection() ?>
-
-

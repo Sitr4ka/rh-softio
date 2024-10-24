@@ -10,13 +10,22 @@ use CodeIgniter\HTTP\ResponseInterface;
 class Employee extends BaseController
 {
 
-    public function index(): string
+    public function index()
     {
+        $user = session()->get('user');
+        
+        if(!$user) {
+            return redirect()->back()->with('errors', "Vous n'êtes pas connecté");
+        }
+
         $employee = new InfoPersoModel();
         $infoPro = new InfoProModel();
 
-        $data['employees'] = $employee->getAll();
-        $data['infoPros'] = $infoPro->getAll();
+        $data = [
+            'employees' => $employee->getAll(),
+            'infoPros'  => $infoPro->getAll(),
+            'user'      => $user,
+        ];
 
         return view('employee/index', $data);
     }
@@ -28,7 +37,7 @@ class Employee extends BaseController
         
         if ($this->checkEmail($email))
         {
-            return redirect('/')->with('error', 'Cet email est déjà utilisé');
+            return redirect('home')->with('error', 'Cet email est déjà utilisé');
         } else {
             $data = [
                 'nom' => $this->request->getPost('lastName'),
@@ -48,7 +57,7 @@ class Employee extends BaseController
     
             $infoModels->save($data);
     
-            return redirect('/')->with('status', 'Enregistrement réussi');
+            return redirect('home')->with('status', 'Enregistrement réussi');
             
         }
         
@@ -81,7 +90,7 @@ class Employee extends BaseController
         ];
 
         $model->update($id, $data);
-        return redirect('/')->with('status', 'Modification réussi');
+        return redirect('home')->with('status', 'Modification réussi');
     }
     
     function checkEmail($email) {

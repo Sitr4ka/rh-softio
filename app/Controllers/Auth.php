@@ -14,6 +14,7 @@ class Auth extends BaseController
 
     public function login(): string
     {
+        session()->destroy();
         return view('auth/login');
     }
 
@@ -51,8 +52,8 @@ class Auth extends BaseController
                         'username' => $user->username,
                         'email' => $user->email
                     ]);
-                    dd(session()->get('user'));
-                    return redirect('/');
+                    
+                    return redirect('home');
                 }
             }
         }
