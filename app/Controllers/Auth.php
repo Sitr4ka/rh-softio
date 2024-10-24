@@ -43,10 +43,14 @@ class Auth extends BaseController
 
                 if (!$password_check) {
                     return redirect()->back()->with('errors', 'Mot de passe incorrect');
-                }
-                else {
-                    return redirect('/')->with('status', 'utilisateur connecté');
-
+                } else {
+                    session()->set('user', [
+                        'id' => $user->id,
+                        'username' => $user->username,
+                        'email' => $user->email
+                    ]);
+                    dd(session()->get('user'));
+                    return redirect('/');
                 }
             }
         }
@@ -86,5 +90,3 @@ class Auth extends BaseController
         }
     }
 }
-
-// return view('auth/register', ['validation' => $this->validator]);
