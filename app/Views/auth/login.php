@@ -77,23 +77,39 @@
                     <?php
                     if (session()->getFlashdata("errors")) {
                     ?>
-                        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                        <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
                             <?php echo session()->getFlashdata("errors"); ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php
                     }
                     ?>
+
+
                 </div>
                 <form action="<?= base_url('auth'); ?>" method="post">
                     <?= csrf_field(); ?>
+
+                    <!-- Check if there are errors -->
+                    <?php $errors = session()->getFlashdata('validation_errors'); ?>
+
                     <div class="mb-3">
                         <label for="username" class="form-label">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="username" name="username">
+                        <?php if (isset($errors['username'])): ?>
+                            <span class="text-danger">
+                                <?= esc($errors['username']) ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" aria-describedby="emailHelp">
+                        <input type="password" class="form-control" id="password" name="password">
+                        <?php if (isset($errors['password'])): ?>
+                            <span class="text-danger">
+                                <?= esc($errors['password']) ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <div class="mb-3 d-flex align-items-center">
                         <button type="submit" class="btn btn-primary w-50 m-2">Submit</button>

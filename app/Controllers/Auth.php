@@ -31,8 +31,10 @@ class Auth extends BaseController
         if (!$validation) {
 
             $errors = $this->validator->getErrors();
-            return redirect()->back()->with('errors', $errors);
+            return redirect()->back()->with('validation_errors', $errors);
+
         } else {
+            
             $users = new UserModel();
             $user = $users->where('username', $data['username'])->first();
 
