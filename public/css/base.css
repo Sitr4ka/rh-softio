@@ -77,6 +77,16 @@ body {
 .setting-panel span i {
     scale: 1.3;
 }
+
+.userInfo {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 50px;
+    padding:8px 10px;
+    background-color: white;
+    border-radius: 5px;
+}
 /*  || MAIN CONTENT */
 
 .body {

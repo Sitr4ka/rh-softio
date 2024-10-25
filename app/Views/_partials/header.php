@@ -13,16 +13,16 @@
                 <i class="fa-solid fa-palette text-light"></i>
             </span>
         </div>
-        <div class="profil border border-1 text-center align-content-center">
-            <span id="user_icon">
+        <div id="user_icon" class="profil border border-1 text-center align-content-center">
+            <span>
                 <i class="fa-solid fa-user-tie text-light"></i>
             </span>
         </div>
-        <div id="userInfo" class="position-absolute d-flex flex-column d-none" style="top: 65px" >
-            <span id="username" class="ml-2">
+        <div id="userInfo" class="userInfo d-none">
+            <span id="username">
                 <?= $user['username'] ?>
             </span>
-            <a href="<?= base_url('auth/login') ?>">Déconnexion</a>
+            <a href="<?= base_url('auth/login') ?>" class="link-info nav-link">Déconnexion</a>
         </div>
     </div>
 </header
