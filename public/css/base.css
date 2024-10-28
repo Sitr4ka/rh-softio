@@ -25,6 +25,7 @@ body {
     overflow-y: hidden;
 }
 
+/* || Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -87,6 +88,8 @@ body {
     background-color: white;
     border-radius: 5px;
 }
+
+
 /*  || MAIN CONTENT */
 
 .body {
@@ -102,7 +105,8 @@ body {
 #sidebar {
     min-width: 220px;
     max-width: 220px;
-    max-height: 100vh;
+    min-height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
     padding-top: 20px;
     background: var(--primary-color);
     overflow: hidden;
@@ -124,6 +128,10 @@ body {
 .sidebar .nav-item span {
     margin-right: 10px;
     color: white;
+}
+
+.nav-item i {
+    width: 20px;
 }
 
 .sidebar .nav-link {

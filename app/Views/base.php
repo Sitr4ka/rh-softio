@@ -30,6 +30,8 @@
         crossorigin="anonymous"></script>
 
     <script src="<?= base_url('js/script.js') ?>"></script>
+    <?= $this->renderSection('script') ?>
+    
 </body>
 
 </html>

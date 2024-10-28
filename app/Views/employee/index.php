@@ -504,3 +504,9 @@
 </style>
 
 <?= $this->endSection() ?>
+
+<?= $this->section('script') ?>
+    <script>
+        employeeNav.classList.add('active')
+    </script>
+<?= $this->endSection() ?>

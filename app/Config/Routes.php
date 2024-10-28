@@ -1,8 +1,11 @@
 <?php
 
+use App\Controllers\Auth;
 use App\Controllers\Employee;
 use App\Controllers\InfoPro;
-use App\Controllers\Auth;
+use App\Controllers\Scoring;
+use App\Controllers\Configuration;
+use App\Controllers\Payment;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -48,3 +51,18 @@ $routes->put('employee/infopro/update/(:segment)', [InfoPro::class, 'update']);
 
 // DELETE
 $routes->get('employee/infopro/delete/(:num)',[InfoPro::class, 'delete']);
+
+
+//Payment
+
+//READ
+$routes->get('home/payment', [Payment::class, 'index']);
+
+//Scoring
+
+//READ
+$routes->get('home/scoring', [Scoring::class, 'index']);
+
+
+//config
+$routes->get('home/config', [Configuration::class, 'config']);
