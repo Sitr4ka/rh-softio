@@ -3,6 +3,7 @@
 <?= $this->section('title') ?> RH | Softio<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
 <main class="main container-fluid">
     <header class="mt-3 mx-4">
         <nav>
@@ -38,55 +39,53 @@
             <!-- Add Personal Informations -->
             <form class="px-4" action="<?= base_url('employee/add') ?>" method="post">
 
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
-                    <div class="col">
+                <div class="row row-cols-1 gx-2 gy-2 mb-3">
+                    <div class="col mb-3">
                         <label for="lastName" class="form-label">Nom</label>
                         <input type="text" class="form-control" name="lastName"
                             placeholder="Entrez votre nom" aria-label="Nom" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="firstName" class="form-label">Prénoms</label>
                         <input type="text" class="form-control" name="firstName"
                             placeholder="Entrez vos prénoms" aria-label="Last name" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="address" class="form-label">Adresse</label>
                         <input type="text" class="form-control" name="address"
                             placeholder="Entrez votre adresse" aria-label="First name" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="contact" class="form-label">Contact</label>
                         <input type="text" class="form-control" name="contact"
                             placeholder="Entrez votre numéro" aria-label="Last name" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email"
                             placeholder="Entrez votre email" aria-label="First name" required>
                     </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="numCin" class="form-label">Num CIN</label>
                         <input type="text" class="form-control" name="numCin"
                             placeholder="Entrez votre numéro CIN" aria-label="First name" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="dateCin" class="form-label">Date de délivrance</label>
                         <input type="date" class="form-control" name="dateCin"
                             aria-label="Last name" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="lieuCin" class="form-label">Lieu</label>
                         <input type="text" class="form-control" name="lieuCin"
                             placeholder="Entrez le lieu de délivrance" aria-label="First name" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="nationalite" class="form-label">Nationalité</label>
                         <input type="text" class="form-control" name="nationalite"
                             placeholder="Entrez votre nationalité" aria-label="Last name" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="etatCivil" class="form-label">Etat Civil</label>
                         <select class="form-select" name="etatCivil"
                             aria-label="Default select example">
@@ -94,28 +93,26 @@
                             <option value="marie">Marié</option>
                         </select>
                     </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-2 gy-2 mb-3">
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="urgenceName" class="form-label">Nom Urgence</label>
                         <input type="text" class="form-control" name="urgenceName"
                             placeholder="Entrez un nom d'urgence" aria-label="Nom Urgence" required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="urgenceNum" class="form-label">Contact d'Urgence</label>
                         <input type="text" class="form-control" name="urgenceNum"
                             placeholder="Entrez le numéro d'urgence" aria-label="Contact d'Urgence"
                             required>
                     </div>
-                    <div class="col">
+                    <div class="col mb-3">
                         <label for="urgenceRelation" class="form-label">Relation</label>
                         <input type="text" class="form-control" name="urgenceRelation"
                             placeholder="Relation avec l'urgence" aria-label="Relation" required>
                     </div>
 
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </div>
                 </div>
             </form>
 
@@ -273,21 +270,21 @@
                     </div>
                     <div class="col">
                         <label for="contractType" class="form-label">Contrat</label>
-                        <select type="text" class="form-select" name="contractType"
+                        <select type="text" id="contractType" class="form-select" name="contractType"
                             placeholder="" aria-label="" required>
+                            <option selected>CDI</option>
                             <option value="CDD">CDD</option>
-                            <option value="CDI">CDI</option>
                         </select>
                     </div>
                     <div class="col">
                         <label for="hireDate" class="form-label">Début</label>
-                        <input type="date" class="form-control" name="hireDate"
+                        <input type="date" id="hireDate" class="form-control" name="hireDate"
                             aria-label="" required>
                     </div>
                     <div class="col">
                         <label for="contractEndDate" class="form-label">Fin</label>
-                        <input type="date" class="form-control" name="contractEndDate"
-                            aria-label="">
+                        <input type="date" id="contractEndDate" class="form-control" name="contractEndDate"
+                            aria-label="" disabled>
                     </div>
                     <div class="col">
                         <label for="department" class="form-label">Service</label>
@@ -405,8 +402,8 @@
                                                     <label for="contractType" class="form-label">Contrat</label>
                                                     <select type="text" class="form-select" name="contractType" value="<?= $infoPro['contractType'] ?>"
                                                         placeholder="" aria-label="" required>
-                                                        <option value="CDD">CDD</option>
                                                         <option value="CDI">CDI</option>
+                                                        <option value="CDD">CDD</option>
                                                     </select>
                                                 </div>
                                                 <div class="col mb-4">
@@ -506,7 +503,17 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
-    <script>
-        employeeNav.classList.add('active')
-    </script>
+<script>
+    const today = new Date().toISOString().split('T')[0];
+    hireDate.value = today;
+    
+    employeeNav.classList.add('active')
+    contractType.addEventListener('change', function() {
+        if (this.value === 'CDI') {
+            contractEndDate.disabled = true;
+        } else {
+            contractEndDate.disabled = false;
+        }
+    });
+</script>
 <?= $this->endSection() ?>

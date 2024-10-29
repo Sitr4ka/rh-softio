@@ -16,36 +16,41 @@
 
     <form action="<?= base_url(''); ?>" method="post">
         <?= csrf_field(); ?>
-        <div class="mb-3">
-            <label for="matricule" class="form-label">N° Matricule</label>
-            <input type="text" class="form-control" id="matricule" name="matricule">
-        </div>
-        <div class="mb-3">
-            <label for="paymentType" class="form-label">Type de paiement</label>
-            <input type="text" class="form-control" id="paymentType" name="paymentType">
-        </div>
-        <div class="mb-3">
-            <label for="date" class="form-label">Date d'ajout</label>
-            <input type="date" class="form-control" id="date" name="date">
-        </div>
-        <div class="mb-3">
-            <label for="baseSalary" class="form-label">Salaire</label>
-            <input type="text" class="form-control" id="baseSalary" name="baseSalary">
-        </div>
-        <div class="mb-3 d-flex align-items-center">
-            <button type="submit" class="btn btn-primary m-2">Submit</button>
+        <div class="row-cols-1">
+            <div class="col mb-3 ">
+                <label for="matricule" class="form-label">N° Matricule</label>
+                <input type="text" class="form-control" id="matricule" name="matricule">
+            </div>
+            <div class="col mb-3">
+                <label for="paymentType" class="form-label">Type de paiement</label>
+                <select class="form-select" name="paymentType"
+                    aria-label="Default select example">
+                    <option selected>Virement bancaire</option>
+                    <option value="Mobile Money">Mobile Money</option>
+                    <option value="En espèce">En espèce</option>
+                </select>
+            </div>
+            <div class="col mb-3">
+                <label for="date" class="form-label">Date d'ajout</label>
+                <input type="date" class="form-control" id="date" name="date">
+            </div>
+            <div class="col mb-3">
+                <label for="baseSalary" class="form-label">Salaire de base</label>
+                <input type="text" class="form-control" id="baseSalary" name="baseSalary">
+            </div>
+            <div class="col mb-3">
+                <button type="submit" class="btn btn-primary m-2">Valider</button>
+            </div>
         </div>
     </form>
+
 </main>
 
 <?= $this->endSection() ?>
 
 <?= $this->section('stylesheet') ?>
-    <style>
-        main {
-            
-        }
-    </style>
+<style>
+</style>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>

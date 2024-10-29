@@ -29,7 +29,7 @@
                 <span>
                     <i class="fa fa-cog"></i>
                 </span>
-                <a class="nav-link" id="configNav" href=" <?= base_url('home/config') ?> ">
+                <a class="nav-link" id="configNav" href=" <?= base_url('home/settings') ?> ">
                     Paramètres
                 </a>
             </li>

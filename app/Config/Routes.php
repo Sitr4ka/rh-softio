@@ -65,4 +65,6 @@ $routes->get('home/scoring', [Scoring::class, 'index']);
 
 
 //config
-$routes->get('home/config', [Configuration::class, 'config']);
+$routes->get('home/config/department', [Configuration::class, 'department']);
+$routes->get('home/config/positionHeld', [Configuration::class, 'positionHeld']);
+$routes->get('home/settings', [Configuration::class, 'index']);
