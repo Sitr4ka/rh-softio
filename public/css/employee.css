@@ -1,0 +1,29 @@
+.employee-menu {
+    display: flex;
+    padding: 0;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+}
+
+.employee-menu .nav-title {
+    color: var(--secondary-color);
+    background-color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-decoration: none;
+    font-size: 1.2em;
+
+    &:hover {
+        color: white;
+        background: var(--secondary-color);
+        opacity: .5;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+    }
+}
+
+.employee-menu .nav-title.active {
+    color: white;
+    background: var(--secondary-color);
+}

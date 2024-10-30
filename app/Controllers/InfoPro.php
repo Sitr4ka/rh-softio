@@ -10,6 +10,24 @@ use PHPUnit\Event\Telemetry\Info;
 
 class InfoPro extends BaseController
 {
+    public function index()
+    {
+        $user = session()->get('user');
+        
+        if(!$user) {
+            return redirect()->back()->with('errors', "Vous n'êtes pas connecté");
+        }
+
+        $infoPro = new InfoProModel();
+
+        $data = [
+            'infoPros'  => $infoPro->getAll(),
+            'user'      => $user,
+        ];
+
+        return view('employee/infoPro', $data);
+    }
+
     public function add()
     {
         $email = $this->request->getPost('email');
