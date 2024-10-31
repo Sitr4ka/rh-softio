@@ -1,7 +1,7 @@
 <?php
 
 use App\Controllers\Auth;
-use App\Controllers\Employee;
+use App\Controllers\InfoPerso;
 use App\Controllers\InfoPro;
 use App\Controllers\Scoring;
 use App\Controllers\Configuration;
@@ -25,10 +25,10 @@ $routes->get('/', function() {
 });
 
 // Personal information
-$routes->post('employee/add', [Employee::class, 'add']);
-$routes->get('home', [Employee::class, 'index']);
-$routes->put('employee/update/(:num)', [Employee::class, 'update']);
-$routes->get('employee/delete/(:num)', [Employee::class, 'delete']);
+$routes->post('infoPerso/add', [InfoPerso::class, 'add']);
+$routes->get('home', [InfoPerso::class, 'index']);
+$routes->put('infoPerso/update/(:num)', [InfoPerso::class, 'update']);
+$routes->get('infoPerso/delete/(:num)', [InfoPerso::class, 'delete']);
 
 
 // Profesional informations CRUD

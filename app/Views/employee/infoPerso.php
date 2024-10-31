@@ -23,20 +23,20 @@
             aria-labelledby="nav-home-tab" tabindex="0">
 
             <!-- Add Personal Informations -->
-            <form class="px-4" action="<?= base_url('employee/add') ?>" method="post">
+            <form class="px-4" action="<?= base_url('infoPerso/add') ?>" method="post">
 
                 <div class="row row-cols-1 gx-2 gy-2 mb-3">
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1 ">
                             <label for="lastName" class="col-form-label">Nom</label>
                         </div>
                         <div class="col">
-                            <input type="text" id="lastName" class="form-control" aria-describedby="passwordHelpInline"
+                            <input type="text" id="lastName" name="lastName" class="form-control" aria-describedby="passwordHelpInline"
                                 placeholder="Entrez votre nom" required>
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="firstName" class="col-form-label">Prénoms</label>
                         </div>
                         <div class="col">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="address" class="col-form-label">Adresse</label>
                         </div>
                         <div class="col">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="contact" class="col-form-label">Contact</label>
                         </div>
                         <div class="col">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="email" class="col-form-label">Email</label>
                         </div>
                         <div class="col">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="numCin" class="col-form-label">Num CIN</label>
                         </div>
                         <div class="col">
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="dateCin" class="col-form-label">Date de délivrance</label>
                         </div>
                         <div class="col">
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="lieuCin" class="col-form-label">Lieu</label>
                         </div>
                         <div class="col">
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="nationalite" class="col-form-label">Nationalité</label>
                         </div>
                         <div class="col">
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="etatCivil" class="col-form-label">Etat Civil</label>
                         </div>
                         <div class="col">
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="urgenceName" class="col-form-label">Nom Urgence</label>
                         </div>
                         <div class="col">
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="urgenceNum" class="col-form-label">Contact d'Urgence</label>
                         </div>
                         <div class="col">
@@ -139,7 +139,7 @@
                         </div>
                     </div>
                     <div class="col row g-1 align-items-center mb-3">
-                        <div class="col-2">
+                        <div class="col-2 col-xxl-1">
                             <label for="urgenceRelation" class="col-form-label">Relation</label>
                         </div>
                         <div class="col">
@@ -220,7 +220,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="<?= base_url('employee/update/' . $employee['idInfoPerso']) ?>" method="post">
+                                            <form action="<?= base_url('infoPerso/update/' . $employee['idInfoPerso']) ?>" method="post">
                                                 <input type="hidden" name="_method" value="PUT">
                                                 <div class="">
                                                     <label for="lastName" class="form-label">Nom</label>

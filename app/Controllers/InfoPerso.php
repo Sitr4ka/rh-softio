@@ -7,7 +7,7 @@ use App\Models\InfoPersoModel;
 use App\Models\InfoProModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Employee extends BaseController
+class InfoPerso extends BaseController
 {
 
     public function index()
@@ -27,7 +27,7 @@ class Employee extends BaseController
             'user'      => $user,
         ];
 
-        return view('employee/index', $data);
+        return view('employee/infoPerso', $data);
     }
 
     public function add()

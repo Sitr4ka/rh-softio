@@ -123,10 +123,13 @@ body {
     transition: all .8s ease-in-out;
 }
 
+.sidebar .nav-menu {
+    padding-left: 0;
+}
+
 .sidebar .nav-item {
     display: flex;
-    padding: 8px 5px;
-    margin-left: 20px;
+    padding: 8px 20px;
 }
 
 .sidebar .nav-item span {
@@ -135,7 +138,7 @@ body {
 }
 
 .nav-item i {
-    width: 20px;
+    width: 30px;
 }
 
 .sidebar .nav-link {

@@ -11,7 +11,7 @@
         <form class="px-4" action="<?= base_url('employee/infopro/add') ?>" method="post">
             <div class="row row-cols-1 gy-2 mb-3">
                 <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
+                    <div class="col-2 col-xxl-1">
                         <label for="email" class="form-label">Email</label>
                     </div>
                     <div class="col">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
+                    <div class="col-2 col-xxl-1">
                         <label for="classification" class="form-label">Classification</label>
                     </div>
                     <div class="col">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
+                    <div class="col-2 col-xxl-1">
                         <label for="contractType" class="form-label">Contrat</label>
                     </div>
                     <div class="col">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
+                    <div class="col-2 col-xxl-1">
                         <label for="hireDate" class="form-label">Début</label>
                     </div>
                     <div class="col">
@@ -49,8 +49,8 @@
                             aria-label="" required>
                     </div>
                 </div>
-                <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
+                <div class="col row g-1 align-items-center mb-3" id="endDate">
+                    <div class="col-2 col-xxl-1">
                         <label for="contractEndDate" class="form-label">Fin</label>
                     </div>
                     <div class="col">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
+                    <div class="col-2 col-xxl-1">
                         <label for="department" class="form-label">Service</label>
                     </div>
                     <div class="col">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
+                    <div class="col-2 col-xxl-1">
                         <label for="workLocation" class="form-label">Lieu</label>
                     </div>
                     <div class="col">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
+                    <div class="col-2 col-xxl-1">
                         <label for="positionHeld" class="form-label">Poste</label>
                     </div>
                     <div class="col">
@@ -86,13 +86,6 @@
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
-                    <div class="col-2">
-                        <label for="workingHours" class="form-label">Heures de travail</label>
-                    </div>
-                    <div class="col">
-                        <input type="number" class="form-control" name="workingHours"
-                            placeholder="" aria-label="" required>
-                    </div>
                 </div>
             </div>
             <div>
@@ -260,7 +253,9 @@
 
     hireNav.classList.add('active')
     employeeNav.classList.add('active')
-    
+
+    const endDate = document.querySelector('#endDate');
+
     hireDate.value = today;
     contractType.addEventListener('change', function() {
         if (this.value === 'CDI') {
