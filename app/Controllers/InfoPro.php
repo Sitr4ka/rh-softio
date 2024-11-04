@@ -13,17 +13,33 @@ class InfoPro extends BaseController
     public function index()
     {
         $user = session()->get('user');
-        
-        if(!$user) {
+
+        if (!$user) {
             return redirect()->back()->with('errors', "Vous n'êtes pas connecté");
         }
 
         $infoPro = new InfoProModel();
+        $keyword = $this->request->getGet('searchKeyword');
 
-        $data = [
-            'infoPros'  => $infoPro->getAll(),
-            'user'      => $user,
-        ];
+        if ($keyword) {
+
+            $data = [
+                'infoPros' => $infoPro
+                    ->like('positionHeld', $keyword)
+                    ->orLike('idInfoPro', $keyword)
+                    ->orLike('contractType', $keyword)
+                    ->orLike('department', $keyword)
+                    ->getAll(),
+
+                'user'      => $user,
+            ];
+        } else {
+            $data = [
+                'infoPros' => $infoPro->getAll(),
+                'user'      => $user,
+            ];
+        }
+
 
         return view('employee/infoPro', $data);
     }
@@ -34,8 +50,7 @@ class InfoPro extends BaseController
         $employees = new InfoPersoModel();
         $employee = $employees->where('mail', $email)->first();
 
-        if($employee)
-        {
+        if ($employee) {
             $employeeId = $employee['idInfoPerso'];
 
             $infoPro = new InfoProModel();
@@ -53,11 +68,9 @@ class InfoPro extends BaseController
 
             $infoPro->save($data);
             return redirect('/')->with('status', 'Enregistrement des informations professionnelles réussi');
-
         } else {
 
             return redirect('/')->with('status', 'Employé non trouvé');
-
         }
     }
 
@@ -78,13 +91,12 @@ class InfoPro extends BaseController
             'workingHours' => $this->request->getPost('workingHours')
         ];
 
-        
+
         $employees->update($id, $data);
         return redirect('/')->with('status', 'Modification réussi');
-
     }
-    
-    public function delete($id = null) 
+
+    public function delete($id = null)
     {
         $model = new InfoProModel();
         $model->delete($id);

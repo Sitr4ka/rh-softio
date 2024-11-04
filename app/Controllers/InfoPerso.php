@@ -16,18 +16,34 @@ class InfoPerso extends BaseController
         
         if(!$user) {
             return redirect()->back()->with('errors', "Vous n'êtes pas connecté");
-        }
-
+        }        
+        
         $employee = new InfoPersoModel();
-        $infoPro = new InfoProModel();
+        $keyword = $this->request->getGet('searchKeyword');
 
-        $data = [
-            'employees' => $employee->getAll(),
-            'infoPros'  => $infoPro->getAll(),
-            'user'      => $user,
-        ];
+        if ($keyword) {
 
+            $data = [
+                'employees' => $employee
+                    ->like('prenom', $keyword)
+                    ->orLike('nom', $keyword)
+                    ->orLike('contact', $keyword)
+                    ->orLike('mail', $keyword)
+                    ->getAll(),
+
+                'user'      => $user,
+            ];
+
+        } else {
+            $data = [
+                'employees' => $employee->getAll(),
+                'user'      => $user,
+            ];
+        }
+        
         return view('employee/infoPerso', $data);
+
+
     }
 
     public function add()

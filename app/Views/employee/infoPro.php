@@ -9,10 +9,10 @@
     <div>
         <!-- Add Professional Informations -->
         <form class="px-4" action="<?= base_url('employee/infopro/add') ?>" method="post">
-            <div class="row row-cols-1 gy-2 mb-3">
+            <div class="row row-cols-1 gx-2 gy-2 mb-3">
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="col-form-label">Email</label>
                     </div>
                     <div class="col">
                         <input type="email" class="form-control" name="email"
@@ -21,78 +21,93 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="classification" class="form-label">Classification</label>
+                        <label for="classification" class="col-form-label">Classification</label>
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="classification"
-                            placeholder="" aria-label="">
+                            placeholder="Entrer la classification" aria-label="">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="contractType" class="form-label">Contrat</label>
+                        <label for="contractType" class="col-form-label">Contrat</label>
                     </div>
                     <div class="col">
                         <select type="text" id="contractType" class="form-select" name="contractType"
-                            placeholder="" aria-label="" required>
-                            <option selected>CDI</option>
-                            <option value="CDD">CDD</option>
+                            placeholder="Entrer le type de contrat" aria-label="" required>
+                            <option selected>CDD</option>
+                            <option value="CDI">CDI</option>
                         </select>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="hireDate" class="form-label">Début</label>
+                        <label for="hireDate" class="col-form-label">Début</label>
                     </div>
                     <div class="col">
                         <input type="date" id="hireDate" class="form-control" name="hireDate"
-                            aria-label="" required>
+                            aria-label="" placeholder="Entrer la date de début du contrat" required>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3" id="endDate">
                     <div class="col-2 col-xxl-1">
-                        <label for="contractEndDate" class="form-label">Fin</label>
+                        <label for="contractEndDate" class="col-form-label">Fin</label>
                     </div>
                     <div class="col">
                         <input type="date" id="contractEndDate" class="form-control" name="contractEndDate"
-                            aria-label="" disabled>
+                            aria-label="" placeholder="Entrer la date de fin du contrat">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="department" class="form-label">Service</label>
+                        <label for="department" class="col-form-label">Service</label>
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="department"
-                            placeholder="" aria-label="">
+                            placeholder="Entrer le service" aria-label="">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="workLocation" class="form-label">Lieu</label>
+                        <label for="workLocation" class="col-form-label">Lieu</label>
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="workLocation"
-                            placeholder="" aria-label="" required>
+                            placeholder="Entre le lieu de travail" aria-label="" required>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="positionHeld" class="form-label">Poste</label>
+                        <label for="positionHeld" class="col-form-label">Poste</label>
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="positionHeld"
-                            placeholder="" aria-label="" required>
+                            placeholder="Entre le poste" aria-label="" required>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
+                    <div class="col-2 col-xxl-1">
+                        <label for="baseSalary" class="col-form-label">Salaire de base</label>
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" name="baseSalary"
+                            placeholder="Entrer le salaire de base" aria-label="" required>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Confirmer</button>
                 </div>
             </div>
-            <div>
-                <button type="submit" class="btn btn-primary">Confirmer</button>
-            </div>
         </form>
-
+        <div class="search-employee border border-1 bg-white row mx-4 rounded-3">
+            <form class="offset-9 col-3 d-flex align-items-center ">
+                <input type="search" name="searchKeyword" id="searchKeyword" class="form-control"
+                    placeholder="Rechercher">
+                <button type="submit" class="btn">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
         <div class="p-4">
             <table class="table table-borderless table-hover table-striped mt-3 ">
                 <thead>
@@ -244,6 +259,10 @@
         max-height: calc(100vh - 60px);
         overflow-y: auto;
     }
+
+    .search-employee {
+        height: 75px;
+    }
 </style>
 <?= $this->endSection() ?>
 
@@ -259,9 +278,9 @@
     hireDate.value = today;
     contractType.addEventListener('change', function() {
         if (this.value === 'CDI') {
-            contractEndDate.disabled = true;
+            endDate.classList.add('d-none');
         } else {
-            contractEndDate.disabled = false;
+            endDate.classList.remove('d-none');
         }
     });
 </script>
