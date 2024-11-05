@@ -99,17 +99,8 @@
                 </div>
             </div>
         </form>
-        <div class="search-employee border border-1 bg-white row mx-4 rounded-3">
-            <form class="offset-9 col-3 d-flex align-items-center ">
-                <input type="search" name="searchKeyword" id="searchKeyword" class="form-control"
-                    placeholder="Rechercher">
-                <button type="submit" class="btn">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
-        </div>
-        <div class="p-4">
-            <table class="table table-borderless table-hover table-striped mt-3 ">
+        <div class="container-fluid infoProTable">
+            <table id="infoProTable" class="table table-borderless table-hover table-striped mt-3">
                 <thead>
                     <tr>
                         <th class="text-center bg-info">#</th>
@@ -259,15 +250,17 @@
         max-height: calc(100vh - 60px);
         overflow-y: auto;
     }
-
-    .search-employee {
-        height: 75px;
+    
+    .infoProTable {
+        min-height: 400px;
     }
 </style>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
 <script>
+    new DataTable('#infoProTable');
+
     const today = new Date().toISOString().split('T')[0];
 
     hireNav.classList.add('active')

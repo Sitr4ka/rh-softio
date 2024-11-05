@@ -19,26 +19,11 @@ class InfoPro extends BaseController
         }
 
         $infoPro = new InfoProModel();
-        $keyword = $this->request->getGet('searchKeyword');
+        $data = [
+            'infoPros' => $infoPro->getAll(),
+            'user'      => $user,
+        ];
 
-        if ($keyword) {
-
-            $data = [
-                'infoPros' => $infoPro
-                    ->like('positionHeld', $keyword)
-                    ->orLike('idInfoPro', $keyword)
-                    ->orLike('contractType', $keyword)
-                    ->orLike('department', $keyword)
-                    ->getAll(),
-
-                'user'      => $user,
-            ];
-        } else {
-            $data = [
-                'infoPros' => $infoPro->getAll(),
-                'user'      => $user,
-            ];
-        }
 
 
         return view('employee/infoPro', $data);

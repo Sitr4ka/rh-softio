@@ -13,46 +13,28 @@ class InfoPerso extends BaseController
     public function index()
     {
         $user = session()->get('user');
-        
-        if(!$user) {
+
+        if (!$user) {
             return redirect()->back()->with('errors', "Vous n'êtes pas connecté");
-        }        
-        
-        $employee = new InfoPersoModel();
-        $keyword = $this->request->getGet('searchKeyword');
-
-        if ($keyword) {
-
-            $data = [
-                'employees' => $employee
-                    ->like('prenom', $keyword)
-                    ->orLike('nom', $keyword)
-                    ->orLike('contact', $keyword)
-                    ->orLike('mail', $keyword)
-                    ->getAll(),
-
-                'user'      => $user,
-            ];
-
-        } else {
-            $data = [
-                'employees' => $employee->getAll(),
-                'user'      => $user,
-            ];
         }
-        
+
+        $employee = new InfoPersoModel();
+
+        $data = [
+            'employees' => $employee->getAll(),
+            'user'      => $user,
+        ];
+
+
         return view('employee/infoPerso', $data);
-
-
     }
 
     public function add()
     {
         $infoModels = new InfoPersoModel();
         $email = $this->request->getPost('email');
-        
-        if ($this->checkEmail($email))
-        {
+
+        if ($this->checkEmail($email)) {
             return redirect('home')->with('error', 'Cet email est déjà utilisé');
         } else {
             $data = [
@@ -70,24 +52,24 @@ class InfoPerso extends BaseController
                 'contactUrgence' => $this->request->getPost('urgenceNum'),
                 'relation' => $this->request->getPost('urgenceRelation'),
             ];
-    
+
             $infoModels->save($data);
-    
+
             return redirect('home')->with('status', 'Enregistrement réussi');
-            
         }
-        
     }
 
-    public function delete($id = null) {
+    public function delete($id = null)
+    {
         $model = new InfoPersoModel();
         $model->delete($id);
 
         return redirect()->back()->with('status', 'Suppression réussi');
     }
-    
 
-    public function update($id = null) {
+
+    public function update($id = null)
+    {
         $model = new InfoPersoModel();
         $data = [
             'nom' => $this->request->getPost('lastName'),
@@ -108,10 +90,10 @@ class InfoPerso extends BaseController
         $model->update($id, $data);
         return redirect('home')->with('status', 'Modification réussi');
     }
-    
-    function checkEmail($email) {
+
+    function checkEmail($email)
+    {
         $employees = new InfoPersoModel();
         return $employees->where('mail', $email)->first() !== NULL;
     }
-
 }
