@@ -1,18 +1,48 @@
 <?= $this->extend('base') ?>
 
-<?= $this->section('title') ?> RH | Softio<?= $this->endSection() ?>
+<?= $this->section('title') ?> RH | Embauche<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <main class="main container-fluid">
     <?= $this->include('_partials/employeeHeader') ?>
     <!-- Message alert -->
     <?php
-    if (session()->getFlashdata("status")) {
+    $flashData = session()->getFlashdata("status");
+    if ($flashData) {
     ?>
-        <div class="alert alert-success alert-dismissible fade show mx-4 mt-2" role="alert">
-            <?php echo session()->getFlashdata("status"); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        <script>
+            const operation = '<?= $flashData ?>'
+            let text = '';
+            let icon = '';
+
+            switch (operation) {
+                case 'enregistrement':
+                    text = 'Enregistrement réussi'
+                    icon = 'success'
+                    break;
+
+                case 'suppression':
+                    text = 'Suppression réussi'
+                    icon = 'success'
+                    break;
+
+                case 'modification':
+                    text = 'Modification réussi'
+                    icon = 'success'
+                    break;
+
+                default:
+                    text = `Aucun personnel trouvé`
+                    icon = 'error'
+                    break;
+            }
+
+            Swal.fire({
+                text: text,
+                icon: icon,
+                confirmButtonText: 'ok',
+            });
+        </script>
     <?php
     }
     ?>
@@ -229,11 +259,6 @@
                                                 <input type="text" class="form-control" name="positionHeld" value="<?= $infoPro['positionHeld'] ?>"
                                                     placeholder="" aria-label="" required>
                                             </div>
-                                            <div class="col mb-4">
-                                                <label for="workingHours" class="form-label">Heures de travail</label>
-                                                <input type="number" class="form-control" name="workingHours" value="<?= $infoPro['workingHours'] ?>"
-                                                    placeholder="" aria-label="" required>
-                                            </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                                 <button type="submit" class="btn btn-primary">Mettre à jour</button>
@@ -277,7 +302,7 @@
                 '<option value="10">10</option>' +
                 '<option value="15">15</option>' +
                 '</select>  éléments par page',
-            "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées", 
+            "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées",
             "infoEmpty": "Aucune entrée à afficher",
             "infoFiltered": "(filtré de _MAX_ entrées totales)",
         }

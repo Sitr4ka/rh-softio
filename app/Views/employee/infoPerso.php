@@ -1,6 +1,6 @@
 <?= $this->extend('base') ?>
 
-<?= $this->section('title') ?> RH | Softio<?= $this->endSection() ?>
+<?= $this->section('title') ?> RH | Gestion des personnels<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
@@ -9,10 +9,6 @@
     <!-- Message alert -->
     <?php
     $flashData = session()->getFlashdata("status");
-    if (!$flashData) {
-        $flashData = session()->getFlashdata("error");
-    }
-
     if ($flashData) {
     ?>
         <script>

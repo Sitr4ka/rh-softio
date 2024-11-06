@@ -30,7 +30,7 @@
                     <i class="fa fa-cog"></i>
                 </span>
                 <a class="nav-link" id="configNav" href=" <?= base_url('home/settings') ?> ">
-                    Paramètres
+                    Départements
                 </a>
             </li>
         </ul>

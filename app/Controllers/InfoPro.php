@@ -5,9 +5,6 @@ namespace App\Controllers;
 use App\Models\InfoPersoModel;
 use App\Models\InfoProModel;
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
-use PHPUnit\Event\Telemetry\Info;
-
 class InfoPro extends BaseController
 {
     public function index()
@@ -15,7 +12,7 @@ class InfoPro extends BaseController
         $user = session()->get('user');
 
         if (!$user) {
-            return redirect()->back()->with('errors', "Vous n'êtes pas connecté");
+            return redirect()->back()->with('status', "Vous n'êtes pas connecté");
         }
 
         $infoPro = new InfoProModel();
@@ -23,8 +20,6 @@ class InfoPro extends BaseController
             'infoPros' => $infoPro->getAll(),
             'user'      => $user,
         ];
-
-
 
         return view('employee/infoPro', $data);
     }
@@ -52,10 +47,10 @@ class InfoPro extends BaseController
             ];
 
             $infoPro->save($data);
-            return redirect('/')->with('status', 'Enregistrement des informations professionnelles réussi');
+            return redirect('employee/infopro/index')->with('status', 'enregistrement');
         } else {
 
-            return redirect('/')->with('status', 'Employé non trouvé');
+            return redirect('employee/infopro/index')->with('status', 'erreur');
         }
     }
 
@@ -78,7 +73,7 @@ class InfoPro extends BaseController
 
 
         $employees->update($id, $data);
-        return redirect('/')->with('status', 'Modification réussi');
+        return redirect('employee/infopro/index')->with('status', 'modification');
     }
 
     public function delete($id = null)
@@ -86,6 +81,6 @@ class InfoPro extends BaseController
         $model = new InfoProModel();
         $model->delete($id);
 
-        return redirect()->back()->with('status', 'Suppression réussi');
+        return redirect()->back()->with('status', 'suppression');
     }
 }

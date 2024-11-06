@@ -35,7 +35,7 @@ class InfoPerso extends BaseController
         $email = $this->request->getPost('email');
 
         if ($this->checkEmail($email)) {
-            return redirect('home')->with('error', 'erreur');
+            return redirect('home')->with('status', 'erreur');
         } else {
             $data = [
                 'nom' => $this->request->getPost('lastName'),

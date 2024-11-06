@@ -5,14 +5,14 @@
     <div class="row row-cols-1 row-cols-lg-2">
         <section class="department">
             <h6 class="nav-title py-2 px-4">
-                Service
+                Départements
             </h6>
             <hr>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th class="bg-info">#</th>
-                        <th class="bg-info">Service</th>
+                        <th class="bg-info">Départements</th>
                         <th class="bg-info text-center">Action</th>
                     </tr>
                 </thead>
@@ -54,7 +54,7 @@
         </section>
         <section class="postionHeld">
             <h6 class="nav-title py-2 px-4">
-                Poste
+                Postes
             </h6>
             <hr>
             <table class="table table-striped table-bordered">
