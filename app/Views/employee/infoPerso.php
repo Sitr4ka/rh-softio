@@ -8,12 +8,46 @@
     <?= $this->include('_partials/employeeHeader') ?>
     <!-- Message alert -->
     <?php
-    if (session()->getFlashdata("status")) {
+    $flashData = session()->getFlashdata("status");
+    if (!$flashData) {
+        $flashData = session()->getFlashdata("error");
+    }
+
+    if ($flashData) {
     ?>
-        <div class="alert alert-success alert-dismissible fade show mx-4 mt-2" role="alert">
-            <?php echo session()->getFlashdata("status"); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        <script>
+            const operation = '<?= $flashData ?>'
+            let text = '';
+            let icon = '';
+
+            switch (operation) {
+                case 'enregistrement':
+                    text = 'Enregistrement réussi'
+                    icon = 'success'
+                    break;
+
+                case 'suppression':
+                    text = 'Suppression réussi'
+                    icon = 'success'
+                    break;
+
+                case 'modification':
+                    text = 'Modification réussi'
+                    icon = 'success'
+                    break;
+
+                default:
+                    text = `L'adresse email est déjà utilisé`
+                    icon = 'error'
+                    break;
+            }
+
+            Swal.fire({
+                text: text,
+                icon: icon,
+                confirmButtonText: 'ok',
+            });
+        </script>
     <?php
     }
     ?>
@@ -147,9 +181,8 @@
                 <div class="text-end">
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
-            </div>
         </form>
-        <div class="container-fluid infoPersoTable">
+        <div class="container-fluid infoPersoTable overflow-x-auto">
             <table id="infoPersoTable" class="table table-borderless table-hover table-striped" style="width:100%">
                 <thead>
                     <tr>
@@ -190,7 +223,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -198,7 +231,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                        <a href="<?= base_url('employee/delete/' . $employee['idInfoPerso']) ?>" class="btn btn-primary">
+                                        <a href="<?= base_url('infoPerso/delete/' . $employee['idInfoPerso']) ?>" class="btn btn-primary">
                                             Continuer
                                         </a>
                                     </div>
@@ -287,148 +320,6 @@
 </main>
 
 <?= $this->endSection() ?>
-<div class="search-employee border border-1 bg-white row mx-2 rounded-3">
-    <form class="offset-9 col-3 d-flex align-items-center ">
-        <input type="search" name="searchKeyword" id="searchKeyword" class="form-control"
-            placeholder="Rechercher">
-        <button type="submit" class="btn">
-            <i class="fa fa-search"></i>
-        </button>
-    </form>
-</div>
-<table class="table table-borderless table-hover table-striped mt-3" id="infoPersoTable">
-    <thead>
-        <tr>
-            <th class="text-center bg-info">#</th>
-            <th class="text-center bg-info">Nom</th>
-            <th class="text-center bg-info">Prénoms</th>
-            <th class="text-center bg-info">Adresse</th>
-            <th class="text-center bg-info">Contact</th>
-            <th class="text-center bg-info">Email</th>
-            <th class="text-center bg-info">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($employees as $employee) {
-        ?>
-            <tr>
-                <td> <?= $employee['idInfoPerso'] ?> </td>
-                <td> <?= $employee['nom']         ?> </td>
-                <td> <?= $employee['prenom']      ?> </td>
-                <td> <?= $employee['adresse']     ?> </td>
-                <td> <?= $employee['contact']     ?> </td>
-                <td> <?= $employee['mail']        ?> </td>
-                <td class="d-flex gap-2">
-
-                    <!-- Delete Button modal -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $employee['idInfoPerso'] ?>">
-                        <i class="fa fa-trash"></i>
-                    </button>
-
-                    <!-- Edit Button modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<?= $employee['idInfoPerso'] ?>">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                </td>
-            </tr>
-            <!-- Deletion Modal -->
-            <div class="modal fade" id="deleteModal<?= $employee['idInfoPerso'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Voulez vous vraiment supprimer cet employé ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <a href="<?= base_url('employee/delete/' . $employee['idInfoPerso']) ?>" class="btn btn-primary">
-                                Continuer
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Edit Modal -->
-            <div class="modal fade" id="editModal<?= $employee['idInfoPerso'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modification</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="<?= base_url('infoPerso/update/' . $employee['idInfoPerso']) ?>" method="post">
-                                <input type="hidden" name="_method" value="PUT">
-                                <div class="">
-                                    <label for="lastName" class="form-label">Nom</label>
-                                    <input type="text" name="lastName" id="lastName" class="form form-control" value="<?= $employee['nom'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="firstName" class="form-label">Prénoms</label>
-                                    <input type="text" name="firstName" id="firstName" class="form form-control" value="<?= $employee['prenom'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address" class="form-label">Adresse</label>
-                                    <input type="text" name="address" id="address" class="form form-control" value="<?= $employee['adresse'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="contact" class="form-label">Contact</label>
-                                    <input type="text" name="contact" id="contact" class="form form-control" value="<?= $employee['contact'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" name="email" id="email" class="form form-control" value="<?= $employee['mail'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="numCin" class="form-label">CIN</label>
-                                    <input type="text" name="numCin" id="numCin" class="form form-control" value="<?= $employee['numeroCin'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="dateCin" class="form-label">Date</label>
-                                    <input type="date" name="dateCin" id="dateCin" class="form form-control" value="<?= $employee['dateCin'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="lieuCin" class="form-label">Lieu</label>
-                                    <input type="text" name="lieuCin" id="lieuCin" class="form form-control" value="<?= $employee['lieuCin'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nationalite" class="form-label">Nationalité</label>
-                                    <input type="text" name="nationalite" id="nationalite" class="form form-control" value="<?= $employee['nationalité'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="etatCivil" class="form-label">Etat Civil</label>
-                                    <input type="text" name="etatCivil" id="etatCivil" class="form form-control" value="<?= $employee['etatCivil'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="urgenceName" class="form-label">Urgence</label>
-                                    <input type="text" name="urgenceName" id="urgenceName" class="form form-control" value="<?= $employee['nomUrgence'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="urgenceNum" class="form-label">Contact Urgence</label>
-                                    <input type="text" name="urgenceNum" id="urgenceNum" class="form form-control" value="<?= $employee['contactUrgence'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="urgenceRelation" class="form-label">Relation</label>
-                                    <input type="text" name="urgenceRelation" id="urgenceRelation" class="form form-control" value="<?= $employee['relation'] ?>">
-                                </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        <?php
-        } ?>
-    </tbody>
-</table>
-
 
 <?= $this->section('stylesheet') ?>
 
@@ -447,11 +338,21 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
-
-
-
 <script>
-    new DataTable('#infoPersoTable');
+    new DataTable('#infoPersoTable', {
+        "pageLength": 5,
+        "language": {
+            "search": "Rechercher : ",
+            "lengthMenu": '<select class="form-select">' +
+                '<option value="5">5</option>' +
+                '<option value="10">10</option>' +
+                '<option value="15">15</option>' +
+                '</select> éléments par page',
+            "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées", 
+            "infoEmpty": "Aucune entrée à afficher",
+            "infoFiltered": "(filtré de _MAX_ entrées totales)",
+        }
+    });
     infoPersoNav.classList.add('active')
     employeeNav.classList.add('active')
 </script>

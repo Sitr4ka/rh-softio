@@ -15,7 +15,7 @@ class InfoPerso extends BaseController
         $user = session()->get('user');
 
         if (!$user) {
-            return redirect()->back()->with('errors', "Vous n'êtes pas connecté");
+            return redirect()->back()->with('errors', "Veuillez vous connecter");
         }
 
         $employee = new InfoPersoModel();
@@ -35,7 +35,7 @@ class InfoPerso extends BaseController
         $email = $this->request->getPost('email');
 
         if ($this->checkEmail($email)) {
-            return redirect('home')->with('error', 'Cet email est déjà utilisé');
+            return redirect('home')->with('error', 'erreur');
         } else {
             $data = [
                 'nom' => $this->request->getPost('lastName'),
@@ -55,7 +55,7 @@ class InfoPerso extends BaseController
 
             $infoModels->save($data);
 
-            return redirect('home')->with('status', 'Enregistrement réussi');
+            return redirect('home')->with('status', 'enregistrement');
         }
     }
 
@@ -64,7 +64,7 @@ class InfoPerso extends BaseController
         $model = new InfoPersoModel();
         $model->delete($id);
 
-        return redirect()->back()->with('status', 'Suppression réussi');
+        return redirect()->back()->with('status', 'suppression');
     }
 
 
@@ -88,7 +88,7 @@ class InfoPerso extends BaseController
         ];
 
         $model->update($id, $data);
-        return redirect('home')->with('status', 'Modification réussi');
+        return redirect('home')->with('status', 'modification');
     }
 
     function checkEmail($email)

@@ -5,6 +5,17 @@
 <?= $this->section('content') ?>
 <main class="main container-fluid">
     <?= $this->include('_partials/employeeHeader') ?>
+    <!-- Message alert -->
+    <?php
+    if (session()->getFlashdata("status")) {
+    ?>
+        <div class="alert alert-success alert-dismissible fade show mx-4 mt-2" role="alert">
+            <?php echo session()->getFlashdata("status"); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php
+    }
+    ?>
 
     <div>
         <!-- Add Professional Informations -->
@@ -99,7 +110,7 @@
                 </div>
             </div>
         </form>
-        <div class="container-fluid infoProTable">
+        <div class="container-fluid infoProTable overflow-x-auto">
             <table id="infoProTable" class="table table-borderless table-hover table-striped mt-3">
                 <thead>
                     <tr>
@@ -241,8 +252,6 @@
 </main>
 <?= $this->endSection() ?>
 
-
-
 <?= $this->section('stylesheet') ?>
 <style>
     .main {
@@ -250,7 +259,7 @@
         max-height: calc(100vh - 60px);
         overflow-y: auto;
     }
-    
+
     .infoProTable {
         min-height: 400px;
     }
@@ -259,7 +268,20 @@
 
 <?= $this->section('script') ?>
 <script>
-    new DataTable('#infoProTable');
+    new DataTable('#infoProTable', {
+        "pageLength": 5,
+        "language": {
+            "search": "Rechercher : ",
+            "lengthMenu": '<select class="form-select">' +
+                '<option value="5">5</option>' +
+                '<option value="10">10</option>' +
+                '<option value="15">15</option>' +
+                '</select>  éléments par page',
+            "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées", 
+            "infoEmpty": "Aucune entrée à afficher",
+            "infoFiltered": "(filtré de _MAX_ entrées totales)",
+        }
+    });
 
     const today = new Date().toISOString().split('T')[0];
 
