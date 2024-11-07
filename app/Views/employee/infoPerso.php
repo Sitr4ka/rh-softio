@@ -51,14 +51,23 @@
     <div>
         <!-- Add Personal Informations -->
         <form class="px-4" action="<?= base_url('infoPerso/add') ?>" method="post">
+            <?= csrf_field(); ?>
+
+            <?php $errors = session()->getFlashdata('errors'); ?>
+
             <div class="row row-cols-1 gx-2 gy-2 mb-3">
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1 ">
                         <label for="lastName" class="col-form-label">Nom</label>
                     </div>
                     <div class="col">
-                        <input type="text" id="lastName" name="lastName" class="form-control" aria-describedby="passwordHelpInline"
-                            placeholder="Entrez votre nom" required>
+                        <input type="text" id="lastName" name="lastName" class="form-control"
+                            placeholder="Entrez votre nom" value="<?= old('lastName') ?>">
+                        <?php if (isset($errors['lastName'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['lastName']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -67,7 +76,12 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="firstName"
-                            placeholder="Entrez vos prénoms" aria-label="Last name" required>
+                            placeholder="Entrez vos prénoms" value="<?= old('firstName') ?>">
+                        <?php if (isset($errors['firstName'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['firstName']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -76,7 +90,12 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="address"
-                            placeholder="Entrez votre adresse" aria-label="First name" required>
+                            placeholder="Entrez votre adresse" value="<?= old('address') ?>">
+                        <?php if (isset($errors['address'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['address']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -85,16 +104,26 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="contact"
-                            placeholder="Entrez votre numéro" aria-label="Last name" required>
+                            placeholder="Entrez votre numéro" value="<?= old('contact') ?>">
+                        <?php if (isset($errors['contact'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['contact']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <div class="col row g-1 align-items-center mb-3">
+                <div class=" col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
                         <label for="email" class="col-form-label">Email</label>
                     </div>
                     <div class="col">
                         <input type="email" class="form-control" name="email"
-                            placeholder="Entrez votre email" aria-label="First name" required>
+                            placeholder="Entrez votre email" value="<?= old('email') ?>">
+                        <?php if (isset($errors['email'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['email']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -103,7 +132,12 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="numCin"
-                            placeholder="Entrez votre numéro CIN" aria-label="First name" required>
+                            placeholder="Entrez votre numéro CIN" value="<?= old('numCin') ?>">
+                        <?php if (isset($errors['numCin'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['numCin']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -111,17 +145,26 @@
                         <label for="dateCin" class="col-form-label">Date de délivrance</label>
                     </div>
                     <div class="col">
-                        <input type="date" class="form-control" name="dateCin"
-                            aria-label="Last name" required>
+                        <input type="date" class="form-control" name="dateCin" value="<?= old('dateCin') ?>">
+                        <?php if (isset($errors['dateCin'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['dateCin']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <div class="col row g-1 align-items-center mb-3">
+                <div class=" col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
                         <label for="lieuCin" class="col-form-label">Lieu</label>
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="lieuCin"
-                            placeholder="Entrez le lieu de délivrance" aria-label="First name" required>
+                            placeholder="Entrez le lieu de délivrance" value="<?= old('lieuCin') ?>">
+                        <?php if (isset($errors['lieuCin'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['lieuCin']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -130,19 +173,28 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="nationalite"
-                            placeholder="Entrez votre nationalité" aria-label="Last name" required>
+                            placeholder="Entrez votre nationalité" value="<?= old('nationalite') ?>">
+                        <?php if (isset($errors['nationalite'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['nationalite']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <div class="col row g-1 align-items-center mb-3">
+                <div class=" col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
                         <label for="etatCivil" class="col-form-label">Etat Civil</label>
                     </div>
                     <div class="col">
-                        <select class="form-select" name="etatCivil"
-                            aria-label="Default select example">
+                        <select class="form-select" name="etatCivil" value="<?= old('etatCivil') ?>">
                             <option selected>Célibataire</option>
                             <option value="marie">Marié</option>
                         </select>
+                        <?php if (isset($errors['etatCivil'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['etatCivil']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -151,7 +203,12 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="urgenceName"
-                            placeholder="Entrez un nom d'urgence" aria-label="Nom Urgence" required>
+                            placeholder="Entrez un nom d'urgence" value="<?= old('urgenceName') ?>">
+                        <?php if (isset($errors['urgenceName'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['urgenceName']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -160,8 +217,12 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="urgenceNum"
-                            placeholder="Entrez le numéro d'urgence" aria-label="Contact d'Urgence"
-                            required>
+                            placeholder="Entrez le numéro d'urgence" value="<?= old('urgenceNum') ?>">
+                        <?php if (isset($errors['urgenceNum'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['urgenceNum']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -170,7 +231,12 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="urgenceRelation"
-                            placeholder="Relation avec l'urgence" aria-label="Relation" required>
+                            placeholder="Relation avec l' urgence" value="<?= old('urgenceRelation') ?>">
+                        <?php if (isset($errors['urgenceRelation'])): ?>
+                            <div class="ms-2 mt-1 text-danger">
+                                <?= esc($errors['urgenceRelation']) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -344,7 +410,7 @@
                 '<option value="10">10</option>' +
                 '<option value="15">15</option>' +
                 '</select> éléments par page',
-            "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées", 
+            "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées",
             "infoEmpty": "Aucune entrée à afficher",
             "infoFiltered": "(filtré de _MAX_ entrées totales)",
         }

@@ -4,7 +4,7 @@ use App\Controllers\Auth;
 use App\Controllers\InfoPerso;
 use App\Controllers\InfoPro;
 use App\Controllers\Scoring;
-use App\Controllers\Configuration;
+use App\Controllers\Department;
 use App\Controllers\Payment;
 use CodeIgniter\Router\RouteCollection;
 
@@ -44,8 +44,7 @@ $routes->get('home/payment', [Payment::class, 'index']);
 //Scoring
 $routes->get('home/scoring', [Scoring::class, 'index']);
 
-
-//config
-$routes->get('home/config/department', [Configuration::class, 'department']);
-$routes->get('home/config/positionHeld', [Configuration::class, 'positionHeld']);
-$routes->get('home/settings', [Configuration::class, 'index']);
+//Departments
+$routes->get('home/config/department', [Department::class, 'department']);
+$routes->get('home/config/positionHeld', [Department::class, 'positionHeld']);
+$routes->get('home/department', [Department::class, 'index']);

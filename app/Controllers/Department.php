@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Configuration extends BaseController
+class Department extends BaseController
 {
 
     public function index() {
@@ -18,7 +18,7 @@ class Configuration extends BaseController
         $data = [
             'user'      => $user,
         ];
-        return view('settings/index', $data);
+        return view('department/index', $data);
     }
 
     public function department()
@@ -32,7 +32,7 @@ class Configuration extends BaseController
         $data = [
             'user'      => $user,
         ];
-        return view('settings/department', $data);
+        return view('department/department', $data);
     }
 
     public function positionHeld()
@@ -46,6 +46,6 @@ class Configuration extends BaseController
         $data = [
             'user'      => $user,
         ];
-        return view('settings/positionHeld', $data);
+        return view('department/positionHeld', $data);
     }
 }

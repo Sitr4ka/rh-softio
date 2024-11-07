@@ -7,11 +7,6 @@ use App\Models\UserModel;
 
 class Auth extends BaseController
 {
-    public function __construct()
-    {
-        helper(['url', 'Form']);
-    }
-
     public function login(): string
     {
         session()->destroy();
@@ -66,7 +61,6 @@ class Auth extends BaseController
 
     public function registration()
     {
-
         $rules = [
             'username' => 'required|is_unique[users.username]',
             'email' => 'required|valid_email|is_unique[users.email]',
