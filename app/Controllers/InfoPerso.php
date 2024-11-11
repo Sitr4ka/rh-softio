@@ -92,9 +92,6 @@ class InfoPerso extends BaseController
 
         if (!$validation) {
             $errors = $this->validator->getErrors();
-            // foreach ($errors as $error) {
-            //     echo $error;
-            // }
             return redirect()->back()->withInput()->with('errors', $errors);
         } else {
             $infoModels = new InfoPersoModel();
@@ -117,31 +114,6 @@ class InfoPerso extends BaseController
             $infoModels->save($data);
             return redirect('home')->with('status', 'enregistrement');
         }
-
-
-        // $email = $this->request->getPost('email');
-        /* 
-        if ($this->checkEmail($email)) {
-            return redirect('home')->with('status', 'erreur');
-        } else {
-            $data = [
-                'nom'               => $this->request->getPost('lastName'),
-                'prenom'            => $this->request->getPost('firstName'),
-                'adresse'           => $this->request->getPost('address'),
-                'contact'           => $this->request->getPost('contact'),
-                'mail'              => $email,
-                'numeroCin'         => $this->request->getPost('numCin'),
-                'dateCin'           => $this->request->getPost('dateCin'),
-                'lieuCin'           => $this->request->getPost('lieuCin'),
-                'nationalité'       => $this->request->getPost('nationalite'),
-                'etatCivil'         => $this->request->getPost('etatCivil'),
-                'nomUrgence'        => $this->request->getPost('urgenceName'),
-                'contactUrgence'    => $this->request->getPost('urgenceNum'),
-                'relation'          => $this->request->getPost('urgenceRelation'),
-            ];
-
-
-        } */
     }
 
     public function delete($id = null)

@@ -57,7 +57,7 @@
                     </div>
                     <div class="col">
                         <input type="email" class="form-control" name="email"
-                            placeholder="Entrer votre email" aria-label="" required>
+                            placeholder="Entrer votre email" aria-label="">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col">
                         <select type="text" id="contractType" class="form-select" name="contractType"
-                            placeholder="Entrer le type de contrat" aria-label="" required>
+                            placeholder="Entrer le type de contrat" aria-label="">
                             <option selected>CDD</option>
                             <option value="CDI">CDI</option>
                         </select>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col">
                         <input type="date" id="hireDate" class="form-control" name="hireDate"
-                            aria-label="" placeholder="Entrer la date de début du contrat" required>
+                            aria-label="" placeholder="Entrer la date de début du contrat">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3" id="endDate">
@@ -114,7 +114,7 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="workLocation"
-                            placeholder="Entre le lieu de travail" aria-label="" required>
+                            placeholder="Entre le lieu de travail" aria-label="">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -123,7 +123,7 @@
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="positionHeld"
-                            placeholder="Entre le poste" aria-label="" required>
+                            placeholder="Entre le poste" aria-label="">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
@@ -132,7 +132,19 @@
                     </div>
                     <div class="col">
                         <input type="number" class="form-control" name="baseSalary"
-                            placeholder="Entrer le salaire de base" aria-label="" required>
+                            placeholder="Entrer le salaire de base" aria-label="">
+                    </div>
+                </div>
+                <div class="col row g-1 align-items-center mb-3">
+                    <div class="col-2 col-xxl-1">
+                        <label for="paymentType" class="col-form-label">Type de paiement</label>
+                    </div>
+                    <div class="col">
+                        <select type="text" class="form-select" name="paymentType">
+                            <option default>Virement bancaire</option>
+                            <option value="Mobile Money">Mobile Money</option>
+                            <option value="En espèce">En espèce</option>
+                        </select>
                     </div>
                 </div>
                 <div class="text-end">
@@ -149,7 +161,7 @@
                         <th class="text-center bg-info">Poste</th>
                         <th class="text-center bg-info">Début</th>
                         <th class="text-center bg-info">Fin</th>
-                        <th class="text-center bg-info">Heures</th>
+                        <th class="text-center bg-info">Salaire de base</th>
                         <th class="text-center bg-info">Action</th>
                     </tr>
                 </thead>
@@ -162,7 +174,7 @@
                             <td class="text-center"> <?= $infoPro['positionHeld'] ?></td>
                             <td class="text-center"> <?= $infoPro['hireDate'] ?></td>
                             <td class="text-center"> <?= $infoPro['contractEndDate'] ?></td>
-                            <td class="text-center"> <?= $infoPro['workingHours'] ?></td>
+                            <td class="text-end"> <?= $infoPro['baseSalary'] ?></td>
                             <td class="d-flex gap-2 justify-content-center">
 
                                 <!-- Delete Button modal -->
@@ -221,7 +233,7 @@
                                             <div class="col mb-4">
                                                 <label for="status" class="form-label">Etat</label>
                                                 <select type="text" class="form-select" name="status" value="<?= $infoPro['status'] ?>"
-                                                    placeholder="" aria-label="" required>
+                                                    placeholder="" aria-label="">
                                                     <option value="en service">en service</option>
                                                     <option value="débauché">débauché</option>
                                                 </select>
@@ -229,7 +241,7 @@
                                             <div class="col mb-4">
                                                 <label for="contractType" class="form-label">Contrat</label>
                                                 <select type="text" class="form-select" name="contractType" value="<?= $infoPro['contractType'] ?>"
-                                                    placeholder="" aria-label="" required>
+                                                    placeholder="" aria-label="">
                                                     <option value="CDI">CDI</option>
                                                     <option value="CDD">CDD</option>
                                                 </select>
@@ -237,7 +249,7 @@
                                             <div class="col mb-4">
                                                 <label for="hireDate" class="form-label">Début</label>
                                                 <input type="date" class="form-control" name="hireDate" value="<?= $infoPro['hireDate'] ?>"
-                                                    aria-label="" required>
+                                                    aria-label="">
                                             </div>
                                             <div class="col mb-4">
                                                 <label for="contractEndDate" class="form-label">Fin</label>
@@ -252,12 +264,33 @@
                                             <div class="col mb-4">
                                                 <label for="workLocation" class="form-label">Lieu</label>
                                                 <input type="text" class="form-control" name="workLocation" value="<?= $infoPro['workLocation'] ?>"
-                                                    placeholder="" aria-label="" required>
+                                                    placeholder="" aria-label="">
                                             </div>
                                             <div class="col mb-4">
                                                 <label for="positionHeld" class="form-label">Poste</label>
                                                 <input type="text" class="form-control" name="positionHeld" value="<?= $infoPro['positionHeld'] ?>"
-                                                    placeholder="" aria-label="" required>
+                                                    placeholder="" aria-label="">
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-3">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label for="baseSalary" class="col-form-label">Salaire de base</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input type="number" class="form-control" name="baseSalary"
+                                                        placeholder="Entrer le salaire de base" value="<?= $infoPro['baseSalary'] ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-3">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label for="paymentType" class="col-form-label">Type de paiement</label>
+                                                </div>
+                                                <div class="col">
+                                                    <select type="text" class="form-select" name="paymentType" value="<?= $infoPro['paymentType'] ?>" >
+                                                        <option default>Virement bancaire</option>
+                                                        <option value="Mobile Money">Mobile Money</option>
+                                                        <option value="En espèce">En espèce</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

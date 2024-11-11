@@ -23,7 +23,9 @@ class InfoProModel extends Model
         'workLocation',
         'positionHeld',
         'idInfoPerso',
-        'workingHours'
+        'workingHours',
+        'baseSalary',
+        'paymentType'
     ];
 
     protected bool $allowEmptyInserts = false;

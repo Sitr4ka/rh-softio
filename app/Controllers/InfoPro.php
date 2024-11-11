@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\InfoPersoModel;
 use App\Models\InfoProModel;
 use App\Controllers\BaseController;
+
 class InfoPro extends BaseController
 {
     public function index()
@@ -35,15 +36,17 @@ class InfoPro extends BaseController
 
             $infoPro = new InfoProModel();
             $data = [
-                'idInfoPerso' => $employeeId,
-                'contractType' => $this->request->getPost('contractType'),
-                'classification' => $this->request->getPost('classification'),
-                'hireDate' => $this->request->getPost('hireDate'),
-                'contractEndDate' => $this->request->getPost('contractEndDate'),
-                'department' => $this->request->getPost('department'),
-                'workLocation' => $this->request->getPost('workLocation'),
-                'positionHeld' => $this->request->getPost('positionHeld'),
-                'workingHours' => $this->request->getPost('workingHours')
+                'idInfoPerso'       => $employeeId,
+                'contractType'      => $this->request->getPost('contractType'),
+                'classification'    => $this->request->getPost('classification'),
+                'hireDate'          => $this->request->getPost('hireDate'),
+                'contractEndDate'   => $this->request->getPost('contractEndDate'),
+                'department'        => $this->request->getPost('department'),
+                'workLocation'      => $this->request->getPost('workLocation'),
+                'positionHeld'      => $this->request->getPost('positionHeld'),
+                'workingHours'      => $this->request->getPost('workingHours'),
+                'baseSalary'        => $this->request->getPost('baseSalary'),
+                'paymentType'       => $this->request->getPost('paymentType'),
             ];
 
             $infoPro->save($data);
@@ -60,15 +63,17 @@ class InfoPro extends BaseController
         $employee = $employees->where('idInfoPro', $employeeNumber)->first();
         $id = $employee['idInfoPro'];
         $data = [
-            'contractType' => $this->request->getPost('contractType'),
-            'classification' => $this->request->getPost('classification'),
-            'hireDate' => $this->request->getPost('hireDate'),
-            'contractEndDate' => $this->request->getPost('contractEndDate'),
-            'status' => $this->request->getPost('status'),
-            'department' => $this->request->getPost('department'),
-            'workLocation' => $this->request->getPost('workLocation'),
-            'positionHeld' => $this->request->getPost('positionHeld'),
-            'workingHours' => $this->request->getPost('workingHours')
+            'contractType'      => $this->request->getPost('contractType'),
+            'classification'    => $this->request->getPost('classification'),
+            'hireDate'          => $this->request->getPost('hireDate'),
+            'contractEndDate'   => $this->request->getPost('contractEndDate'),
+            'status'            => $this->request->getPost('status'),
+            'department'        => $this->request->getPost('department'),
+            'workLocation'      => $this->request->getPost('workLocation'),
+            'positionHeld'      => $this->request->getPost('positionHeld'),
+            'workingHours'      => $this->request->getPost('workingHours'),
+            'baseSalary'        => $this->request->getPost('baseSalary'),
+            'paymentType'       => $this->request->getPost('paymentType'),
         ];
 
 

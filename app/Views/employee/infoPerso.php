@@ -188,7 +188,7 @@
                     <div class="col">
                         <select class="form-select" name="etatCivil" value="<?= old('etatCivil') ?>">
                             <option selected>Célibataire</option>
-                            <option value="marie">Marié</option>
+                            <option value="marié(e)">Marié(e)</option>
                         </select>
                         <?php if (isset($errors['etatCivil'])): ?>
                             <div class="ms-2 mt-1 text-danger">
