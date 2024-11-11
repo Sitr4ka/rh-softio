@@ -3,12 +3,11 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\InfoPersoModel;
+use App\Models\EmployeModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class InfoPerso extends BaseController
+class EmployeController extends BaseController
 {
-
     public function index()
     {
         $user = session()->get('user');
@@ -17,39 +16,42 @@ class InfoPerso extends BaseController
             return redirect()->back()->with('errors', "Veuillez vous connecter");
         }
 
-        $employee = new InfoPersoModel();
+        $employee = new EmployeModel();
 
         $data = [
             'employees' => $employee->getAll(),
             'user'      => $user,
         ];
 
-
-        return view('employee/infoPerso', $data);
+        return view('employee/index', $data);
     }
 
     public function add()
     {
         $rules = [
-            'lastName'          => 'required',
-            'address'           => 'required',
-            'contact'           => 'required|is_unique[InfoPersos.contact]',
-            'email'             => 'required|is_unique[InfoPersos.mail]',
-            'numCin'            => 'required|is_unique[InfoPersos.numeroCin]',
+            'nom'               => 'required',
+            'prenoms'           => 'required',
+            'adresse'           => 'required',
+            'contact'           => 'required|is_unique[employes.contact]',
+            'email'             => 'required|is_unique[employes.email]',
+            'numeroCin'         => 'required|is_unique[employes.numeroCin]',
             'dateCin'           => 'required',
             'lieuCin'           => 'required',
             'nationalite'       => 'required',
             'etatCivil'         => 'required',
-            'urgenceName'       => 'required',
-            'urgenceNum'        => 'required',
-            'urgenceRelation'   => 'required',
+            'nomUrgence'        => 'required',
+            'contactUrgence'    => 'required',
+            'relationUrgence'   => 'required',
         ];
 
         $errorsMsg = [
-            'lastName'          => [
+            'nom'          => [
                 'required'  => 'Veuillez entrer votre nom',
             ],
-            'address'           => [
+            'prenoms'          => [
+                'required'  => 'Veuillez entrer vos prénoms',
+            ],
+            'adresse'           => [
                 'required'  => 'Veuillez entrer votre adresse',
             ],
             'contact'           => [
@@ -60,7 +62,7 @@ class InfoPerso extends BaseController
                 'required' => 'Veuillez entrer votre adresse email',
                 'is_unique' => 'Cet adresse email est déjà utilisé',
             ],
-            'numCin'            => [
+            'numeroCin'            => [
                 'required' => 'Veuillez entrer votre numéro CIN',
                 'is_unique' => 'Ce numéro CIN est déjà utilisé',
             ],
@@ -76,13 +78,13 @@ class InfoPerso extends BaseController
             'etatCivil'         => [
                 'required' => 'Veuillez sélectionner votre Etat Civil',
             ],
-            'urgenceName'       => [
+            'nomUrgence'       => [
                 'required' => 'Veuillez entrer le nom en cas d\'urgence',
             ],
-            'urgenceNum'        => [
+            'contactUrgence'        => [
                 'required' => 'Veuillez entrer un numéro d\'urgence',
             ],
-            'urgenceRelation'   => [
+            'relationUrgence'   => [
                 'required' => 'Veuillez entrer votre relation avec l\'urgence',
             ],
         ];
@@ -93,57 +95,56 @@ class InfoPerso extends BaseController
             $errors = $this->validator->getErrors();
             return redirect()->back()->withInput()->with('errors', $errors);
         } else {
-            $infoModels = new InfoPersoModel();
+            $infoModels = new EmployeModel();
             $data = [
-                'nom'               => $this->request->getPost('lastName'),
-                'prenom'            => $this->request->getPost('firstName'),
-                'adresse'           => $this->request->getPost('address'),
+                'nom'               => $this->request->getPost('nom'),
+                'prenoms'           => $this->request->getPost('prenoms'),
+                'adresse'           => $this->request->getPost('adresse'),
                 'contact'           => $this->request->getPost('contact'),
-                'mail'              => $this->request->getPost('email'),
-                'numeroCin'         => $this->request->getPost('numCin'),
+                'email'             => $this->request->getPost('email'),
+                'numeroCin'         => $this->request->getPost('numeroCin'),
                 'dateCin'           => $this->request->getPost('dateCin'),
                 'lieuCin'           => $this->request->getPost('lieuCin'),
-                'nationalité'       => $this->request->getPost('nationalite'),
+                'nationalite'       => $this->request->getPost('nationalite'),
                 'etatCivil'         => $this->request->getPost('etatCivil'),
-                'nomUrgence'        => $this->request->getPost('urgenceName'),
-                'contactUrgence'    => $this->request->getPost('urgenceNum'),
-                'relation'          => $this->request->getPost('urgenceRelation'),
+                'nomUrgence'        => $this->request->getPost('nomUrgence'),
+                'contactUrgence'    => $this->request->getPost('contactUrgence'),
+                'relationUrgence'   => $this->request->getPost('relationUrgence'),
             ];
 
             $infoModels->save($data);
-            return redirect('home')->with('status', 'enregistrement');
+            return redirect('employee')->with('status', 'enregistrement');
         }
     }
 
     public function delete($id = null)
     {
-        $model = new InfoPersoModel();
-        $model->delete($id);
+        $employee = new EmployeModel();
+        $employee->delete($id);
 
         return redirect()->back()->with('status', 'suppression');
     }
 
-
     public function update($id = null)
     {
-        $model = new InfoPersoModel();
+        $employee = new EmployeModel();
         $data = [
-            'nom' => $this->request->getPost('lastName'),
-            'prenom' => $this->request->getPost('firstName'),
-            'adresse' => $this->request->getPost('address'),
+            'nom' => $this->request->getPost('nom'),
+            'prenoms' => $this->request->getPost('prenoms'),
+            'adresse' => $this->request->getPost('adresse'),
             'contact' => $this->request->getPost('contact'),
-            'mail' => $this->request->getPost('email'),
-            'numeroCin' => $this->request->getPost('numCin'),
+            'email' => $this->request->getPost('email'),
+            'numeroCin' => $this->request->getPost('numeroCin'),
             'dateCin' => $this->request->getPost('dateCin'),
             'lieuCin' => $this->request->getPost('lieuCin'),
-            'nationalité' => $this->request->getPost('nationalite'),
+            'nationalite' => $this->request->getPost('nationalite'),
             'etatCivil' => $this->request->getPost('etatCivil'),
-            'nomUrgence' => $this->request->getPost('urgenceName'),
-            'contactUrgence' => $this->request->getPost('urgenceNum'),
-            'relation' => $this->request->getPost('urgenceRelation'),
+            'nomUrgence' => $this->request->getPost('nomUrgence'),
+            'contactUrgence' => $this->request->getPost('contactUrgence'),
+            'relationUrgence' => $this->request->getPost('relationUrgence'),
         ];
 
-        $model->update($id, $data);
-        return redirect('home')->with('status', 'modification');
+        $employee->update($id, $data);
+        return redirect('employee')->with('status', 'modification');
     }
 }

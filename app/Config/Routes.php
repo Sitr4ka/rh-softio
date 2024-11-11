@@ -6,6 +6,10 @@ use App\Controllers\InfoPro;
 use App\Controllers\Scoring;
 use App\Controllers\Department;
 use App\Controllers\Payment;
+
+use App\Controllers\EmployeController;
+use App\Controllers\ContratController;
+
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -25,10 +29,16 @@ $routes->get('/', function() {
 });
 
 // Personal information
-$routes->post('infoPerso/add', [InfoPerso::class, 'add']);
-$routes->get('home', [InfoPerso::class, 'index']);
-$routes->put('infoPerso/update/(:num)', [InfoPerso::class, 'update']);
-$routes->get('infoPerso/delete/(:num)', [InfoPerso::class, 'delete']);
+// $routes->post('infoPerso/add', [InfoPerso::class, 'add']);
+// $routes->get('home', [InfoPerso::class, 'index']);
+// $routes->put('infoPerso/update/(:num)', [InfoPerso::class, 'update']);
+// $routes->get('infoPerso/delete/(:num)', [InfoPerso::class, 'delete']);
+
+// EMPLOYE ROUTES
+$routes->get('employee', [EmployeController::class, 'index']);
+$routes->post('employee/add', [EmployeController::class, 'add']);
+$routes->get('employee/delete/(:num)', [EmployeController::class, 'delete']);
+$routes->put('employee/update/(:num)', [EmployeController::class, 'update']);
 
 
 // Profesional informations CRUD
@@ -37,6 +47,11 @@ $routes->post('employee/infopro/add', [InfoPro::class , 'add']);
 $routes->put('employee/infopro/update/(:segment)', [InfoPro::class, 'update']);
 $routes->get('employee/infopro/delete/(:num)',[InfoPro::class, 'delete']);
 
+// CONTRAT ROUTES
+$routes->get('employee/contrat', [ContratController::class, 'index']);
+$routes->post('employee/contrat/add', [ContratController::class, 'add']);
+$routes->put('employee/contrat/update/(:segment)', [ContratController::class, 'update']);
+$routes->get('employee/contrat/delete/(:num)', [ContratController::class, 'delete']);
 
 //Payment
 $routes->get('home/payment', [Payment::class, 'index']);

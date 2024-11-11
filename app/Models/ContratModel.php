@@ -4,16 +4,23 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class ContratModel extends Model
 {
-    protected $table            = 'users';
-    protected $primaryKey       = 'idUsers';
+    protected $table            = 'contrats';
+    protected $primaryKey       = 'idContrat';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'object';
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'username', 'email', 'password'
+        'typeContrat',
+        'dateDebut',
+        'dateFin',
+        'salaire',
+        'lieuTravail',
+        'moyenPaiement',
+        'idEmploye',
+        'idPoste'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -45,4 +52,10 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // Methods
+    function getAll()
+    {
+        return $this->findAll();
+    }
 }

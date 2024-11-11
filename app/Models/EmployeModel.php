@@ -4,16 +4,30 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class EmployeModel extends Model
 {
-    protected $table            = 'users';
-    protected $primaryKey       = 'idUsers';
+    protected $table            = 'employes';
+    protected $primaryKey       = 'idEmploye';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'object';
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'username', 'email', 'password'
+        'nom',
+        'prenoms',
+        'adresse',
+        'contact',
+        'email',
+        'numeroCin',
+        'dateCin',
+        'lieuCin',
+        'nationalite',
+        'etatCivil',
+        'nomUrgence',
+        'contactUrgence',
+        'relationUrgence',
+        'classification',
+        'statut'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -45,4 +59,10 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // Methods
+    function getAll()
+    {
+        return $this->findAll();
+    }
 }

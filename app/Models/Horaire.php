@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class Horaire extends Model
 {
-    protected $table            = 'users';
-    protected $primaryKey       = 'idUsers';
+    protected $table            = 'horaires';
+    protected $primaryKey       = 'idHoraire';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'object';
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'username', 'email', 'password'
+        'jours', 'heureDebut', 'heureFin', 'idContrat'
     ];
 
     protected bool $allowEmptyInserts = false;

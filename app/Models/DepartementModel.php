@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class DepartementModel extends Model
 {
-    protected $table            = 'users';
-    protected $primaryKey       = 'idUsers';
+    protected $table            = 'departements';
+    protected $primaryKey       = 'idDepart';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'object';
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'username', 'email', 'password'
+        'libelleDepart'
     ];
 
     protected bool $allowEmptyInserts = false;
