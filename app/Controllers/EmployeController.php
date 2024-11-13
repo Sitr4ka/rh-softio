@@ -19,7 +19,7 @@ class EmployeController extends BaseController
         $employee = new EmployeModel();
 
         $data = [
-            'employees' => $employee->getAll(),
+            'employees' => $employee->limit(5)->getAll(),
             'user'      => $user,
         ];
 

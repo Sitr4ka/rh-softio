@@ -45,4 +45,9 @@ class PosteModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function getAll()
+    {
+        return $this->findAll();
+    }
 }

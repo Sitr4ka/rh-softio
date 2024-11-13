@@ -75,11 +75,29 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
+                        <label for="poste" class="col-form-label">Poste</label>
+                    </div>
+                    <div class="col">
+                        <select type="text" id="poste" class="form-select" name="poste">
+                            <?php
+                            foreach ($postes as $poste) {
+                            ?>
+                                <option value="<?= $poste['poste'] ?>">
+                                    <?= $poste['poste'] ?>
+                                </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col row g-1 align-items-center mb-3">
+                    <div class="col-2 col-xxl-1">
                         <label for="dateDebut" class="col-form-label">Début</label>
                     </div>
                     <div class="col">
                         <input type="date" id="dateDebut" class="form-control" name="dateDebut"
-                            aria-label="" placeholder="Entrer la date de début du contrat">
+                            placeholder="Entrer la date de début du contrat" min="<?= $currentDate ?>">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3" id="endDate">
@@ -121,6 +139,75 @@
                         </select>
                     </div>
                 </div>
+                <div class="col row g-1 align-items-center mb-3">
+                    <div class="col-2 col-xxl-1">
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editHoraire">
+                            Horaires
+                        </button>
+                    </div>
+
+                    <!-- Horaire modal -->
+                    <div class="modal fade" id="editHoraire" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Horaires de travail</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                    <div class="modal-body">
+                                        <!-- Select Days -->
+                                        <div class="days mb-3">
+                                            <div class="mb-1">Jours</div>
+                                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                                <input class="btn-check" id="Mon"
+                                                    type="checkbox" name="monday" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="Mon">M</label>
+
+                                                <input class="btn-check" id="Tue"
+                                                    type="checkbox" name="tuesday" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="Tue">T</label>
+
+                                                <input class="btn-check" id="Wed"
+                                                    type="checkbox" name="wednesday" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="Wed">W</label>
+
+                                                <input class="btn-check" id="Thu"
+                                                    type="checkbox" name="thursday" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="Thu">T</label>
+
+                                                <input class="btn-check" id="Fri"
+                                                    type="checkbox" name="friday" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="Fri">F</label>
+
+                                                <input class="btn-check" id="Sat"
+                                                    type="checkbox" name="saturday" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="Sat">S</label>
+
+                                                <input class="btn-check" id="Sun"
+                                                    type="checkbox" name="sunday" autocomplete="off">
+                                                <label class="btn btn-outline-primary" for="Sun">S</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="days mb-3">
+                                            <label for="startTime" class="mb-1">De</label>
+                                            <input type="time" name="startTime" class="form-control">
+                                        </div>
+                                        <div class="days mb-3">
+                                            <label for="startTime" class="mb-1">À</label>
+                                            <input type="time" name="startTime" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                                    </div>
+                            </div>
+                        </div><button></button>
+                    </div>
+                </div>
+
                 <div class="text-end">
                     <button type="submit" class="btn btn-primary">Confirmer</button>
                 </div>
@@ -234,7 +321,7 @@
                                                     <label for="moyenPaiement" class="col-form-label">Type de paiement</label>
                                                 </div>
                                                 <div class="col">
-                                                    <select type="text" class="form-select" name="moyenPaiement" value="<?= $contrat['moyenPaiement'] ?>" >
+                                                    <select type="text" class="form-select" name="moyenPaiement" value="<?= $contrat['moyenPaiement'] ?>">
                                                         <option default>Virement bancaire</option>
                                                         <option value="Mobile Money">Mobile Money</option>
                                                         <option value="En espèce">En espèce</option>

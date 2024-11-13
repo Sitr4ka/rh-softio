@@ -308,10 +308,10 @@
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Modification</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="<?= base_url('employee/update/' . $employee['idEmploye']) ?>" method="post">
+                                    <form action="<?= base_url('employee/update/' . $employee['idEmploye']) ?>" method="post">
+                                        <div class="modal-body">
                                             <input type="hidden" name="_method" value="PUT">
-                                            <div class="">
+                                            <div class="mb-3">
                                                 <label for="nom" class="form-label">Nom</label>
                                                 <input type="text" name="nom" id="nom" class="form form-control" value="<?= $employee['nom'] ?>">
                                             </div>
@@ -363,11 +363,11 @@
                                                 <label for="relationUrgence" class="form-label">Relation</label>
                                                 <input type="text" name="relationUrgence" id="relationUrgence" class="form form-control" value="<?= $employee['relationUrgence'] ?>">
                                             </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

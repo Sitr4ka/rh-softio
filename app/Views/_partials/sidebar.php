@@ -5,7 +5,7 @@
                 <span>
                     <i class="fa fa-user"></i>
                 </span>
-                <a class="nav-link " id="employeeNav" href="<?= base_url('home') ?>">
+                <a class="nav-link " id="employeeNav" href="<?= base_url('employee') ?>">
                     Employé
                 </a>
             </li>
@@ -29,7 +29,7 @@
                 <span>
                     <i class="fa fa-cog"></i>
                 </span>
-                <a class="nav-link" id="configNav" href=" <?= base_url('home/department') ?> ">
+                <a class="nav-link" id="configNav" href=" <?= base_url('department') ?> ">
                     Départements
                 </a>
             </li>
