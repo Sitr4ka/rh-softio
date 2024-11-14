@@ -3,9 +3,10 @@
 namespace App\Controllers;
 
 use App\Models\ContratModel;
+use App\Models\EmployeModel;
+use App\Models\HoraireModel;
 
 use App\Controllers\BaseController;
-use App\Models\EmployeModel;
 use App\Models\PosteModel;
 
 class ContratController extends BaseController
@@ -34,21 +35,23 @@ class ContratController extends BaseController
 
     public function add()
     {
+        //Employee Checking
         $employee = new EmployeModel();
         $email = $this->request->getPost('email');
         $employee = $employee->where('email', $email)->first();
 
-        //Check if the employee exists
         if ($employee) {
+            //Get the employee ID
             $idEmploye = $employee['idEmploye'];
 
-            //Get the idPoste
+            //Get the poste ID
             $poste = new PosteModel();
             $posteTitle = $this->request->getPost('poste');
             $poste = $poste->where('poste', $posteTitle)->first();
             $idPoste = $poste['idPoste'];
 
-            $data = [
+            //Get the contrat data
+            $dataContrat = [
                 'typeContrat'   => $this->request->getPost('typeContrat'),
                 'dateDebut'     => $this->request->getPost('dateDebut'),
                 'dateFin'       => $this->request->getPost('dateFin'),
@@ -56,13 +59,16 @@ class ContratController extends BaseController
                 'lieuTravail'   => $this->request->getPost('lieuTravail'),
                 'moyenPaiement' => $this->request->getPost('moyenPaiement'),
                 'idEmploye'     => $idEmploye,
-                'idPoste'       =>  $idPoste,
+                'idPoste'       => $idPoste,
             ];
 
-            //Insert contrat Data
+            //Saving Contrat data and get its id
             $contrat = new ContratModel();
-            $idContrat = $contrat->insert($data);
+            $idContrat = $contrat->insert($dataContrat);
 
+            //Get Horaire data
+            $daysData = [];
+            
             $daysInput = [
                 'mon' => $this->request->getPost('monday'),
                 'tue' => $this->request->getPost('tuesday'),
@@ -72,8 +78,7 @@ class ContratController extends BaseController
                 'sat' => $this->request->getPost('saturday'),
                 'sun' => $this->request->getPost('sunday')
             ];
-
-            $daysData = [];
+            
             foreach ($daysInput as $key => $value) {
                 if ($value) {
                     switch ($key) {
@@ -102,9 +107,21 @@ class ContratController extends BaseController
                 }
             }
 
+            $dataHoraire = [
+                'heureDebut' => $this->request->getPost('startTime'),
+                'heureFin' => $this->request->getPost('endTime'),
+                'idContrat' => $idContrat,
+            ];
+
             foreach ($daysData as $day) {
-                //Insert horaire data
+                $dataHoraire['jours'] = $day;
+                $horaire = new HoraireModel();
+                $horaire->save($dataHoraire);
             }
+
+            return redirect('employee/contrat')->with('status', 'enregistrement');
+        } else {
+            return redirect('employee/contrat')->with('status', 'erreur');
         }
     }
 }

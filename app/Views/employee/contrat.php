@@ -156,53 +156,57 @@
                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Horaires de travail</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                    <div class="modal-body">
-                                        <!-- Select Days -->
-                                        <div class="days mb-3">
-                                            <div class="mb-1">Jours</div>
-                                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                                <input class="btn-check" id="Mon"
-                                                    type="checkbox" name="monday" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="Mon">M</label>
 
-                                                <input class="btn-check" id="Tue"
-                                                    type="checkbox" name="tuesday" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="Tue">T</label>
+                                <div class="modal-body">
+                                    <!-- Select Days -->
+                                    <div class="days mb-3">
+                                        <div class="mb-1">Jours</div>
+                                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 
-                                                <input class="btn-check" id="Wed"
-                                                    type="checkbox" name="wednesday" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="Wed">W</label>
+                                            <input class="btn-check" id="Sun"
+                                                type="checkbox" name="sunday" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="Sun">D</label>
 
-                                                <input class="btn-check" id="Thu"
-                                                    type="checkbox" name="thursday" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="Thu">T</label>
+                                            <input class="btn-check" id="Mon"
+                                                type="checkbox" name="monday" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="Mon">L</label>
 
-                                                <input class="btn-check" id="Fri"
-                                                    type="checkbox" name="friday" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="Fri">F</label>
 
-                                                <input class="btn-check" id="Sat"
-                                                    type="checkbox" name="saturday" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="Sat">S</label>
 
-                                                <input class="btn-check" id="Sun"
-                                                    type="checkbox" name="sunday" autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="Sun">S</label>
-                                            </div>
-                                        </div>
+                                            <input class="btn-check" id="Tue"
+                                                type="checkbox" name="tuesday" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="Tue">M</label>
 
-                                        <div class="days mb-3">
-                                            <label for="startTime" class="mb-1">De</label>
-                                            <input type="time" name="startTime" class="form-control">
-                                        </div>
-                                        <div class="days mb-3">
-                                            <label for="startTime" class="mb-1">À</label>
-                                            <input type="time" name="startTime" class="form-control">
+                                            <input class="btn-check" id="Wed"
+                                                type="checkbox" name="wednesday" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="Wed">M</label>
+
+                                            <input class="btn-check" id="Thu"
+                                                type="checkbox" name="thursday" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="Thu">J</label>
+
+                                            <input class="btn-check" id="Fri"
+                                                type="checkbox" name="friday" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="Fri">V</label>
+
+                                            <input class="btn-check" id="Sat"
+                                                type="checkbox" name="saturday" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="Sat">S</label>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+
+                                    <div class="days mb-3">
+                                        <label for="startTime" class="mb-1">de</label>
+                                        <input type="time" name="startTime" class="form-control">
                                     </div>
+                                    <div class="days mb-3">
+                                        <label for="endTime" class="mb-1">à</label>
+                                        <input type="time" name="endTime" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                                </div>
                             </div>
                         </div><button></button>
                     </div>

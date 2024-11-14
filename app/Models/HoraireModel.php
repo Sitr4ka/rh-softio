@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Horaire extends Model
+class HoraireModel extends Model
 {
     protected $table            = 'horaires';
     protected $primaryKey       = 'idHoraire';
