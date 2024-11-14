@@ -35,22 +35,22 @@ class ContratController extends BaseController
 
     public function add()
     {
-        //Employee Checking
+        //check if employee exists
         $employee = new EmployeModel();
         $email = $this->request->getPost('email');
         $employee = $employee->where('email', $email)->first();
 
         if ($employee) {
-            //Get the employee ID
+            //Retrieve employee ID
             $idEmploye = $employee['idEmploye'];
 
-            //Get the poste ID
+            //Retrieve poste ID
             $poste = new PosteModel();
             $posteTitle = $this->request->getPost('poste');
             $poste = $poste->where('poste', $posteTitle)->first();
             $idPoste = $poste['idPoste'];
 
-            //Get the contrat data
+            //Retrieve contract data
             $dataContrat = [
                 'typeContrat'   => $this->request->getPost('typeContrat'),
                 'dateDebut'     => $this->request->getPost('dateDebut'),
@@ -62,13 +62,11 @@ class ContratController extends BaseController
                 'idPoste'       => $idPoste,
             ];
 
-            //Saving Contrat data and get its id
+            //Save contract data and retrieve ID
             $contrat = new ContratModel();
             $idContrat = $contrat->insert($dataContrat);
 
-            //Get Horaire data
-            $daysData = [];
-            
+            //Retrieve working hours and days
             $daysInput = [
                 'mon' => $this->request->getPost('monday'),
                 'tue' => $this->request->getPost('tuesday'),
@@ -78,50 +76,75 @@ class ContratController extends BaseController
                 'sat' => $this->request->getPost('saturday'),
                 'sun' => $this->request->getPost('sunday')
             ];
-            
-            foreach ($daysInput as $key => $value) {
-                if ($value) {
-                    switch ($key) {
-                        case 'mon':
-                            $daysData[] = 'Lundi';
-                            break;
-                        case 'tue':
-                            $daysData[] = 'Mardi';
-                            break;
-                        case 'wed':
-                            $daysData[] = 'Mercredi';
-                            break;
-                        case 'thu':
-                            $daysData[] = 'Jeudi';
-                            break;
-                        case 'fri':
-                            $daysData[] = 'Vendredi';
-                            break;
-                        case 'sat':
-                            $daysData[] = 'Samedi';
-                            break;
-                        case 'sun':
-                            $daysData[] = 'Dimanche';
-                            break;
-                    }
-                }
-            }
-
-            $dataHoraire = [
+            $daysData = $this->saveDate($daysInput);
+            $workingHoursData = [
                 'heureDebut' => $this->request->getPost('startTime'),
                 'heureFin' => $this->request->getPost('endTime'),
                 'idContrat' => $idContrat,
             ];
-
+            
             foreach ($daysData as $day) {
-                $dataHoraire['jours'] = $day;
+                $workingHoursData['jours'] = $day;
                 $horaire = new HoraireModel();
-                $horaire->save($dataHoraire);
+                $horaire->save($workingHoursData);
             }
 
             return redirect('employee/contrat')->with('status', 'enregistrement');
         } else {
             return redirect('employee/contrat')->with('status', 'erreur');
         }
+    }
+
+    public function deleteContrat($idContrat = null)
+    {
+
+        // Delete shedule
+        $horaire = new HoraireModel();
+        $horaire = $horaire->where('idContrat', $idContrat)->delete();
+
+        // Delete contract
+        $contrat = new ContratModel();
+        $contrat->delete($idContrat);
+
+        return redirect()->back()->with('status', 'suppression');
+    }
+
+
+
+    /**
+     * @param array $days days values
+     * @return array a new array that contains the appropriate values of days
+     */
+    public function saveDate(array $days)
+    {
+        $newArray = [];
+        foreach ($days as $key => $value) {
+            if ($value) {
+                switch ($key) {
+                    case 'mon':
+                        $newArray[] = 'Lundi';
+                        break;
+                    case 'tue':
+                        $newArray[] = 'Mardi';
+                        break;
+                    case 'wed':
+                        $newArray[] = 'Mercredi';
+                        break;
+                    case 'thu':
+                        $newArray[] = 'Jeudi';
+                        break;
+                    case 'fri':
+                        $newArray[] = 'Vendredi';
+                        break;
+                    case 'sat':
+                        $newArray[] = 'Samedi';
+                        break;
+                    case 'sun':
+                        $newArray[] = 'Dimanche';
+                        break;
+                }
+            }
+        }
+        return $newArray;
     }
 }

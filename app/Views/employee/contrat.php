@@ -241,7 +241,7 @@
                             <td class="d-flex gap-2 justify-content-center">
 
                                 <!-- Delete Button modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteInfoPro<?= $contrat['idContrat'] ?>">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteContrat<?= $contrat['idContrat'] ?>">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
@@ -252,7 +252,7 @@
                             </td>
                         </tr>
                         <!-- Deletion Modal -->
-                        <div class="modal fade" id="deleteInfoPro<?= $contrat['idContrat'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="deleteContrat<?= $contrat['idContrat'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -264,7 +264,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                        <a href="<?= base_url('employee/infopro/delete/' . $contrat['idContrat']) ?>" class="btn btn-primary">
+                                        <a href="<?= base_url('employee/contrat/delete/' . $contrat['idContrat']) ?>" class="btn btn-primary">
                                             Continuer
                                         </a>
                                     </div>

@@ -50,7 +50,7 @@ $routes->get('employee/infopro/delete/(:num)',[InfoPro::class, 'delete']);
 $routes->get('employee/contrat', [ContratController::class, 'index']);
 $routes->post('employee/contrat/add', [ContratController::class, 'add']);
 $routes->put('employee/contrat/update/(:num)', [ContratController::class, 'update']);
-$routes->get('employee/contrat/delete/(:num)', [ContratController::class, 'delete']);
+$routes->get('employee/contrat/delete/(:num)', [ContratController::class, 'deleteContrat']);
 
 
 // DEPARTMENT ROUTES
