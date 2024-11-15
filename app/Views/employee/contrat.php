@@ -302,7 +302,7 @@
                             <td> <?= $contrat['idEmploye'] ?></td>
                             <td class="text-center"> <?= $contrat['idContrat'] ?></td>
                             <td class="text-center"> <?= date('d-m-Y', strtotime($contrat['dateDebut'])) ?></td>
-                            <td class="text-center"> <?= $contrat['dateFin'] ?></td>
+                            <td class="text-center"><?= date('d-m-Y', strtotime($contrat['dateFin'])) ?></td>
                             <td class="text-end"> <?= number_format($contrat['salaire'], 0, ',', ' ') ?></td>
                             <td class="d-flex gap-2 justify-content-center">
 
@@ -317,6 +317,7 @@
                                 </button>
                             </td>
                         </tr>
+
                         <!-- Deletion Modal -->
                         <div class="modal fade" id="deleteContrat<?= $contrat['idContrat'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -333,6 +334,92 @@
                                         <a href="<?= base_url('employee/contrat/delete/' . $contrat['idContrat']) ?>" class="btn btn-primary">
                                             Continuer
                                         </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Edit Modal -->
+                        <div class="modal fade" id="editContrat<?= $contrat['idContrat'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modification</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="<?= base_url('employee/contrat/update/' . $contrat['idContrat']) ?>" method="post">
+                                            <input type="hidden" name="_method" value="PUT">
+                                            <div class="col mb-4">
+                                                <label for="employeeNumber" class="form-label">N° Matricule</label>
+                                                <input type="text" class="form-control" name="employeeNumber" value="<?= $contrat['idContrat'] ?>"
+                                                    placeholder="" aria-label="" disabled>
+                                            </div>
+                                            <div class="col mb-4">
+                                                <label for="typeContrat" class="form-label">Contrat</label>
+                                                <select type="text" id="typeContrat" class="form-select" name="typeContrat"
+                                                    placeholder="Entrer le type de contrat" aria-label="">
+                                                    <option value="CDD" <?= ($contrat['typeContrat'] == 'CDD') ? "selected" : "" ?> >CDD</option>
+                                                    <option value="CDI" <?= ($contrat['typeContrat'] == 'CDI')  ? "selected" : "" ?> >CDI</option>
+                                                    <option value="Stage" <?= ($contrat['typeContrat'] == 'Stage') ? "selected" : "" ?> >Stage</option>
+                                                    <option value="Alternance" <?= ($contrat['typeContrat'] == 'Alternance') ? "selected" : "" ?> >Alternance</option>
+                                                </select>
+                                            </div>
+                                            <div class="col mb-4">
+                                                <label for="poste" class="form-label">Poste</label>
+                                                <select type="text" id="poste" class="form-select" name="poste">
+                                                    <?php
+                                                    foreach ($postes as $poste) {
+                                                    ?>
+                                                        <option value="<?= $poste['poste'] ?>">
+                                                            <?= $poste['poste'] ?>
+                                                        </option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="col mb-4">
+                                                <label for="dateDebut" class="form-label">Début</label>
+                                                <input type="date" class="form-control" name="dateDebut" value="<?= $contrat['dateDebut'] ?>"
+                                                    aria-label="">
+                                            </div>
+                                            <div class="col mb-4">
+                                                <label for="dateFin" class="form-label">Fin</label>
+                                                <input type="date" class="form-control" name="dateFin" value="<?= $contrat['dateFin'] ?>"
+                                                    aria-label="">
+                                            </div>
+                                            <div class="col mb-4">
+                                                <label for="lieuTravail" class="form-label">Lieu</label>
+                                                <input type="text" class="form-control" name="lieuTravail" value="<?= $contrat['lieuTravail'] ?>"
+                                                    placeholder="" aria-label="">
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-3">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label for="salaire" class="form-label">Salaire de base</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input type="number" class="form-control" name="salaire"
+                                                        placeholder="Entrer le salaire de base" value="<?= $contrat['salaire'] ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-3">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label for="moyenPaiement" class="col-form-label">Type de paiement</label>
+                                                </div>
+                                                <div class="col">
+                                                    <select type="text" class="form-select" name="moyenPaiement">
+                                                        <option default>Virement bancaire</option>
+                                                        <option value="Mobile Money">Mobile Money</option>
+                                                        <option value="En espèce">En espèce</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

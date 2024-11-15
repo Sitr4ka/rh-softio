@@ -50,7 +50,8 @@ class HoraireModel extends Model
     protected $afterDelete    = [];
 
     /**
-     * @param array $horaire contains startTime end endTime, array
+     * @param array horaire contains startTime end endTime
+     * @param int contract identifiant
      * @return void
      */
     function addNewHoraire(array $horaire, int $idContrat)

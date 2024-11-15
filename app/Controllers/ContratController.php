@@ -5,9 +5,9 @@ namespace App\Controllers;
 use App\Models\ContratModel;
 use App\Models\EmployeModel;
 use App\Models\HoraireModel;
+use App\Models\PosteModel;
 
 use App\Controllers\BaseController;
-use App\Models\PosteModel;
 
 class ContratController extends BaseController
 {
@@ -45,7 +45,7 @@ class ContratController extends BaseController
             $poste = new PosteModel();
             $posteTitle = $this->request->getPost('poste');
             $idPoste = $poste->getPosteId($posteTitle);
-            
+
             $dataContrat = [
                 'typeContrat'   => $this->request->getPost('typeContrat'),
                 'dateDebut'     => $this->request->getPost('dateDebut'),
@@ -100,7 +100,6 @@ class ContratController extends BaseController
             $horaire->addNewHoraire($horaireInput, $idContrat);
 
             return redirect('employee/contrat')->with('status', 'enregistrement');
-
         } else {
 
             return redirect('employee/contrat')->with('status', 'erreur');
@@ -121,5 +120,24 @@ class ContratController extends BaseController
         return redirect()->back()->with('status', 'suppression');
     }
 
-    public function updateContrat($idContrat) {}
+    public function updateContrat($idContrat)
+    {
+        $contrat = new ContratModel();
+        
+        $poste = new PosteModel();
+        $posteTitle = $this->request->getPost('poste');
+        $dataContrat = [
+            'typeContrat'   => $this->request->getPost('typeContrat'),
+            'dateDebut'     => $this->request->getPost('dateDebut'),
+            'dateFin'       => $this->request->getPost('dateFin'),
+            'salaire'       => $this->request->getPost('salaire'),
+            'lieuTravail'   => $this->request->getPost('lieuTravail'),
+            'moyenPaiement' => $this->request->getPost('moyenPaiement'),
+            'idPoste'       => $poste->getPosteId($posteTitle),
+        ];
+
+        $contrat->update($idContrat, $dataContrat);
+        return redirect('employee/contrat')->with('status', 'modification');
+
+    }
 }
