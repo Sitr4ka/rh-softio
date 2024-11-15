@@ -13,7 +13,10 @@ class HoraireModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'jours', 'heureDebut', 'heureFin', 'idContrat'
+        'jours',
+        'heureDebut',
+        'heureFin',
+        'idContrat'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -45,4 +48,62 @@ class HoraireModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    /**
+     * @param array $horaire contains startTime end endTime, array
+     * @return void
+     */
+    function addNewHoraire(array $horaire, int $idContrat)
+    {
+        foreach ($horaire as $day => $time) {
+            if (!($time['endTime'] == ""  || $time['startTime'] == "")) {
+                $horaireData = [
+                    'jours'     => $this->getDaysName($day),
+                    'heureDebut'=> $time['startTime'],
+                    'heureFin'  => $time['endTime'],
+                    'idContrat' => $idContrat
+                ];
+
+                $this->save($horaireData);
+            }
+        };
+    }
+
+    /**
+     * @param string days 
+     * @return string a new days in french
+     */
+    function getDaysName(string $day)
+    {
+        switch ($day) {
+            case 'monday':
+                $newDay = 'Lundi';
+                break;
+
+            case 'tuesday':
+                $newDay = 'Mardi';
+                break;
+
+            case 'wednesday':
+                $newDay = 'Mercredi';
+                break;
+
+            case 'thursday':
+                $newDay = 'Jeudi';
+                break;
+
+            case 'friday':
+                $newDay = 'Vendredi';
+                break;
+
+            case 'saturday':
+                $newDay = 'Samedi';
+                break;
+
+            case 'sunday':
+                $newDay = 'Dimanche';
+                break;
+        }
+        return $newDay;
+    }
 }

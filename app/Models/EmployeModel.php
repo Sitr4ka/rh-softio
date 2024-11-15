@@ -65,4 +65,12 @@ class EmployeModel extends Model
     {
         return $this->findAll();
     }
+
+    /**
+     * @param string email
+     * @return array Employe
+     */
+    function getEmployeeByEmail(string $email) {
+        return $this->where('email', $email)->first();
+    }
 }

@@ -48,8 +48,8 @@ $routes->get('employee/infopro/delete/(:num)',[InfoPro::class, 'delete']);
 
 // CONTRAT ROUTES
 $routes->get('employee/contrat', [ContratController::class, 'index']);
-$routes->post('employee/contrat/add', [ContratController::class, 'add']);
-$routes->put('employee/contrat/update/(:num)', [ContratController::class, 'update']);
+$routes->post('employee/contrat/add', [ContratController::class, 'newContrat']);
+$routes->put('employee/contrat/update/(:num)', [ContratController::class, 'updateContrat']);
 $routes->get('employee/contrat/delete/(:num)', [ContratController::class, 'deleteContrat']);
 
 

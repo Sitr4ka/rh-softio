@@ -33,24 +33,19 @@ class ContratController extends BaseController
         return view('employee/contrat', $data);
     }
 
-    public function add()
+    public function newContrat()
     {
         //check if employee exists
-        $employee = new EmployeModel();
         $email = $this->request->getPost('email');
-        $employee = $employee->where('email', $email)->first();
+        $employee = new EmployeModel();
+        $employee = $employee->getEmployeeByEmail($email);
 
         if ($employee) {
-            //Retrieve employee ID
             $idEmploye = $employee['idEmploye'];
-
-            //Retrieve poste ID
             $poste = new PosteModel();
             $posteTitle = $this->request->getPost('poste');
-            $poste = $poste->where('poste', $posteTitle)->first();
-            $idPoste = $poste['idPoste'];
-
-            //Retrieve contract data
+            $idPoste = $poste->getPosteId($posteTitle);
+            
             $dataContrat = [
                 'typeContrat'   => $this->request->getPost('typeContrat'),
                 'dateDebut'     => $this->request->getPost('dateDebut'),
@@ -62,35 +57,52 @@ class ContratController extends BaseController
                 'idPoste'       => $idPoste,
             ];
 
-            //Save contract data and retrieve ID
+            // Save contrat
             $contrat = new ContratModel();
             $idContrat = $contrat->insert($dataContrat);
 
-            //Retrieve working hours and days
-            $daysInput = [
-                'mon' => $this->request->getPost('monday'),
-                'tue' => $this->request->getPost('tuesday'),
-                'wed' => $this->request->getPost('wednesday'),
-                'thu' => $this->request->getPost('thursday'),
-                'fri' => $this->request->getPost('friday'),
-                'sat' => $this->request->getPost('saturday'),
-                'sun' => $this->request->getPost('sunday')
+            //Retrieve horaire data
+            $horaireInput = [
+                'monday' => [
+                    'startTime' => $this->request->getPost('mondayStartTime'),
+                    'endTime' => $this->request->getPost('mondayEndTime'),
+                ],
+                'tuesday' => [
+                    'startTime' => $this->request->getPost('tuesdayStartTime'),
+                    'endTime' => $this->request->getPost('tuesdayEndTime'),
+                ],
+                'wednesday' => [
+                    'startTime' => $this->request->getPost('wednesdayStartTime'),
+                    'endTime' => $this->request->getPost('wednesdayEndTime'),
+                ],
+                'thursday' => [
+                    'startTime' => $this->request->getPost('thursdayStartTime'),
+                    'endTime' => $this->request->getPost('thursdayEndTime'),
+                ],
+                'friday' => [
+                    'startTime' => $this->request->getPost('fridayStartTime'),
+                    'endTime' => $this->request->getPost('fridayEndTime'),
+                ],
+                'saturday' => [
+                    'startTime' => $this->request->getPost('saturdayStartTime'),
+                    'endTime' => $this->request->getPost('saturdayEndTime'),
+                ],
+                'sunday' => [
+                    'startTime' => $this->request->getPost('sundayStartTime'),
+                    'endTime' => $this->request->getPost('sundayEndTime'),
+                ],
             ];
-            $daysData = $this->saveDate($daysInput);
-            $workingHoursData = [
-                'heureDebut' => $this->request->getPost('startTime'),
-                'heureFin' => $this->request->getPost('endTime'),
-                'idContrat' => $idContrat,
-            ];
-            
-            foreach ($daysData as $day) {
-                $workingHoursData['jours'] = $day;
-                $horaire = new HoraireModel();
-                $horaire->save($workingHoursData);
-            }
+
+            $horaireData['idContrat'] = $idContrat;
+
+            //Save horaire
+            $horaire = new HoraireModel();
+            $horaire->addNewHoraire($horaireInput, $idContrat);
 
             return redirect('employee/contrat')->with('status', 'enregistrement');
+
         } else {
+
             return redirect('employee/contrat')->with('status', 'erreur');
         }
     }
@@ -109,42 +121,5 @@ class ContratController extends BaseController
         return redirect()->back()->with('status', 'suppression');
     }
 
-
-
-    /**
-     * @param array $days days values
-     * @return array a new array that contains the appropriate values of days
-     */
-    public function saveDate(array $days)
-    {
-        $newArray = [];
-        foreach ($days as $key => $value) {
-            if ($value) {
-                switch ($key) {
-                    case 'mon':
-                        $newArray[] = 'Lundi';
-                        break;
-                    case 'tue':
-                        $newArray[] = 'Mardi';
-                        break;
-                    case 'wed':
-                        $newArray[] = 'Mercredi';
-                        break;
-                    case 'thu':
-                        $newArray[] = 'Jeudi';
-                        break;
-                    case 'fri':
-                        $newArray[] = 'Vendredi';
-                        break;
-                    case 'sat':
-                        $newArray[] = 'Samedi';
-                        break;
-                    case 'sun':
-                        $newArray[] = 'Dimanche';
-                        break;
-                }
-            }
-        }
-        return $newArray;
-    }
+    public function updateContrat($idContrat) {}
 }

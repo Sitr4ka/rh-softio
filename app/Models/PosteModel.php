@@ -50,4 +50,15 @@ class PosteModel extends Model
     {
         return $this->findAll();
     }
+
+
+    /**
+     * @param string poste title
+     * @return int idPoste
+     */
+    function getPosteId(string $poste) 
+    {
+        $temp = $this->where('poste', $poste)->first();
+        return $temp['idPoste'];
+    }
 }
