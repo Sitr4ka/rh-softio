@@ -39,7 +39,7 @@ class Auth extends BaseController
             } else {
                 $password_check = password_verify($data['password'], $user->password);
 
-                if ($password_check) {
+                if (!$password_check) {
                     return redirect()->back()->with('errors', 'Mot de passe incorrect');
                 } else {
                     session()->set('user', [
