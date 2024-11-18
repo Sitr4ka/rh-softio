@@ -340,7 +340,8 @@
                         </div>
 
                         <!--Edit Modal -->
-                        <div class="modal fade" id="editContrat<?= $contrat['idContrat'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal modal-lg fade" id="editContrat<?= $contrat['idContrat'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -348,6 +349,17 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
+
+                                        <?php
+                                        $horaireData = [];
+                                        foreach ($contrat['horaires'] as $horaire) {
+                                            $horaireData[$horaire['jours']] = [
+                                                'startTime' => $horaire['heureDebut'],
+                                                'endTime' => $horaire['heureFin'],
+                                            ];
+                                        }
+
+                                        ?>
                                         <form action="<?= base_url('employee/contrat/update/' . $contrat['idContrat']) ?>" method="post">
                                             <input type="hidden" name="_method" value="PUT">
                                             <div class="col mb-4">
@@ -359,10 +371,10 @@
                                                 <label for="typeContrat" class="form-label">Contrat</label>
                                                 <select type="text" id="typeContrat" class="form-select" name="typeContrat"
                                                     placeholder="Entrer le type de contrat" aria-label="">
-                                                    <option value="CDD" <?= ($contrat['typeContrat'] == 'CDD') ? "selected" : "" ?> >CDD</option>
-                                                    <option value="CDI" <?= ($contrat['typeContrat'] == 'CDI')  ? "selected" : "" ?> >CDI</option>
-                                                    <option value="Stage" <?= ($contrat['typeContrat'] == 'Stage') ? "selected" : "" ?> >Stage</option>
-                                                    <option value="Alternance" <?= ($contrat['typeContrat'] == 'Alternance') ? "selected" : "" ?> >Alternance</option>
+                                                    <option value="CDD" <?= ($contrat['typeContrat'] == 'CDD') ? "selected" : "" ?>>CDD</option>
+                                                    <option value="CDI" <?= ($contrat['typeContrat'] == 'CDI')  ? "selected" : "" ?>>CDI</option>
+                                                    <option value="Stage" <?= ($contrat['typeContrat'] == 'Stage') ? "selected" : "" ?>>Stage</option>
+                                                    <option value="Alternance" <?= ($contrat['typeContrat'] == 'Alternance') ? "selected" : "" ?>>Alternance</option>
                                                 </select>
                                             </div>
                                             <div class="col mb-4">
@@ -413,6 +425,90 @@
                                                         <option value="Mobile Money">Mobile Money</option>
                                                         <option value="En espèce">En espèce</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-1">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label class="col-form-label">Lundi</label>
+                                                </div>
+                                                <div class="col input-group">
+                                                    <input type="time" class="form-control" name="mondayStartTime"
+                                                        value="<?= array_key_exists('Lundi', $horaireData) ? $horaireData['Lundi']['startTime'] : ""; ?>">
+
+                                                    <input type="time" class="form-control" name="mondayEndTime"
+                                                        value="<?= array_key_exists('Lundi', $horaireData) ? $horaireData['Lundi']['endTime'] : ""; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-1">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label class="col-form-label">Mardi</label>
+                                                </div>
+                                                <div class="col input-group">
+                                                    <input type="time" class="form-control" name="tuesdayStartTime"
+                                                        value="<?= array_key_exists('Mardi', $horaireData) ? $horaireData['Mardi']['startTime'] : ""; ?>">
+
+                                                    <input type="time" class="form-control" name="tuesdayEndTime"
+                                                        value="<?= array_key_exists('Mardi', $horaireData) ? $horaireData['Mardi']['endTime'] : ""; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-1">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label class="col-form-label">Mercredi</label>
+                                                </div>
+                                                <div class="col input-group">
+                                                    <input type="time" class="form-control" name="wednesdayStartTime"
+                                                        value="<?= array_key_exists('Mercredi', $horaireData) ? $horaireData['Mercredi']['startTime'] : ""; ?>">
+
+                                                    <input type="time" class="form-control" name="wednesdayEndTime"
+                                                        value="<?= array_key_exists('Mercredi', $horaireData) ? $horaireData['Mercredi']['endTime'] : ""; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-1">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label class="col-form-label">Jeudi</label>
+                                                </div>
+                                                <div class="col input-group">
+                                                    <input type="time" class="form-control" name="thursdayStartTime"
+                                                        value="<?= array_key_exists('Jeudi', $horaireData) ? $horaireData['Jeudi']['startTime'] : ""; ?>">
+
+                                                    <input type="time" class="form-control" name="thursdayEndTime"
+                                                        value="<?= array_key_exists('Jeudi', $horaireData) ? $horaireData['Jeudi']['endTime'] : ""; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-1">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label class="col-form-label">Vendredi</label>
+                                                </div>
+                                                <div class="col input-group">
+                                                    <input type="time" class="form-control" name="fridayStartTime"
+                                                        value="<?= array_key_exists('Vendredi', $horaireData) ? $horaireData['Vendredi']['startTime'] : ""; ?>">
+
+                                                    <input type="time" class="form-control" name="fridayEndTime"
+                                                        value="<?= array_key_exists('Vendredi', $horaireData) ? $horaireData['Vendredi']['endTime'] : ""; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-1">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label class="col-form-label">Samedi</label>
+                                                </div>
+                                                <div class="col input-group">
+                                                    <input type="time" class="form-control" name="saturdayStartTime"
+                                                        value="<?= array_key_exists('Samedi', $horaireData) ? $horaireData['Samedi']['startTime'] : ""; ?>">
+
+                                                    <input type="time" class="form-control" name="saturdayEndTime"
+                                                        value="<?= array_key_exists('Samedi', $horaireData) ? $horaireData['Samedi']['endTime'] : ""; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col row g-1 align-items-center mb-1">
+                                                <div class="col-2 col-xxl-1">
+                                                    <label class="col-form-label">Dimanche</label>
+                                                </div>
+                                                <div class="col input-group">
+                                                    <input type="time" class="form-control" name="sundayStartTime"
+                                                        value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['startTime'] : ""; ?>">
+
+                                                    <input type="time" class="form-control" name="sundayEndTime"
+                                                        value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -486,61 +582,5 @@
     dateDebut.addEventListener('input', function() {
         dateFin.setAttribute('min', this.value)
     })
-
-    /**
-     * Ajax
-     */
-    /*     $(document).ready(function() {
-            // Lorsque l'utilisateur clique sur le bouton pour éditer un contrat
-            $('.btn-edit-contrat').on('click', function() {
-                var idContrat = $(this).data('id-contrat'); // Récupérer l'ID du contrat
-                // Envoi de la requête AJAX pour récupérer les horaires
-                $.ajax({
-                    url: '/employee/contrat/horaires/' + idContrat, // Route vers la méthode getHoraires
-                    method: 'GET',
-                    dataType: 'json',
-                    success: function(response) {
-                        // Réinitialiser toutes les cases à cocher
-                        $('#monday').prop('checked', false);
-                        $('#tuesday').prop('checked', false);
-                        $('#wednesday').prop('checked', false);
-                        $('#thursday').prop('checked', false);
-                        $('#friday').prop('checked', false);
-                        $('#saturday').prop('checked', false);
-                        $('#sunday').prop('checked', false);
-
-                        // Pré-cocher les cases des jours associés au contrat
-                        response.joursSelectionnes.forEach(function(jour) {
-                            switch (jour) {
-                                case 'Lundi':
-                                    $('#monday').prop('checked', true);
-                                    break;
-                                case 'Mardi':
-                                    $('#tuesday').prop('checked', true);
-                                    break;
-                                case 'Mercredi':
-                                    $('#wednesday').prop('checked', true);
-                                    break;
-                                case 'Jeudi':
-                                    $('#thursday').prop('checked', true);
-                                    break;
-                                case 'Vendredi':
-                                    $('#friday').prop('checked', true);
-                                    break;
-                                case 'Samedi':
-                                    $('#saturday').prop('checked', true);
-                                    break;
-                                case 'Dimanche':
-                                    $('#sunday').prop('checked', true);
-                                    break;
-                            }
-                        });
-                    },
-                    error: function() {
-                        alert("Erreur lors du chargement des horaires.");
-                    }
-                });
-            });
-        }); */
 </script>
 <?= $this->endSection() ?>

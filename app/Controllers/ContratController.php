@@ -19,15 +19,24 @@ class ContratController extends BaseController
             return redirect()->back()->with('status', "Vous n'êtes pas connecté");
         }
 
-        $contrat = new ContratModel();
         $postes = new PosteModel();
+        $postes = $postes->getAll();
 
+        $contrats = new ContratModel();
+        $contrats = $contrats->getAll();
+        
+
+        $horaires = new HoraireModel();
+        foreach ($contrats as &$contrat) {
+            $horaireData = $horaires->where('idContrat', $contrat['idContrat'])->getAll();
+            $contrat["horaires"] = $horaireData;
+        }
+        
         $data = [
             'user'      => $user,
             'currentDate' => $currentDate,
-            'contrats' => $contrat->getAll(),
-            'postes' => $postes->getAll()
-
+            'contrats' => $contrats,
+            'postes' => $postes,
         ];
 
         return view('employee/contrat', $data);
@@ -123,7 +132,7 @@ class ContratController extends BaseController
     public function updateContrat($idContrat)
     {
         $contrat = new ContratModel();
-        
+
         $poste = new PosteModel();
         $posteTitle = $this->request->getPost('poste');
         $dataContrat = [
@@ -137,7 +146,42 @@ class ContratController extends BaseController
         ];
 
         $contrat->update($idContrat, $dataContrat);
-        return redirect('employee/contrat')->with('status', 'modification');
 
+        // Update schedule
+        $horaireInput = [
+            'monday' => [
+                'startTime' => $this->request->getPost('mondayStartTime'),
+                'endTime' => $this->request->getPost('mondayEndTime'),
+            ],
+            'tuesday' => [
+                'startTime' => $this->request->getPost('tuesdayStartTime'),
+                'endTime' => $this->request->getPost('tuesdayEndTime'),
+            ],
+            'wednesday' => [
+                'startTime' => $this->request->getPost('wednesdayStartTime'),
+                'endTime' => $this->request->getPost('wednesdayEndTime'),
+            ],
+            'thursday' => [
+                'startTime' => $this->request->getPost('thursdayStartTime'),
+                'endTime' => $this->request->getPost('thursdayEndTime'),
+            ],
+            'friday' => [
+                'startTime' => $this->request->getPost('fridayStartTime'),
+                'endTime' => $this->request->getPost('fridayEndTime'),
+            ],
+            'saturday' => [
+                'startTime' => $this->request->getPost('saturdayStartTime'),
+                'endTime' => $this->request->getPost('saturdayEndTime'),
+            ],
+            'sunday' => [
+                'startTime' => $this->request->getPost('sundayStartTime'),
+                'endTime' => $this->request->getPost('sundayEndTime'),
+            ],
+        ];
+
+        $horaire =  new HoraireModel();
+        $horaire->updateHoraire($horaireInput, $idContrat);
+        
+        return redirect('employee/contrat')->with('status', 'modification');
     }
 }

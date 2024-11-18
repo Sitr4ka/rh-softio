@@ -49,8 +49,14 @@ class HoraireModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    function getAll() 
+    {
+        return $this->findAll();
+    }
+
+
     /**
-     * @param array horaire contains startTime end endTime
+     * @param array horaire contains startTime and endTime
      * @param int contract identifiant
      * @return void
      */
@@ -60,7 +66,7 @@ class HoraireModel extends Model
             if (!($time['endTime'] == ""  || $time['startTime'] == "")) {
                 $horaireData = [
                     'jours'     => $this->getDaysName($day),
-                    'heureDebut'=> $time['startTime'],
+                    'heureDebut' => $time['startTime'],
                     'heureFin'  => $time['endTime'],
                     'idContrat' => $idContrat
                 ];
@@ -69,6 +75,60 @@ class HoraireModel extends Model
             }
         };
     }
+
+    /**
+     * @param array horaire contains startTime and endTime
+     * @param int contract identifiant
+     * @return void
+     */
+    function updateHoraire(array $horaire, int $idContrat)
+    {
+        foreach ($horaire as $day => $time) {
+            if (!($time['endTime'] == ""  || $time['startTime'] == "")) {
+                $day = $this->getDaysName($day);
+
+                $horaireData = [
+                    'jours'     => $day,
+                    'heureDebut' => $time['startTime'],
+                    'heureFin'  => $time['endTime'],
+                    'idContrat' => $idContrat
+                ];
+
+                $idHoraire = null;
+                if ($idHoraire = $this->getHoraireId($idContrat, $day)) {
+                    $this->update($idHoraire, $horaireData);
+                } else {
+                    $this->save($horaireData);
+                }
+
+            }
+        }
+    }
+
+    /**
+     * @param int idContrat
+     * @param string day
+     * @return int id
+     */
+    function getHoraireId($idContrat, $day)
+    {
+        $horaire =  $this
+            ->where('jours', $day)
+            ->where('idContrat', $idContrat)
+            ->first();
+
+        if ($horaire) {
+            return $horaire['idHoraire'];
+        } else {
+            return null;
+        }
+    }
+
+    function getHoraireByContrat($idContrat) 
+    {
+        return $this->where('idContrat', $idContrat);
+    }
+
 
     /**
      * @param string days 
