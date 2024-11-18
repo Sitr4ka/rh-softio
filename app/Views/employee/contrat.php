@@ -560,6 +560,8 @@
         }
     });
 
+    const contrat = document.getElementById('typeContrat')
+
     const today = new Date().toISOString().split('T')[0];
 
     hireNav.classList.add('active')
@@ -572,7 +574,9 @@
     dateDebut.value = today;
     dateFin.setAttribute('min', dateDebut.value)
 
-    typeContrat.addEventListener('change', function() {
+
+
+    contrat.addEventListener('input', function() {
         if (this.value === 'CDI') {
             endDate.classList.add('d-none');
         } else {

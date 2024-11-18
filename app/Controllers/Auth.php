@@ -43,7 +43,7 @@ class Auth extends BaseController
                     return redirect()->back()->with('errors', 'Mot de passe incorrect');
                 } else {
                     session()->set('user', [
-                        'idUsers' => $user->idUsers,
+                        'id' => $user->id,
                         'username' => $user->username,
                         'email' => $user->email
                     ]);
