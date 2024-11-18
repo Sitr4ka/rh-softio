@@ -4,28 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class InfoPersoModel extends Model
+class PointageModel extends Model
 {
-    protected $table            = 'InfoPersos';
-    protected $primaryKey       = 'idInfoPerso';
+    protected $table            = 'pointages';
+    protected $primaryKey       = 'idPointage';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'nom',
-        'prenom',
-        'adresse',
-        'contact',
-        'mail',
-        'numeroCin',
-        'dateCin',
-        'lieuCin',
-        'nationalité',
-        'etatCivil',
-        'nomUrgence',
-        'contactUrgence',
-        'relation'
+        'date', 'heureEntree', 'heureSortie', 'observation', 'idEmploye'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -57,10 +45,4 @@ class InfoPersoModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-
-    // Methods
-    function getAll() {
-        return $this->findAll();
-    }
 }
