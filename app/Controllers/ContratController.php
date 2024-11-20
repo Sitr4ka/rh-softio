@@ -45,9 +45,10 @@ class ContratController extends BaseController
     public function newContrat()
     {
         //check if employee exists
-        $email = $this->request->getPost('email');
+        $keyWord = $this->request->getPost('email');
         $employee = new EmployeModel();
-        $employee = $employee->getEmployeeByEmail($email);
+        $employee = $employee->getEmployee($keyWord);
+        // dd($employee);
 
         if ($employee) {
             $idEmploye = $employee['idEmploye'];

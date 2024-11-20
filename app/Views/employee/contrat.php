@@ -2,84 +2,10 @@
 
 <?= $this->section('title') ?> RH | Contrat<?= $this->endSection() ?>
 
-<!-- Need some change -->
-<div class="col row g-1 align-items-center mb-3">
-    <div class="col-2 col-xxl-1">
-        Horaires
-    </div>
-    <div class="col">
-        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editHoraire">
-            sélectionner
-        </button>
-    </div>
-
-    <!-- Horaire modal -->
-    <div class="modal fade" id="editHoraire" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Horaires de travail</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <!-- Select Days -->
-                    <div class="days mb-3">
-                        <div class="mb-1">Jours</div>
-                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-
-                            <input class="btn-check" id="Sun"
-                                type="checkbox" name="sunday" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="Sun">D</label>
-
-                            <input class="btn-check" id="Mon"
-                                type="checkbox" name="monday" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="Mon">L</label>
-
-
-
-                            <input class="btn-check" id="Tue"
-                                type="checkbox" name="tuesday" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="Tue">M</label>
-
-                            <input class="btn-check" id="Wed"
-                                type="checkbox" name="wednesday" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="Wed">M</label>
-
-                            <input class="btn-check" id="Thu"
-                                type="checkbox" name="thursday" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="Thu">J</label>
-
-                            <input class="btn-check" id="Fri"
-                                type="checkbox" name="friday" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="Fri">V</label>
-
-                            <input class="btn-check" id="Sat"
-                                type="checkbox" name="saturday" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="Sat">S</label>
-                        </div>
-                    </div>
-
-                    <div class="days mb-3">
-                        <label for="startTime" class="mb-1">de</label>
-                        <input type="time" name="startTime" class="form-control">
-                    </div>
-                    <div class="days mb-3">
-                        <label for="endTime" class="mb-1">à</label>
-                        <input type="time" name="endTime" class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
-                </div>
-            </div>
-        </div><button></button>
-    </div>
-</div>
-
 <?= $this->section('content') ?>
 <main class="main container-fluid">
     <?= $this->include('_partials/employeeHeader') ?>
+
     <!-- Message alert -->
     <?php
     $flashData = session()->getFlashdata("status");
@@ -130,8 +56,8 @@
                         <label for="email" class="col-form-label">Email</label>
                     </div>
                     <div class="col">
-                        <input type="email" class="form-control" name="email"
-                            placeholder="Entrer votre email" aria-label="">
+                        <input type="text" class="form-control" name="email"
+                            placeholder="Email ou numéro téléphone">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3">

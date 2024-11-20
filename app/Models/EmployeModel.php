@@ -70,7 +70,10 @@ class EmployeModel extends Model
      * @param string email
      * @return array Employe
      */
-    function getEmployeeByEmail(string $email) {
-        return $this->where('email', $email)->first();
+    function getEmployee(string $keyWord)
+    {
+        return $this->where('email', $keyWord)
+            ->orWhere('contact', $keyWord)
+            ->first();
     }
 }
