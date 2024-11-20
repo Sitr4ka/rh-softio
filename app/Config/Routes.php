@@ -27,24 +27,14 @@ $routes->get('/', function() {
     return redirect()->to('/auth/login');
 });
 
-// Personal information
-// $routes->post('infoPerso/add', [InfoPerso::class, 'add']);
-// $routes->get('home', [InfoPerso::class, 'index']);
-// $routes->put('infoPerso/update/(:num)', [InfoPerso::class, 'update']);
-// $routes->get('infoPerso/delete/(:num)', [InfoPerso::class, 'delete']);
-
 // EMPLOYE ROUTES
 $routes->get('employee', [EmployeController::class, 'index']);
 $routes->post('employee/add', [EmployeController::class, 'add']);
 $routes->get('employee/delete/(:num)', [EmployeController::class, 'delete']);
 $routes->put('employee/update/(:num)', [EmployeController::class, 'update']);
 
-
-// Profesional informations CRUD
-$routes->get('employee/infopro/index', [InfoPro::class, 'index']);
-$routes->post('employee/infopro/add', [InfoPro::class , 'add']);
-$routes->put('employee/infopro/update/(:segment)', [InfoPro::class, 'update']);
-$routes->get('employee/infopro/delete/(:num)',[InfoPro::class, 'delete']);
+//temp
+$routes->get('employee/getname', [EmployeController::class, 'getEmployeeName']);
 
 // CONTRAT ROUTES
 $routes->get('employee/contrat', [ContratController::class, 'index']);
@@ -63,11 +53,10 @@ $routes->post('department/positionHeld/add', [DepartmentController::class, 'addP
 $routes->put('department/postionHeld/update/(:num)', [DepartmentController::class, 'updatePostionHeld']);
 $routes->get('department/positionHeld/delete/(:num)', [DepartmentController::class, 'deletePositionHeld']);
 
-
-
-
 //Payment
 $routes->get('home/payment', [Payment::class, 'index']);
 
 //Scoring
 $routes->get('home/scoring', [Scoring::class, 'index']);
+
+

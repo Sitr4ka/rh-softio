@@ -50,19 +50,41 @@
 
     <div>
         <form class="px-4" action="<?= base_url('employee/contrat/add') ?>" method="post">
-            <div class="row row-cols-1 gx-2 gy-2 mb-3">
+            <div class="row row-cols-1 gx-2 gy-2">
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="email" class="col-form-label">Email</label>
+                        <label for="contactInput" class="col-form-label">Coordonnée :</label>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" name="email"
+                        <input type="text" class="form-control" name="contactInput" id="contactInput"
                             placeholder="Email ou numéro téléphone">
                     </div>
                 </div>
+
+                <!-- Display Employee Name -->
+                <div class="col row g-1 align-items-center mb-3 d-none" id="contactErrorMsgBox">
+                    <div class="col-2 col-xxl-1"></div>
+                    <div class="col text-danger" id="contactErrorMsg"></div>
+                </div>
+                <div class="col row g-1 align-items-center mb-3 d-none" id="lastNameGroup">
+                    <div class="col-2 col-xxl-1">
+                        Nom :
+                    </div>
+                    <div class="col" id="lastname">
+                    </div>
+                </div>
+                <div class="col row g-1 align-items-center mb-3 d-none" id="firstNameGroup">
+                    <div class="col-2 col-xxl-1">
+                        Prénoms :
+                    </div>
+                    <div class="col" id="firstname">
+                    </div>
+                </div>
+
+
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="typeContrat" class="col-form-label">Contrat</label>
+                        <label for="typeContrat" class="col-form-label">Contrat :</label>
                     </div>
                     <div class="col">
                         <select type="text" id="typeContrat" class="form-select" name="typeContrat"
@@ -76,7 +98,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="poste" class="col-form-label">Poste</label>
+                        <label for="poste" class="col-form-label">Poste :</label>
                     </div>
                     <div class="col">
                         <select type="text" id="poste" class="form-select" name="poste">
@@ -94,7 +116,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="dateDebut" class="col-form-label">Début</label>
+                        <label for="dateDebut" class="col-form-label">Début :</label>
                     </div>
                     <div class="col">
                         <input type="date" id="dateDebut" class="form-control" name="dateDebut"
@@ -103,7 +125,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-3" id="endDate">
                     <div class="col-2 col-xxl-1">
-                        <label for="dateFin" class="col-form-label">Fin</label>
+                        <label for="dateFin" class="col-form-label">Fin :</label>
                     </div>
                     <div class="col">
                         <input type="date" id="dateFin" class="form-control" name="dateFin"
@@ -112,7 +134,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="lieuTravail" class="col-form-label">Lieu</label>
+                        <label for="lieuTravail" class="col-form-label">Lieu :</label>
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" name="lieuTravail"
@@ -121,7 +143,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="salaire" class="col-form-label">Salaire de base</label>
+                        <label for="salaire" class="col-form-label">Salaire de base :</label>
                     </div>
                     <div class="col">
                         <input type="number" class="form-control" name="salaire"
@@ -130,7 +152,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
-                        <label for="moyenPaiement" class="col-form-label">Moyen de paiement</label>
+                        <label for="moyenPaiement" class="col-form-label">Moyen de paiement :</label>
                     </div>
                     <div class="col">
                         <select type="text" class="form-select" name="moyenPaiement">
@@ -142,7 +164,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-1">
                     <div class="col-2 col-xxl-1">
-                        <label class="col-form-label">Lundi</label>
+                        <label class="col-form-label">Lundi :</label>
                     </div>
                     <div class="col input-group">
                         <input type="time" class="form-control" name="mondayStartTime">
@@ -151,7 +173,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-1">
                     <div class="col-2 col-xxl-1">
-                        <label class="col-form-label">Mardi</label>
+                        <label class="col-form-label">Mardi :</label>
                     </div>
                     <div class="col input-group">
                         <input type="time" class="form-control" name="tuesdayStartTime">
@@ -160,7 +182,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-1">
                     <div class="col-2 col-xxl-1">
-                        <label class="col-form-label">Mercredi</label>
+                        <label class="col-form-label">Mercredi :</label>
                     </div>
                     <div class="col input-group">
                         <input type="time" class="form-control" name="wednesdayStartTime">
@@ -169,7 +191,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-1">
                     <div class="col-2 col-xxl-1">
-                        <label class="col-form-label">Jeudi</label>
+                        <label class="col-form-label">Jeudi :</label>
                     </div>
                     <div class="col input-group">
                         <input type="time" class="form-control" name="thursdayStartTime">
@@ -178,7 +200,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-1">
                     <div class="col-2 col-xxl-1">
-                        <label class="col-form-label">Vendredi</label>
+                        <label class="col-form-label">Vendredi :</label>
                     </div>
                     <div class="col input-group">
                         <input type="time" class="form-control" name="fridayStartTime">
@@ -187,7 +209,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-1">
                     <div class="col-2 col-xxl-1">
-                        <label class="col-form-label">Samedi</label>
+                        <label class="col-form-label">Samedi :</label>
                     </div>
                     <div class="col input-group">
                         <input type="time" class="form-control" name="saturdayStartTime">
@@ -196,7 +218,7 @@
                 </div>
                 <div class="col row g-1 align-items-center mb-1">
                     <div class="col-2 col-xxl-1">
-                        <label class="col-form-label">Dimanche</label>
+                        <label class="col-form-label">Dimanche :</label>
                     </div>
                     <div class="col input-group">
                         <input type="time" class="form-control" name="sundayStartTime">
@@ -289,12 +311,12 @@
                                         <form action="<?= base_url('employee/contrat/update/' . $contrat['idContrat']) ?>" method="post">
                                             <input type="hidden" name="_method" value="PUT">
                                             <div class="col mb-4">
-                                                <label for="employeeNumber" class="form-label">N° Matricule</label>
+                                                <label for="employeeNumber" class="form-label">N° Matricule :</label>
                                                 <input type="text" class="form-control" name="employeeNumber" value="<?= $contrat['idContrat'] ?>"
                                                     placeholder="" aria-label="" disabled>
                                             </div>
                                             <div class="col mb-4">
-                                                <label for="typeContrat" class="form-label">Contrat</label>
+                                                <label for="typeContrat" class="form-label">Contrat :</label>
                                                 <select type="text" id="typeContrat" class="form-select" name="typeContrat"
                                                     placeholder="Entrer le type de contrat" aria-label="">
                                                     <option value="CDD" <?= ($contrat['typeContrat'] == 'CDD') ? "selected" : "" ?>>CDD</option>
@@ -304,7 +326,7 @@
                                                 </select>
                                             </div>
                                             <div class="col mb-4">
-                                                <label for="poste" class="form-label">Poste</label>
+                                                <label for="poste" class="form-label">Poste :</label>
                                                 <select type="text" id="poste" class="form-select" name="poste">
                                                     <?php
                                                     foreach ($postes as $poste) {
@@ -318,23 +340,23 @@
                                                 </select>
                                             </div>
                                             <div class="col mb-4">
-                                                <label for="dateDebut" class="form-label">Début</label>
+                                                <label for="dateDebut" class="form-label">Début :</label>
                                                 <input type="date" class="form-control" name="dateDebut" value="<?= $contrat['dateDebut'] ?>"
                                                     aria-label="">
                                             </div>
                                             <div class="col mb-4">
-                                                <label for="dateFin" class="form-label">Fin</label>
+                                                <label for="dateFin" class="form-label">Fin :</label>
                                                 <input type="date" class="form-control" name="dateFin" value="<?= $contrat['dateFin'] ?>"
                                                     aria-label="">
                                             </div>
                                             <div class="col mb-4">
-                                                <label for="lieuTravail" class="form-label">Lieu</label>
+                                                <label for="lieuTravail" class="form-label">Lieu :</label>
                                                 <input type="text" class="form-control" name="lieuTravail" value="<?= $contrat['lieuTravail'] ?>"
                                                     placeholder="" aria-label="">
                                             </div>
                                             <div class="col row g-1 align-items-center mb-3">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label for="salaire" class="form-label">Salaire de base</label>
+                                                    <label for="salaire" class="form-label">Salaire de base :</label>
                                                 </div>
                                                 <div class="col">
                                                     <input type="number" class="form-control" name="salaire"
@@ -343,7 +365,7 @@
                                             </div>
                                             <div class="col row g-1 align-items-center mb-3">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label for="moyenPaiement" class="col-form-label">Type de paiement</label>
+                                                    <label for="moyenPaiement" class="col-form-label">Type de paiement :</label>
                                                 </div>
                                                 <div class="col">
                                                     <select type="text" class="form-select" name="moyenPaiement">
@@ -355,7 +377,7 @@
                                             </div>
                                             <div class="col row g-1 align-items-center mb-1">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Lundi</label>
+                                                    <label class="col-form-label">Lundi :</label>
                                                 </div>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="mondayStartTime"
@@ -367,7 +389,7 @@
                                             </div>
                                             <div class="col row g-1 align-items-center mb-1">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Mardi</label>
+                                                    <label class="col-form-label">Mardi :</label>
                                                 </div>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="tuesdayStartTime"
@@ -379,7 +401,7 @@
                                             </div>
                                             <div class="col row g-1 align-items-center mb-1">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Mercredi</label>
+                                                    <label class="col-form-label">Mercredi :</label>
                                                 </div>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="wednesdayStartTime"
@@ -391,7 +413,7 @@
                                             </div>
                                             <div class="col row g-1 align-items-center mb-1">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Jeudi</label>
+                                                    <label class="col-form-label">Jeudi :</label>
                                                 </div>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="thursdayStartTime"
@@ -403,7 +425,7 @@
                                             </div>
                                             <div class="col row g-1 align-items-center mb-1">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Vendredi</label>
+                                                    <label class="col-form-label">Vendredi :</label>
                                                 </div>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="fridayStartTime"
@@ -415,7 +437,7 @@
                                             </div>
                                             <div class="col row g-1 align-items-center mb-1">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Samedi</label>
+                                                    <label class="col-form-label">Samedi :</label>
                                                 </div>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="saturdayStartTime"
@@ -427,7 +449,7 @@
                                             </div>
                                             <div class="col row g-1 align-items-center mb-1">
                                                 <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Dimanche</label>
+                                                    <label class="col-form-label">Dimanche :</label>
                                                 </div>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="sundayStartTime"
@@ -471,6 +493,41 @@
 
 <?= $this->section('script') ?>
 <script>
+    const contactInput = document.getElementById("contactInput")
+    contactInput.onchange = fetchEmployee;
+
+    function fetchEmployee() {
+        let coordonnee = document.getElementById("contactInput").value;
+        let lastNameGroup = document.getElementById('lastNameGroup')
+        let firstNameGroup = document.getElementById('firstNameGroup')
+        let contactErrorMsgBox = document.getElementById('contactErrorMsgBox')
+        let contactErrorMsg = document.getElementById('contactErrorMsg')
+
+        $.ajax({
+            url: '<?= base_url('employee/getname') ?>',
+            type: 'GET',
+            data: {
+                coordonnee: coordonnee
+            },
+            success: function(response) {
+                let firstname = document.getElementById('firstname')
+                let lastname = document.getElementById('lastname')
+                lastNameGroup.classList.remove('d-none')
+                firstNameGroup.classList.remove('d-none')
+
+                firstname.textContent = response.firstname
+                lastname.textContent = response.lastname
+            },
+            error: function() {
+                lastNameGroup.classList.add('d-none')
+                firstNameGroup.classList.add('d-none')
+
+                contactErrorMsg.textContent = "Aucun employé trouvé"
+                contactErrorMsgBox.classList.remove('d-none')
+            },
+        })
+    }
+
     new DataTable('#infoProTable', {
         "pageLength": 5,
         "language": {
@@ -509,6 +566,7 @@
             endDate.classList.remove('d-none');
         }
     });
+
     dateDebut.addEventListener('input', function() {
         dateFin.setAttribute('min', this.value)
     })

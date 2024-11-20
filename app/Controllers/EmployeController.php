@@ -147,4 +147,34 @@ class EmployeController extends BaseController
         $employee->update($id, $data);
         return redirect('employee')->with('status', 'modification');
     }
+
+    public function getEmployeeName()
+    {
+        $coordonnee = $this->request->getVar('coordonnee');
+
+        $essai = null;
+        if ($coordonnee) {
+            $employee = new EmployeModel();
+            $employee = $employee->getEmployee($coordonnee);
+
+            if ($employee) {
+
+                $essai = $this->response->setJSON([
+                    'lastname'  => $employee['nom'],
+                    'firstname' => $employee['prenoms']
+                ]);
+
+            } else {
+
+                return $this->response->setStatusCode(404)->setJSON(['error' => 'Employé introuvable']);
+            }
+        } else {
+            $essai = $this->response->setJSON([
+                'lastname'  => '',
+                'firstname' => ''
+            ]);
+        }
+
+        return $essai;
+    }
 }
