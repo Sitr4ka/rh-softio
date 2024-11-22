@@ -51,7 +51,7 @@
     <div>
         <form class="px-4" action="<?= base_url('employee/contrat/add') ?>" method="post">
             <div class="row row-cols-1 gx-2 gy-2">
-                <div class="col row g-1 align-items-center mb-3">
+                <div class="col row g-1 align-items-center mb-3" id="contactField">
                     <div class="col-2 col-xxl-1">
                         <label for="contactInput" class="col-form-label">Coordonnée :</label>
                     </div>
@@ -66,18 +66,18 @@
                     <div class="col-2 col-xxl-1"></div>
                     <div class="col text-danger" id="contactErrorMsg"></div>
                 </div>
-                <div class="col row g-1 align-items-center mb-3 d-none" id="lastNameGroup">
+                <div class="col row g-1 align-items-center d-none" id="lastNameGroup">
                     <div class="col-2 col-xxl-1">
                         Nom :
                     </div>
-                    <div class="col" id="lastname">
+                    <div class="col text-success" id="lastname">
                     </div>
                 </div>
                 <div class="col row g-1 align-items-center mb-3 d-none" id="firstNameGroup">
                     <div class="col-2 col-xxl-1">
                         Prénoms :
                     </div>
-                    <div class="col" id="firstname">
+                    <div class="col text-success" id="firstname">
                     </div>
                 </div>
 
@@ -502,6 +502,7 @@
         let firstNameGroup = document.getElementById('firstNameGroup')
         let contactErrorMsgBox = document.getElementById('contactErrorMsgBox')
         let contactErrorMsg = document.getElementById('contactErrorMsg')
+        let contactField = document.getElementById('contactField')
 
         $.ajax({
             url: '<?= base_url('employee/getname') ?>',
@@ -514,6 +515,8 @@
                 let lastname = document.getElementById('lastname')
                 lastNameGroup.classList.remove('d-none')
                 firstNameGroup.classList.remove('d-none')
+                contactField.classList.add('mb-3')
+                contactErrorMsgBox.classList.add('d-none')
 
                 firstname.textContent = response.firstname
                 lastname.textContent = response.lastname
@@ -524,6 +527,7 @@
 
                 contactErrorMsg.textContent = "Aucun employé trouvé"
                 contactErrorMsgBox.classList.remove('d-none')
+                contactField.classList.remove('mb-3')
             },
         })
     }
