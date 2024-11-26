@@ -76,4 +76,20 @@ class EmployeModel extends Model
             ->orWhere('contact', $keyWord)
             ->first();
     }
+
+    /**
+     * Fetch employees by selected day
+     * 
+     * @param string $day
+     */
+    public function getEmployeesByDay($day)
+    {
+
+        return $this->select('employes.idEmploye, employes.nom, contrats.typeContrat, postes.poste')
+            ->join('contrats', 'contrats.idEmploye = employes.idEmploye')
+            ->join('horaires', 'contrats.idContrat = horaires.idContrat')
+            ->join('postes', 'contrats.idPoste = postes.idPoste')
+            ->like('horaires.jours', $day)
+            ->findAll();
+    }
 }

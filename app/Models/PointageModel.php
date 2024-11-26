@@ -45,4 +45,11 @@ class PointageModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    /**
+     * 
+     */
+    function getScoringById(int $idEmploye) {
+        return $this->where('idEmploye', $idEmploye)->first();
+    }
 }

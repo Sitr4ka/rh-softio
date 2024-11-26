@@ -58,4 +58,18 @@ class ContratModel extends Model
     {
         return $this->findAll();
     }
+
+    /**
+     * 
+     */
+    function getContratByHoraire(string $days)
+    {
+        $contrats =
+            $this->select('contrats.idContrat')
+            ->join('horaires', 'contrats.idContrat = horaires.idContrat')
+            ->where('horaires.jours', $days)
+            ->findAll() ;
+        
+            return $contrats;
+    }
 }

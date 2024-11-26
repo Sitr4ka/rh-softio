@@ -48,7 +48,6 @@ class ContratController extends BaseController
         $keyWord = $this->request->getPost('contactInput');
         $employee = new EmployeModel();
         $employee = $employee->getEmployee($keyWord);
-        // dd($employee);
 
         if ($employee) {
             $idEmploye = $employee['idEmploye'];

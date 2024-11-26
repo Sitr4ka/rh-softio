@@ -65,7 +65,7 @@ class HoraireModel extends Model
         foreach ($horaire as $day => $time) {
             if (!($time['endTime'] == ""  || $time['startTime'] == "")) {
                 $horaireData = [
-                    'jours'     => $this->getDaysName($day),
+                    'jours' => getFrenchDayName($day),
                     'heureDebut' => $time['startTime'],
                     'heureFin'  => $time['endTime'],
                     'idContrat' => $idContrat
@@ -85,10 +85,9 @@ class HoraireModel extends Model
     {
         foreach ($horaire as $day => $time) {
             if (!($time['endTime'] == ""  || $time['startTime'] == "")) {
-                $day = $this->getDaysName($day);
 
                 $horaireData = [
-                    'jours'     => $day,
+                    'jours'     => getFrenchDayName($day),
                     'heureDebut' => $time['startTime'],
                     'heureFin'  => $time['endTime'],
                     'idContrat' => $idContrat
@@ -127,44 +126,5 @@ class HoraireModel extends Model
     function getHoraireByContrat($idContrat) 
     {
         return $this->where('idContrat', $idContrat);
-    }
-
-
-    /**
-     * @param string days 
-     * @return string a new days in french
-     */
-    function getDaysName(string $day)
-    {
-        switch ($day) {
-            case 'monday':
-                $newDay = 'Lundi';
-                break;
-
-            case 'tuesday':
-                $newDay = 'Mardi';
-                break;
-
-            case 'wednesday':
-                $newDay = 'Mercredi';
-                break;
-
-            case 'thursday':
-                $newDay = 'Jeudi';
-                break;
-
-            case 'friday':
-                $newDay = 'Vendredi';
-                break;
-
-            case 'saturday':
-                $newDay = 'Samedi';
-                break;
-
-            case 'sunday':
-                $newDay = 'Dimanche';
-                break;
-        }
-        return $newDay;
     }
 }

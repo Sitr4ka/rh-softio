@@ -58,5 +58,6 @@ $routes->get('home/payment', [Payment::class, 'index']);
 
 //Scoring
 $routes->get('home/scoring', [Scoring::class, 'index']);
-
+$routes->get('scoring/fetchEmployee', [Scoring::class, 'fetchEmployee']);
+$routes->post('scoring/add', [Scoring::class, 'addScoring']);
 
