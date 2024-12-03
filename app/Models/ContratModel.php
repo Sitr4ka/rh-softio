@@ -59,6 +59,12 @@ class ContratModel extends Model
         return $this->findAll();
     }
 
+    function getWithPositionHired() {
+        return $this
+        ->join('postes', 'contrats.idPoste = postes.idPoste')
+        ->findAll();
+    }
+
     /**
      * 
      */

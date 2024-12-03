@@ -12,39 +12,6 @@
     if ($flashData) {
     ?>
         <input type="hidden" name="status" value="<?= $flashData ? $flashData : null ?>" id="status">
-        <!-- <script>
-            const operation = '<?= $flashData ?>'
-            let text = '';
-            let icon = '';
-
-            switch (operation) {
-                case 'enregistrement':
-                    text = 'Enregistrement réussi'
-                    icon = 'success'
-                    break;
-
-                case 'suppression':
-                    text = 'Suppression réussi'
-                    icon = 'success'
-                    break;
-
-                case 'modification':
-                    text = 'Modification réussi'
-                    icon = 'success'
-                    break;
-
-                default:
-                    text = `Aucun personnel trouvé`
-                    icon = 'error'
-                    break;
-            }
-
-            Swal.fire({
-                text: text,
-                icon: icon,
-                confirmButtonText: 'ok',
-            });
-        </script> -->
     <?php
     }
     ?>
@@ -81,7 +48,6 @@
                     <div class="col text-success" id="firstname">
                     </div>
                 </div>
-
 
                 <div class="col row g-1 align-items-center mb-3">
                     <div class="col-2 col-xxl-1">
@@ -313,8 +279,7 @@
                                             <input type="hidden" name="_method" value="PUT">
                                             <div class="col mb-4">
                                                 <label for="employeeNumber" class="form-label">N° Matricule :</label>
-                                                <input type="text" class="form-control" name="employeeNumber" value="<?= $contrat['idContrat'] ?>"
-                                                    placeholder="" aria-label="" disabled>
+                                                <input type="text" class="form-control" name="employeeNumber" value="<?= $contrat['idContrat'] ?>" disabled>
                                             </div>
                                             <div class="col mb-4">
                                                 <label for="typeContrat" class="form-label">Contrat :</label>
@@ -332,7 +297,7 @@
                                                     <?php
                                                     foreach ($postes as $poste) {
                                                     ?>
-                                                        <option value="<?= $poste['poste'] ?>">
+                                                        <option value="<?= $poste['poste'] ?>" <?= ($contrat['poste'] == $poste['poste']) ? "selected" : "" ?>>
                                                             <?= $poste['poste'] ?>
                                                         </option>
                                                     <?php
@@ -355,31 +320,21 @@
                                                 <input type="text" class="form-control" name="lieuTravail" value="<?= $contrat['lieuTravail'] ?>"
                                                     placeholder="" aria-label="">
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-3">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label for="salaire" class="form-label">Salaire de base :</label>
-                                                </div>
-                                                <div class="col">
-                                                    <input type="number" class="form-control" name="salaire"
-                                                        placeholder="Entrer le salaire de base" value="<?= $contrat['salaire'] ?>">
-                                                </div>
+                                            <div class="col mb-4">
+                                                <label for="salaire" class="form-label">Salaire de base :</label>
+                                                <input type="number" class="form-control" name="salaire"
+                                                    placeholder="Entrer le salaire de base" value="<?= $contrat['salaire'] ?>">
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-3">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label for="moyenPaiement" class="col-form-label">Type de paiement :</label>
-                                                </div>
-                                                <div class="col">
-                                                    <select type="text" class="form-select" name="moyenPaiement">
-                                                        <option default>Virement bancaire</option>
-                                                        <option value="Mobile Money">Mobile Money</option>
-                                                        <option value="En espèce">En espèce</option>
-                                                    </select>
-                                                </div>
+                                            <div class="col mb-4">
+                                                <label for="moyenPaiement" class="col-form-label">Type de paiement :</label>
+                                                <select type="text" class="form-select" name="moyenPaiement">
+                                                    <option default>Virement bancaire</option>
+                                                    <option value="Mobile Money">Mobile Money</option>
+                                                    <option value="En espèce">En espèce</option>
+                                                </select>
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-1">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Lundi :</label>
-                                                </div>
+                                            <div class="col mb-4">
+                                                <label class="col-form-label">Lundi :</label>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="mondayStartTime"
                                                         value="<?= array_key_exists('Lundi', $horaireData) ? $horaireData['Lundi']['startTime'] : ""; ?>">
@@ -388,10 +343,8 @@
                                                         value="<?= array_key_exists('Lundi', $horaireData) ? $horaireData['Lundi']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-1">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Mardi :</label>
-                                                </div>
+                                            <div class="col mb-4">
+                                                <label class="col-form-label">Mardi :</label>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="tuesdayStartTime"
                                                         value="<?= array_key_exists('Mardi', $horaireData) ? $horaireData['Mardi']['startTime'] : ""; ?>">
@@ -400,10 +353,8 @@
                                                         value="<?= array_key_exists('Mardi', $horaireData) ? $horaireData['Mardi']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-1">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Mercredi :</label>
-                                                </div>
+                                            <div class="col mb-4">
+                                                <label class="col-form-label">Mercredi :</label>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="wednesdayStartTime"
                                                         value="<?= array_key_exists('Mercredi', $horaireData) ? $horaireData['Mercredi']['startTime'] : ""; ?>">
@@ -412,10 +363,8 @@
                                                         value="<?= array_key_exists('Mercredi', $horaireData) ? $horaireData['Mercredi']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-1">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Jeudi :</label>
-                                                </div>
+                                            <div class="col mb-4">
+                                                <label class="col-form-label">Jeudi :</label>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="thursdayStartTime"
                                                         value="<?= array_key_exists('Jeudi', $horaireData) ? $horaireData['Jeudi']['startTime'] : ""; ?>">
@@ -424,10 +373,8 @@
                                                         value="<?= array_key_exists('Jeudi', $horaireData) ? $horaireData['Jeudi']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-1">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Vendredi :</label>
-                                                </div>
+                                            <div class="col mb-4">
+                                                <label class="col-form-label">Vendredi :</label>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="fridayStartTime"
                                                         value="<?= array_key_exists('Vendredi', $horaireData) ? $horaireData['Vendredi']['startTime'] : ""; ?>">
@@ -436,10 +383,8 @@
                                                         value="<?= array_key_exists('Vendredi', $horaireData) ? $horaireData['Vendredi']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-1">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Samedi :</label>
-                                                </div>
+                                            <div class="col mb-4">
+                                                <label class="col-form-label">Samedi :</label>
                                                 <div class="col input-group">
                                                     <input type="time" class="form-control" name="saturdayStartTime"
                                                         value="<?= array_key_exists('Samedi', $horaireData) ? $horaireData['Samedi']['startTime'] : ""; ?>">
@@ -448,15 +393,15 @@
                                                         value="<?= array_key_exists('Samedi', $horaireData) ? $horaireData['Samedi']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-2 col-xxl-1">
+                                            <div class="col mb-4">
                                                 <label class="col-form-label">Dimanche :</label>
-                                            </div>
-                                            <div class="col input-group">
-                                                <input type="time" class="form-control" name="sundayStartTime"
-                                                    value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['startTime'] : ""; ?>">
+                                                <div class="col input-group">
+                                                    <input type="time" class="form-control" name="sundayStartTime"
+                                                        value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['startTime'] : ""; ?>">
 
-                                                <input type="time" class="form-control" name="sundayEndTime"
-                                                    value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['endTime'] : ""; ?>">
+                                                    <input type="time" class="form-control" name="sundayEndTime"
+                                                        value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['endTime'] : ""; ?>">
+                                                </div>
                                             </div>
                                     </div>
                                     <div class="modal-footer">

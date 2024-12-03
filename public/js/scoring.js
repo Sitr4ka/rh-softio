@@ -1,7 +1,7 @@
 $("#scoringNav").addClass("active");
 
-$("#searchBtn").click(function (e) { 
-    fetchEmploye()
+$("#searchBtn").click(function (e) {
+  fetchEmploye();
 });
 
 /**
@@ -15,17 +15,18 @@ function fetchEmploye() {
 
   $.ajax({
     type: "GET",
-    url: base_url("employee/getname"),
+    url: base_url("employee/getAttendance"),
     data: {
       coordonnee: searchKeyWord,
       startDate: startDate,
       endDate: endDate,
     },
     success: function (response) {
+      const apointments = response.apointments;
+      
       $("#lastname").text(response.lastname);
       $("#firstname").text(response.firstname);
 
-      const apointments = response.apointments;
       $("#apointment-table tbody").empty();
       if (apointments) {
         apointments.forEach((elt) => {
@@ -37,24 +38,22 @@ function fetchEmploye() {
       $("#apointment-table tbody").empty();
       lastname.textContent = "";
       firstname.textContent = "";
+      $("#lastname").text("");
+      $("#firstname").text("");
     },
   });
 }
 
 /**
  * Used to add row into the appointment table
- * @param {Object} scoring 
+ * @param {Object} scoring
  * @returns void
  */
 function newAppointment(scoring) {
   let row =
     "<tr>" +
-    "<td class='text-center'>" +
-    scoring["date"] +
-    "</td>" +
-    "<td class='text-center'>" +
-    scoring["observation"] +
-    "</td>" +
+      "<td class='text-center'>" + scoring["date"] + "</td>" +
+      "<td class='text-center'>" + scoring["observation"] + "</td>" +
     "<tr>";
   $("#apointment-table tbody").append(row);
 }

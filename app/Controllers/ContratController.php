@@ -23,8 +23,8 @@ class ContratController extends BaseController
         $postes = $postes->getAll();
 
         $contrats = new ContratModel();
-        $contrats = $contrats->getAll();
-        
+        // $contrats = $contrats->getAll();
+        $contrats = $contrats->getWithPositionHired();
 
         $horaires = new HoraireModel();
         foreach ($contrats as &$contrat) {

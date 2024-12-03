@@ -36,6 +36,7 @@ $routes->put('employee/update/(:num)', [EmployeController::class, 'update']);
 
 //temp
 $routes->get('employee/getname', [EmployeController::class, 'getEmployeeName']);
+$routes->get('employee/getAttendance', [EmployeController::class, 'getEmployeeAttendance']);
 $routes->get('employee/getPersonalInfo', [EmployeController::class, 'getPersonalInfo']);
 // CONTRAT ROUTES
 $routes->get('employee/contrat', [ContratController::class, 'index']);

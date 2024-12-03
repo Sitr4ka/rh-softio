@@ -22,11 +22,11 @@
     <table id="scoringTable" class="table table-bordered table-hover table-striped" style="width:100%">
         <thead>
             <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Nom</th>
-                <th class="text-center">Prénoms</th>
-                <th class="text-center">Contact</th>
-                <th class="text-center">Options</th>
+                <th class="text-center bg-info">#</th>
+                <th class="text-center bg-info">Nom</th>
+                <th class="text-center bg-info">Prénoms</th>
+                <th class="text-center bg-info">Contact</th>
+                <th class="text-center bg-info">Options</th>
             </tr>
         </thead>
         <tbody>
@@ -62,7 +62,7 @@
                                                 value="<?= $employee['idEmploye'] ?>" readonly>
                                         </div>
                                         <div class="mb-3">
-                                            <input type="date" name="datePointage" id="datePointage" class="form-control" value="<?= $datePointage ?>">
+                                            <input type="hidden" name="datePointage" id="datePointage" class="form-control" value="<?= $datePointage ?>">
                                         </div>
                                         <div class="mb-3">
                                             <label for="heureEntree" class="form-label">Entrée</label>
@@ -130,8 +130,8 @@
                 <table class="table table-bordered" id="apointment-table">
                     <thead>
                         <tr>
-                            <th class="text-center bg-primary text-light">Date</th>
-                            <th class="text-center bg-primary text-light">Observation</th>
+                            <th class="text-center bg-info">Date</th>
+                            <th class="text-center bg-info">Observation</th>
                         </tr>
                     </thead>
                     <tbody>

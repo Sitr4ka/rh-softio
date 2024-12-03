@@ -155,6 +155,32 @@ class EmployeController extends BaseController
     public function getEmployeeName()
     {
         $coordonnee = $this->request->getVar('coordonnee');
+        $response = null;
+        if ($coordonnee && $coordonnee !== "") {
+            $employee = new EmployeModel();
+            $employee = $employee->getEmployee($coordonnee);
+
+            if ($employee) {
+                $response = $this->response->setJSON([
+                    'lastname'  => $employee['nom'],
+                    'firstname' => $employee['prenoms'],
+                ]);
+            } else {
+                return $this->response->setStatusCode(404)->setJSON(['error' => 'Employé introuvable']);
+            }
+        } else {
+            $response = $this->response->setJSON([
+                'lastname'  => '',
+                'firstname' => '',
+                'idEmploye' => '',
+            ]);
+        }
+        return $response;
+    }
+
+    public function getEmployeeAttendance()
+    {
+        $coordonnee = $this->request->getVar('coordonnee');
         $startDate = $this->request->getVar('startDate');
         $endDate = $this->request->getVar('endDate');
 

@@ -1,82 +1,79 @@
-const contactInput = document.getElementById("contactInput")
-contactInput.onchange = fetchEmployee;
+let coordonnee = null 
+$("#contactInput").change(function (e) {
+    coordonnee = $("#contactInput").val();
+    if (coordonnee == "") {
+        $("#lastNameGroup").addClass("d-none");
+        $("#firstNameGroup").addClass("d-none");
+    } else {
+        fetchEmployee();
+    }
+});
 
 function fetchEmployee() {
-    let coordonnee = document.getElementById("contactInput").value;
-    let lastNameGroup = document.getElementById('lastNameGroup')
-    let firstNameGroup = document.getElementById('firstNameGroup')
-    let contactErrorMsgBox = document.getElementById('contactErrorMsgBox')
-    let contactErrorMsg = document.getElementById('contactErrorMsg')
-    let contactField = document.getElementById('contactField')
-
-    $.ajax({
-        url: base_url('employee/getname'),
-        type: 'GET',
-        data: {
-        coordonnee: coordonnee
+  $.ajax({
+    url: base_url("employee/getname"),
+    type: "GET",
+    data: {
+      coordonnee: coordonnee,
     },
-        success: function (response) {
-            let firstname = document.getElementById('firstname')
-            let lastname = document.getElementById('lastname')
+    success: function (response) {
+      $("#lastNameGroup").removeClass("d-none");
+      $("#firstNameGroup").removeClass("d-none");
+      $("#contactField").addClass("mb-3");
+      $("#contactErrorMsgBox").addClass("d-none");
 
-            lastNameGroup.classList.remove('d-none')
-            firstNameGroup.classList.remove('d-none')
-            contactField.classList.add('mb-3')
-            contactErrorMsgBox.classList.add('d-none')
+      $("#lastname").text(response.lastname);
+      $("#firstname").text(response.firstname);
+    },
+    error: function () {
+      $("#lastNameGroup").addClass("d-none");
+      $("#firstNameGroup").addClass("d-none");
 
-            firstname.textContent = response.firstname
-            lastname.textContent = response.lastname
-        },
-        error: function () {
-            lastNameGroup.classList.add('d-none')
-            firstNameGroup.classList.add('d-none')
+      $("#contactErrorMsg").text("Aucun employé trouvé");
+      $("#contactErrorMsgBox").removeClass("d-none");
+      $("#contactField").removeClass("mb-3");
+    },
+  });
+}
 
-            contactErrorMsg.textContent = "Aucun employé trouvé"
-            contactErrorMsgBox.classList.remove('d-none')
-            contactField.classList.remove('mb-3')
-        },
-        })
-    }
-
-new DataTable('#infoProTable', {
-    "pageLength": 5,
-    "language": {
-        "search": "Rechercher : ",
-        "lengthMenu": '<select class="form-select">' +
-            '<option value="5">5</option>' +
-            '<option value="10">10</option>' +
-            '<option value="15">15</option>' +
-            '</select>  éléments par page',
-        "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées",
-        "infoEmpty": "Aucune entrée à afficher",
-        "infoFiltered": "(filtré de _MAX_ entrées totales)",
-    }
+// Custom datatble library
+new DataTable("#infoProTable", {
+  pageLength: 5,
+  language: {
+    search: "Rechercher : ",
+    lengthMenu:
+      '<select class="form-select">' +
+      '<option value="5">5</option>' +
+      '<option value="10">10</option>' +
+      '<option value="15">15</option>' +
+      "</select>  éléments par page",
+    info: "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées",
+    infoEmpty: "Aucune entrée à afficher",
+    infoFiltered: "(filtré de _MAX_ entrées totales)",
+  },
 });
 
-const contrat = document.getElementById('typeContrat')
+const today = new Date().toISOString().split("T")[0];
 
-const today = new Date().toISOString().split('T')[0];
+hireNav.classList.add("active");
+employeeNav.classList.add("active");
 
-hireNav.classList.add('active')
-employeeNav.classList.add('active')
-
-const endDate = document.querySelector('#endDate');
-const dateDebut = document.querySelector('#dateDebut');
-const dateFin = document.querySelector('#dateFin');
+const endDate = document.querySelector("#endDate");
+const dateDebut = document.querySelector("#dateDebut");
+const dateFin = document.querySelector("#dateFin");
 
 dateDebut.value = today;
-dateFin.setAttribute('min', dateDebut.value)
+dateFin.setAttribute("min", dateDebut.value);
 
-
-
-contrat.addEventListener('input', function () {
-    if (this.value === 'CDI') {
-        endDate.classList.add('d-none');
-    } else {
-        endDate.classList.remove('d-none');
-    }
+const contrat = document.getElementById("typeContrat");
+contrat.addEventListener("input", function () {
+  if (this.value === "CDI") {
+    endDate.classList.add("d-none");
+  } else {
+    endDate.classList.remove("d-none");
+  }
 });
 
-dateDebut.addEventListener('input', function () {
-    dateFin.setAttribute('min', this.value)
-})
+dateDebut.addEventListener("input", function () {
+  dateFin.setAttribute("min", this.value);
+});
