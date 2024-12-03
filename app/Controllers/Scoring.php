@@ -10,38 +10,36 @@ class Scoring extends BaseController
 {
     public function index()
     {
-
+        // Vérification si l'utilisateur est connecté
         $user = session()->get('user');
-
         if (!$user) {
             return redirect()->back()->with('errors', "Vous n'êtes pas connecté");
         }
 
-        $day = getFrenchDayName(date('l'));
-        
         $datePointage = $this->request->getGet('datePointage');
-        if ($datePointage) {
-            $day = getDaysName($datePointage);
+
+        if (!($datePointage)) {
+            $datePointage = today();
         }
 
-        $today = today();
+        $day = getDaysName($datePointage);
 
+        //Lister les employés travaillant le jours {$day}
         $employeeLists = new EmployeModel();
         $employeeLists = $employeeLists->getEmployeesByDay($day);
 
         foreach ($employeeLists as &$employeeList) {
             $idEmploye = $employeeList['idEmploye'];
             $pointages = new PointageModel();
-            $pointage = $pointages->getScoringById($idEmploye);
+            $pointage = $pointages->getScoringById($idEmploye, $datePointage);
             if ($pointage) {
                 $employeeList['heureEntree'] = $pointage['heureEntree'];
                 $employeeList['heureSortie'] = $pointage['heureSortie'];
             }
         }
-
         $data = [
-            'user'      => $user,
-            'today'     => $today,
+            'user'          => $user,
+            'datePointage'  => $datePointage,
             'employees' => $employeeLists
         ];
 
@@ -106,7 +104,6 @@ class Scoring extends BaseController
 
             return $this->response->setJSON($response);
         }
-
     }
 }
 

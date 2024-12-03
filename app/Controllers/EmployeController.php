@@ -18,7 +18,7 @@ class EmployeController extends BaseController
         }
 
         $today = today();
-        
+
         $employee = new EmployeModel();
 
         $data = [
@@ -164,32 +164,34 @@ class EmployeController extends BaseController
             $employee = $employee->getEmployee($coordonnee);
 
             if ($employee) {
-                
+
                 //Retrieve employee apointment
                 $idEmploye = $employee['idEmploye'];
                 $pointages = new PointageModel();
                 $pointages = $pointages->getAllScoringById($idEmploye, $startDate, $endDate);
-                // $pointages = $pointages->getScoringById($idEmploye);
 
-                $pointageData = [];
-                foreach ($pointages as $pointage) {
-                    $pointageData[] = [
-                        'date' => $pointage['date'],
-                        'observation' => $pointage['observation']
-                    ];
-                }
-
+                $pointageData = null;
+                if ($pointages) {
+                    foreach ($pointages as $pointage) {
+                        $pointageData[] = [
+                            'date' => $pointage['date'],
+                            'observation' => $pointage['observation']
+                        ];
+                    }
+                } 
                 $essai = $this->response->setJSON([
                     'lastname'      => $employee['nom'],
                     'firstname'     => $employee['prenoms'],
                     'idEmploye'     => $idEmploye,
                     'apointments'   => $pointageData
                 ]);
+
             } else {
 
                 return $this->response->setStatusCode(404)->setJSON(['error' => 'Employé introuvable']);
             }
         } else {
+
             $essai = $this->response->setJSON([
                 'lastname'  => '',
                 'firstname' => '',

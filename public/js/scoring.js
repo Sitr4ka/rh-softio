@@ -1,21 +1,17 @@
-const today = new Date().toISOString().split("T")[0];
-const dateInput = document.getElementsByClassName("datePointage");
-const navMenu = document.getElementById("scoringNav");
-const searchBtn = document.getElementById("searchBtn");
+$("#scoringNav").addClass("active");
 
-navMenu.classList.add("active");
+$("#searchBtn").click(function (e) { 
+    fetchEmploye()
+});
 
-//Inputs:
-const firstname = document.getElementById("firstname");
-const lastname = document.getElementById("lastname");
-
-searchBtn.onclick = fetchEmploye;
-
-//Search employees
+/**
+ * Used to display employee appointments between a date interval
+ * @return void
+ */
 function fetchEmploye() {
-  const searchKeyWord = document.getElementById("keyWord").value;
-  const startDate = document.getElementById("startDate").value;
-  const endDate = document.getElementById("endDate").value;
+  const searchKeyWord = $("#keyWord").val();
+  const startDate = $("#startDate").val();
+  const endDate = $("#endDate").val();
 
   $.ajax({
     type: "GET",
@@ -26,10 +22,19 @@ function fetchEmploye() {
       endDate: endDate,
     },
     success: function (response) {
-      lastname.textContent = response.lastname;
-      firstname.textContent = response.firstname;
+      $("#lastname").text(response.lastname);
+      $("#firstname").text(response.firstname);
+
+      const apointments = response.apointments;
+      $("#apointment-table tbody").empty();
+      if (apointments) {
+        apointments.forEach((elt) => {
+          newAppointment(elt);
+        });
+      } else console.log("Aucune enregistrement trouvée");
     },
     error: function (e) {
+      $("#apointment-table tbody").empty();
       lastname.textContent = "";
       firstname.textContent = "";
     },
@@ -37,55 +42,19 @@ function fetchEmploye() {
 }
 
 /**
- * Modification
+ * Used to add row into the appointment table
+ * @param {Object} scoring 
+ * @returns void
  */
-
-$("#datePointage").change(function () {
-  fetchEmployeByDate();
-});
-
-function fetchEmployeByDate() {
-  const date = $("#datePointage").val();
-  let row = "";
-
-  $.ajax({
-    type: "GET",
-    url: base_url("scoring/fetch"),
-    data: {
-      datePointage: date,
-    },
-    success: function (response) {
-      // $("#scoringTable tbody").empty();
-      response.forEach((emp) => {
-        // newRow(emp);
-      });
-    },
-    error: function (response) {
-      console.log(response.error);
-    },
-  });
+function newAppointment(scoring) {
+  let row =
+    "<tr>" +
+    "<td class='text-center'>" +
+    scoring["date"] +
+    "</td>" +
+    "<td class='text-center'>" +
+    scoring["observation"] +
+    "</td>" +
+    "<tr>";
+  $("#apointment-table tbody").append(row);
 }
-
-/**
- *
- * @param {object} emp
- */
-
-function newRow(emp) {
-  let row = 
-      "<tr>" + 
-      "<td class='text-center'>" + emp["idEmploye"] + "</td>" + 
-      "<td class='text-center'>" + emp["nom"] + "</td>" + 
-      "<td class='text-center'>" + emp["prenoms"] + "</td>" + 
-      "<td class='text-center'>" + emp["contact"] + "</td>" + 
-      "<td class='d-flex gap-2 justify-content-center'>" +
-          "<button type='button' " + 
-              "class='btn btn-success' " + 
-              "data-bs-target='#editScoring" + emp["idEmploye"] + "'>" + 
-              "Pointage" +
-          "</button>" + 
-      "</td>" + 
-      "</tr>";
-  $("#scoringTable tbody").append(row);
-}
-

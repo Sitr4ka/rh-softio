@@ -1,16 +1,22 @@
 <?= $this->extend('base') ?>
 
+<form action="<?= base_url("home/scoring") ?>" method="get" class="row">
+    <div class="datePointage col">
+        <div class="col-2"></div>
+        <input type="date" name="datePointage" id="datePointage" class="form-control" value="<?= $datePointage ?>">
+    </div>
+    <div class="col-2">
+        <input type="submit" value="Rechercher" class="btn btn-warning">
+    </div>
+</form>
 <?= $this->section('content') ?>
 <main class="main container-fluid pt-3">
-    <form action="<?= base_url("home/scoring") ?>" method="get">
-        <div class="form-group row mb-3 d-flex justify-content-end" id="dateSearch">
-            <div class="datePointage col-2">
-                <div class="col-2"></div>
-                <input type="date" name="datePointage" id="datePointage" class="form-control" value="<?= $today ?>">
-            </div>
-            <div class="col-2">
-                <input type="submit" value="Rechercher" class="btn btn-warning">
-            </div>
+    <form action="<?= base_url("home/scoring") ?>" method="get" class="d-flex justify-content-end gap-3 mb-3">
+        <div class="">
+            <input type="date" name="datePointage" class="form-control" value="<?= $datePointage ?>">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-outline-primary">Rechercher</button>
         </div>
     </form>
     <table id="scoringTable" class="table table-bordered table-hover table-striped" style="width:100%">
@@ -56,6 +62,9 @@
                                                 value="<?= $employee['idEmploye'] ?>" readonly>
                                         </div>
                                         <div class="mb-3">
+                                            <input type="date" name="datePointage" id="datePointage" class="form-control" value="<?= $datePointage ?>">
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="heureEntree" class="form-label">Entrée</label>
                                             <input id="heureEntree" type="time" class="form-control" name="heureEntree"
                                                 value="<?= array_key_exists('heureEntree', $employee) ? $employee['heureEntree'] : "" ?>">
@@ -74,7 +83,6 @@
                             </div>
                         </div>
                     </div>
-
                 </tr>
             <?php
             } ?>
@@ -119,30 +127,14 @@
                 </div>
             </div>
             <div class="apointment-table col-6">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="apointment-table">
                     <thead>
                         <tr>
-                            <th class="text-center">Date</th>
-                            <th class="text-center">Observation</th>
+                            <th class="text-center bg-primary text-light">Date</th>
+                            <th class="text-center bg-primary text-light">Observation</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center">18/01/2023</td>
-                            <td class="text-center">Présent</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">18/01/2023</td>
-                            <td class="text-center">Présent</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">18/01/2023</td>
-                            <td class="text-center">Présent</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">18/01/2023</td>
-                            <td class="text-center">Présent</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

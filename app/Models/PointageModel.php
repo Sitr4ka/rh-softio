@@ -54,9 +54,12 @@ class PointageModel extends Model
     /**
      * 
      */
-    function getScoringById(int $idEmploye)
+    function getScoringById(int $idEmploye, string $date)
     {
-        return $this->where('idEmploye', $idEmploye)->first();
+        return $this
+            ->where('idEmploye', $idEmploye)
+            ->where('date', $date)
+            ->first();
     }
 
     /**
@@ -68,7 +71,7 @@ class PointageModel extends Model
     }
 
     /**
-     * 
+     * @return array scoring filter by an interval of date
      */
     function getAllScoringById(int $idEmploye, string $startDate, string $endDate)
     {
@@ -85,9 +88,9 @@ class PointageModel extends Model
      */
     function getScoringByDate(int $idEmploye, string $date)
     {
-        
+
         return $this->where('idEmploye', $idEmploye)
-        ->where('date', $date)    
-        ->first();
+            ->where('date', $date)
+            ->first();
     }
 }
