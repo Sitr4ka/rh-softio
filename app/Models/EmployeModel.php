@@ -85,11 +85,14 @@ class EmployeModel extends Model
     public function getEmployeesByDay($day)
     {
 
-        return $this->select('employes.idEmploye, employes.nom, contrats.typeContrat, postes.poste')
+        return $this->builder()
+            ->distinct()
+            ->select(' employes.idEmploye, employes.nom, employes.prenoms, employes.contact')
             ->join('contrats', 'contrats.idEmploye = employes.idEmploye')
             ->join('horaires', 'contrats.idContrat = horaires.idContrat')
             ->join('postes', 'contrats.idPoste = postes.idPoste')
             ->like('horaires.jours', $day)
-            ->findAll();
+            ->get()
+            ->getResultArray();
     }
 }

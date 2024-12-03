@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use PhpParser\Node\Stmt\Return_;
 
 class PointageModel extends Model
 {
@@ -13,7 +14,11 @@ class PointageModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'date', 'heureEntree', 'heureSortie', 'observation', 'idEmploye'
+        'date',
+        'heureEntree',
+        'heureSortie',
+        'observation',
+        'idEmploye'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -49,7 +54,40 @@ class PointageModel extends Model
     /**
      * 
      */
-    function getScoringById(int $idEmploye) {
+    function getScoringById(int $idEmploye)
+    {
         return $this->where('idEmploye', $idEmploye)->first();
+    }
+
+    /**
+     * 
+     */
+    function getScoringByDays(string $date)
+    {
+        return $this->where('date', $date)->findAll();
+    }
+
+    /**
+     * 
+     */
+    function getAllScoringById(int $idEmploye, string $startDate, string $endDate)
+    {
+        return $this
+            ->where('idEmploye', $idEmploye)
+            ->where('date >=', $startDate)
+            ->where('date <=', $endDate)
+            ->findAll()
+        ;
+    }
+
+    /**
+     * 
+     */
+    function getScoringByDate(int $idEmploye, string $date)
+    {
+        
+        return $this->where('idEmploye', $idEmploye)
+        ->where('date', $date)    
+        ->first();
     }
 }

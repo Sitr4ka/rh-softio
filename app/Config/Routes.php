@@ -9,6 +9,7 @@ use App\Controllers\Payment;
 use App\Controllers\EmployeController;
 use App\Controllers\ContratController;
 use App\Controllers\DepartmentController;
+use App\Models\EmployeModel;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -35,7 +36,7 @@ $routes->put('employee/update/(:num)', [EmployeController::class, 'update']);
 
 //temp
 $routes->get('employee/getname', [EmployeController::class, 'getEmployeeName']);
-
+$routes->get('employee/getPersonalInfo', [EmployeController::class, 'getPersonalInfo']);
 // CONTRAT ROUTES
 $routes->get('employee/contrat', [ContratController::class, 'index']);
 $routes->post('employee/contrat/add', [ContratController::class, 'newContrat']);
@@ -58,6 +59,9 @@ $routes->get('home/payment', [Payment::class, 'index']);
 
 //Scoring
 $routes->get('home/scoring', [Scoring::class, 'index']);
+// $routes->get('home/scoring/(:segment)', [Scoring::class, 'index']);
 $routes->get('scoring/fetchEmployee', [Scoring::class, 'fetchEmployee']);
 $routes->post('scoring/add', [Scoring::class, 'addScoring']);
 
+//Scoring ajax
+$routes->get('scoring/fetch', [Scoring::class, 'fetchEmploye']);

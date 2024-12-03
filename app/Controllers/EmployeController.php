@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\EmployeModel;
+use App\Models\PointageModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class EmployeController extends BaseController
@@ -16,11 +17,14 @@ class EmployeController extends BaseController
             return redirect()->back()->with('errors', "Veuillez vous connecter");
         }
 
+        $today = today();
+        
         $employee = new EmployeModel();
 
         $data = [
-            'employees' => $employee->limit(5)->getAll(),
+            'employees' => $employee->getAll(),
             'user'      => $user,
+            'today'     => $today
         ];
 
         return view('employee/index', $data);
@@ -151,6 +155,8 @@ class EmployeController extends BaseController
     public function getEmployeeName()
     {
         $coordonnee = $this->request->getVar('coordonnee');
+        $startDate = $this->request->getVar('startDate');
+        $endDate = $this->request->getVar('endDate');
 
         $essai = null;
         if ($coordonnee) {
@@ -158,12 +164,27 @@ class EmployeController extends BaseController
             $employee = $employee->getEmployee($coordonnee);
 
             if ($employee) {
+                
+                //Retrieve employee apointment
+                $idEmploye = $employee['idEmploye'];
+                $pointages = new PointageModel();
+                $pointages = $pointages->getAllScoringById($idEmploye, $startDate, $endDate);
+                // $pointages = $pointages->getScoringById($idEmploye);
+
+                $pointageData = [];
+                foreach ($pointages as $pointage) {
+                    $pointageData[] = [
+                        'date' => $pointage['date'],
+                        'observation' => $pointage['observation']
+                    ];
+                }
 
                 $essai = $this->response->setJSON([
-                    'lastname'  => $employee['nom'],
-                    'firstname' => $employee['prenoms']
+                    'lastname'      => $employee['nom'],
+                    'firstname'     => $employee['prenoms'],
+                    'idEmploye'     => $idEmploye,
+                    'apointments'   => $pointageData
                 ]);
-
             } else {
 
                 return $this->response->setStatusCode(404)->setJSON(['error' => 'Employé introuvable']);
@@ -171,10 +192,10 @@ class EmployeController extends BaseController
         } else {
             $essai = $this->response->setJSON([
                 'lastname'  => '',
-                'firstname' => ''
+                'firstname' => '',
+                'idEmploye' => '',
             ]);
         }
-
         return $essai;
     }
 }

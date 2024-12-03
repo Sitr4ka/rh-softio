@@ -2,24 +2,36 @@
 
 <?= $this->section('content') ?>
 <main class="main container-fluid pt-3">
-    <table id="scoringTable" class="table table-borderless table-hover table-striped" style="width:100%">
+    <form action="<?= base_url("home/scoring") ?>" method="get">
+        <div class="form-group row mb-3 d-flex justify-content-end" id="dateSearch">
+            <div class="datePointage col-2">
+                <div class="col-2"></div>
+                <input type="date" name="datePointage" id="datePointage" class="form-control" value="<?= $today ?>">
+            </div>
+            <div class="col-2">
+                <input type="submit" value="Rechercher" class="btn btn-warning">
+            </div>
+        </div>
+    </form>
+    <table id="scoringTable" class="table table-bordered table-hover table-striped" style="width:100%">
         <thead>
             <tr>
                 <th class="text-center">#</th>
                 <th class="text-center">Nom</th>
-                <th class="text-center">Contrat</th>
-                <th class="text-center">Poste</th>
+                <th class="text-center">Prénoms</th>
+                <th class="text-center">Contact</th>
                 <th class="text-center">Options</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($employees as $employee) {
+            <?php
+            foreach ($employees as $employee) {
             ?>
                 <tr>
                     <td class="text-center"> <?= $employee['idEmploye'] ?> </td>
                     <td class="text-center"> <?= $employee['nom'] ?> </td>
-                    <td class="text-center"> <?= $employee['typeContrat'] ?> </td>
-                    <td class="text-center"> <?= $employee['poste'] ?> </td>
+                    <td class="text-center"> <?= $employee['prenoms'] ?> </td>
+                    <td class="text-center"> <?= $employee['contact'] ?> </td>
                     <td class="d-flex gap-2 justify-content-center">
 
                         <!-- Edit Button modal -->
@@ -39,24 +51,19 @@
                                 <form action="<?= base_url('scoring/add') ?>" method="post">
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="" class="form-label">N° Employé</label>
-                                            <input id="" type="text" name="numEmploye" class="form-control"
+                                            <label for="numEmploye" class="form-label">N° Employé</label>
+                                            <input id="numEmploye" type="text" name="numEmploye" class="form-control"
                                                 value="<?= $employee['idEmploye'] ?>" readonly>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="" class="form-label">Date</label>
-                                            <input type="date" name="datePointage" class="form-control"
-                                            value="<?= $today ?>">
+                                            <label for="heureEntree" class="form-label">Entrée</label>
+                                            <input id="heureEntree" type="time" class="form-control" name="heureEntree"
+                                                value="<?= array_key_exists('heureEntree', $employee) ? $employee['heureEntree'] : "" ?>">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="" class="form-label">Entrée</label>
-                                            <input id="" type="time" class="form-control" name="heureEntree"
-                                            value="<?= array_key_exists('heureEntree', $employee) ? $employee['heureEntree'] : "" ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Sortie</label>
-                                            <input id="" type="time" class="form-control" name="heureSortie"
-                                            value="<?= array_key_exists('heureSortie', $employee) ? $employee['heureSortie'] : "" ?>">
+                                            <label for="heureSortie" class="form-label">Sortie</label>
+                                            <input id="heureSortie" type="time" class="form-control" name="heureSortie"
+                                                value="<?= array_key_exists('heureSortie', $employee) ? $employee['heureSortie'] : "" ?>">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -74,19 +81,70 @@
         </tbody>
 
     </table>
-    <div class="searchBar mx-2 border">
-        <div class="row bg-white py-4">
+    <div class="searchBar mx-2 border mb-3 bg-white px-5 py-2 rounded rounded-2 shadow">
+        <div class="row py-4">
             <div class="col">
-                <label for="startDate" class="form-label">Début</label>
-                <input type="date" class="form-control">
+                <label for="startDate" class="form-label">Début:</label>
+                <input type="date" class="form-control" id="startDate">
             </div>
             <div class="col">
-                <label for="endDate" class="form-label">Fin</label>
-                <input type="date" class="form-control">
+                <label for="endDate" class="form-label">Fin:</label>
+                <input type="date" class="form-control" id="endDate">
             </div>
             <div class="col">
-                <label for="searchInput" class="form-label">Rechercher</label>
-                <input type="search" class="form-control">
+                <label for="searchInput" class="form-label">Numéro:</label>
+                <input type="search" class="form-control" id="keyWord">
+            </div>
+        </div>
+        <div class="text-end mb-3" id="searchBtn">
+            <button type="button" class="btn btn-outline-success">Rechercher</button>
+        </div>
+        <div class="display-data row d-flex">
+            <div class="coordonnees col-6">
+                <div class="row">
+                    <div class="col-2">
+                        <label for="lastname">Nom: </label>
+                    </div>
+                    <div class="col">
+                        <span type="text" class="text" id="lastname"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="firstname">Prénoms: </label>
+                    </div>
+                    <div class="col">
+                        <span type="text" class="text" id="firstname"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="apointment-table col-6">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Observation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">18/01/2023</td>
+                            <td class="text-center">Présent</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">18/01/2023</td>
+                            <td class="text-center">Présent</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">18/01/2023</td>
+                            <td class="text-center">Présent</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">18/01/2023</td>
+                            <td class="text-center">Présent</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -94,10 +152,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
-<script>
-    const today = new Date().toISOString().split('T')[0];
-    const dateInput = document.getElementsByClassName('datePointage')
-    const navMenu = document.getElementById('scoringNav');
-    navMenu.classList.add('active')
-</script>
+<script src="<?= base_url('js/scoring.js') ?>"></script>
 <?= $this->endSection() ?>

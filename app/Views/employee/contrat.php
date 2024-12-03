@@ -11,7 +11,8 @@
     $flashData = session()->getFlashdata("status");
     if ($flashData) {
     ?>
-        <script>
+        <input type="hidden" name="status" value="<?= $flashData ? $flashData : null ?>" id="status">
+        <!-- <script>
             const operation = '<?= $flashData ?>'
             let text = '';
             let icon = '';
@@ -43,7 +44,7 @@
                 icon: icon,
                 confirmButtonText: 'ok',
             });
-        </script>
+        </script> -->
     <?php
     }
     ?>
@@ -447,32 +448,31 @@
                                                         value="<?= array_key_exists('Samedi', $horaireData) ? $horaireData['Samedi']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
-                                            <div class="col row g-1 align-items-center mb-1">
-                                                <div class="col-2 col-xxl-1">
-                                                    <label class="col-form-label">Dimanche :</label>
-                                                </div>
-                                                <div class="col input-group">
-                                                    <input type="time" class="form-control" name="sundayStartTime"
-                                                        value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['startTime'] : ""; ?>">
+                                            <div class="col-2 col-xxl-1">
+                                                <label class="col-form-label">Dimanche :</label>
+                                            </div>
+                                            <div class="col input-group">
+                                                <input type="time" class="form-control" name="sundayStartTime"
+                                                    value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['startTime'] : ""; ?>">
 
-                                                    <input type="time" class="form-control" name="sundayEndTime"
-                                                        value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['endTime'] : ""; ?>">
-                                                </div>
+                                                <input type="time" class="form-control" name="sundayEndTime"
+                                                    value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['endTime'] : ""; ?>">
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                                <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                                            </div>
-                                        </form>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                    } ?>
-                </tbody>
-            </table>
         </div>
+    <?php
+                    } ?>
+    </tbody>
+    </table>
+    </div>
     </div>
 </main>
 <?= $this->endSection() ?>
@@ -492,87 +492,39 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
+<script src="<?= base_url('js/contract.js') ?>"></script>
 <script>
-    const contactInput = document.getElementById("contactInput")
-    contactInput.onchange = fetchEmployee;
+    const status = document.getElementById('status')
+    const operation = status.value
+    let text = '';
+    let icon = '';
 
-    function fetchEmployee() {
-        let coordonnee = document.getElementById("contactInput").value;
-        let lastNameGroup = document.getElementById('lastNameGroup')
-        let firstNameGroup = document.getElementById('firstNameGroup')
-        let contactErrorMsgBox = document.getElementById('contactErrorMsgBox')
-        let contactErrorMsg = document.getElementById('contactErrorMsg')
-        let contactField = document.getElementById('contactField')
+    switch (operation) {
+        case 'enregistrement':
+            text = 'Enregistrement réussi'
+            icon = 'success'
+            break;
 
-        $.ajax({
-            url: '<?= base_url('employee/getname') ?>',
-            type: 'GET',
-            data: {
-                coordonnee: coordonnee
-            },
-            success: function(response) {
-                let firstname = document.getElementById('firstname')
-                let lastname = document.getElementById('lastname')
-                lastNameGroup.classList.remove('d-none')
-                firstNameGroup.classList.remove('d-none')
-                contactField.classList.add('mb-3')
-                contactErrorMsgBox.classList.add('d-none')
+        case 'suppression':
+            text = 'Suppression réussi'
+            icon = 'success'
+            break;
 
-                firstname.textContent = response.firstname
-                lastname.textContent = response.lastname
-            },
-            error: function() {
-                lastNameGroup.classList.add('d-none')
-                firstNameGroup.classList.add('d-none')
+        case 'modification':
+            text = 'Modification réussi'
+            icon = 'success'
+            break;
 
-                contactErrorMsg.textContent = "Aucun employé trouvé"
-                contactErrorMsgBox.classList.remove('d-none')
-                contactField.classList.remove('mb-3')
-            },
-        })
+        default:
+            text = `Aucun personnel trouvé`
+            icon = 'error'
+            break;
     }
 
-    new DataTable('#infoProTable', {
-        "pageLength": 5,
-        "language": {
-            "search": "Rechercher : ",
-            "lengthMenu": '<select class="form-select">' +
-                '<option value="5">5</option>' +
-                '<option value="10">10</option>' +
-                '<option value="15">15</option>' +
-                '</select>  éléments par page',
-            "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées",
-            "infoEmpty": "Aucune entrée à afficher",
-            "infoFiltered": "(filtré de _MAX_ entrées totales)",
-        }
+    Swal.fire({
+        text: text,
+        icon: icon,
+        confirmButtonText: 'ok',
     });
-
-    const contrat = document.getElementById('typeContrat')
-
-    const today = new Date().toISOString().split('T')[0];
-
-    hireNav.classList.add('active')
-    employeeNav.classList.add('active')
-
-    const endDate = document.querySelector('#endDate');
-    const dateDebut = document.querySelector('#dateDebut');
-    const dateFin = document.querySelector('#dateFin');
-
-    dateDebut.value = today;
-    dateFin.setAttribute('min', dateDebut.value)
-
-
-
-    contrat.addEventListener('input', function() {
-        if (this.value === 'CDI') {
-            endDate.classList.add('d-none');
-        } else {
-            endDate.classList.remove('d-none');
-        }
-    });
-
-    dateDebut.addEventListener('input', function() {
-        dateFin.setAttribute('min', this.value)
-    })
 </script>
 <?= $this->endSection() ?>

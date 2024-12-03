@@ -9,22 +9,27 @@
                     Employé
                 </a>
             </li>
+
+            <?php           
+                $today = today();
+            ?>
+            
             <li class="nav-item">
                 <span>
                     <i class="fa fa-calendar-check"></i>
                 </span>
-                <a class="nav-link" id="scoringNav" href=" <?= base_url('home/scoring') ?> ">
+                <a class="nav-link" id="scoringNav" href=" <?= base_url('home/scoring/'       ) ?>">
                     Pointage
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <span>
                     <i class="fa fa-credit-card-alt"></i>
                 </span>
                 <a class="nav-link" id="paymentNav" href=" <?= base_url('home/payment') ?> ">
                     Paiement
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <span>
                     <i class="fa fa-cog"></i>

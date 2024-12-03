@@ -35,3 +35,10 @@ function getFrenchDayName(string $day)
     return null;
 
 }
+
+/**
+ * 
+ */
+function today() {
+    return $today = date('Y-m-d');
+}
