@@ -22,7 +22,6 @@ class DepartmentController extends BaseController
 
         $departements = new DepartementModel();
         $postes = new PosteModel();
-
         $data = [
             'departements'  => $departements
                 ->orderBy('idDepart', 'ASC')

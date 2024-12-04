@@ -121,7 +121,6 @@
                 </tbody>
             </table>
         </section>
-
         <section class="postionHeld">
             <header class="d-flex justify-content-between">
                 <h6 class="nav-title py-2 px-4">
@@ -143,14 +142,13 @@
                         <form action="<?= base_url('department/positionHeld/add') ?>" method="post">
                             <div class="modal-body">
                                 <?= csrf_field(); ?>
-
                                 <div class="mb-3">
                                     <label for=poste class="form-label">Titre du Poste</label>
                                     <input type="text" name=poste id=poste class="form form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label for=departement class="form-label">Département</label>
-                                    <select type="text" id="poste" class="form-select" name="poste">
+                                    <select type="text" id="poste" class="form-select" name="departement">
                                         <?php
                                         foreach ($departements as $departement) {
                                         ?>
@@ -242,12 +240,16 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for=departement class="form-label">Département</label>
-                                                <select name="departement" id="departement" class="form form-select">
-                                                    <?php foreach ($postes as $poste): ?>
-                                                        <option value="<?= $departement['idDepart'] ?>">
+                                                <select type="text" id="poste" class="form-select" name="departement">
+                                                    <?php
+                                                    foreach ($departements as $departement) {
+                                                    ?>
+                                                        <option value="<?= $departement['libelleDepart'] ?>" <?= ($departement['libelleDepart'] == $poste['libelleDepart']) ? "selected" : "" ?> >
                                                             <?= $departement['libelleDepart'] ?>
                                                         </option>
-                                                    <?php endforeach; ?>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>

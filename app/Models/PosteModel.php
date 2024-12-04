@@ -48,7 +48,10 @@ class PosteModel extends Model
 
     function getAll()
     {
-        return $this->findAll();
+        return $this
+        ->select('postes.idPoste, postes.poste , postes.idDepart , departements.libelleDepart')
+        ->join('departements', 'departements.idDepart = postes.idDepart')
+        ->findAll();
     }
 
 
@@ -60,5 +63,17 @@ class PosteModel extends Model
     {
         $temp = $this->where('poste', $poste)->first();
         return $temp['idPoste'];
+    }
+
+    /**
+     * 
+     */
+    function getPosteById(int $id) {
+        return $this->builder()
+        ->select('postes.idPoste, postes.poste , postes.idDepart , departements.libelleDepart')
+        ->join('departements', 'departements.idDepart = postes.idDepart')
+        ->where('idPoste', $id)
+        ->get()
+        ->getResult();
     }
 }
