@@ -203,7 +203,7 @@
                 <thead>
                     <tr>
                         <th class="text-center bg-info">#</th>
-                        <th class="text-center bg-info">Matricule</th>
+                        <th class="text-center bg-info">Poste</th>
                         <th class="text-center bg-info">Début</th>
                         <th class="text-center bg-info">Fin</th>
                         <th class="text-center bg-info">Salaire de base</th>
@@ -215,9 +215,9 @@
                     ?>
                         <tr>
                             <td> <?= $contrat['idEmploye'] ?></td>
-                            <td class="text-center"> <?= $contrat['idContrat'] ?></td>
+                            <td class="text-center"> <?= $contrat['poste'] ?></td>
                             <td class="text-center"> <?= date('d-m-Y', strtotime($contrat['dateDebut'])) ?></td>
-                            <td class="text-center"><?= date('d-m-Y', strtotime($contrat['dateFin'])) ?></td>
+                            <td class="text-center"><?= ($contrat['dateFin']) ?  date('d-m-Y', strtotime($contrat['dateDebut'])) : "-" ?></td>
                             <td class="text-end"> <?= number_format($contrat['salaire'], 0, ',', ' ') ?></td>
                             <td class="d-flex gap-2 justify-content-center">
 

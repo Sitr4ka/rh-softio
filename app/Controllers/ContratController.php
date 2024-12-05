@@ -23,7 +23,6 @@ class ContratController extends BaseController
         $postes = $postes->getAll();
 
         $contrats = new ContratModel();
-        // $contrats = $contrats->getAll();
         $contrats = $contrats->getWithPositionHired();
 
         $horaires = new HoraireModel();
@@ -55,10 +54,12 @@ class ContratController extends BaseController
             $posteTitle = $this->request->getPost('poste');
             $idPoste = $poste->getPosteId($posteTitle);
 
+            $dateFin =  $this->request->getPost('dateFin');
+
             $dataContrat = [
                 'typeContrat'   => $this->request->getPost('typeContrat'),
                 'dateDebut'     => $this->request->getPost('dateDebut'),
-                'dateFin'       => $this->request->getPost('dateFin'),
+                'dateFin'       => ($dateFin == "") ? null : $dateFin,
                 'salaire'       => $this->request->getPost('salaire'),
                 'lieuTravail'   => $this->request->getPost('lieuTravail'),
                 'moyenPaiement' => $this->request->getPost('moyenPaiement'),
