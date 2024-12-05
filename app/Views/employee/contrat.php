@@ -439,37 +439,6 @@
 <?= $this->section('script') ?>
 <script src="<?= base_url('js/contract.js') ?>"></script>
 <script>
-    const status = document.getElementById('status')
-    const operation = status.value
-    let text = '';
-    let icon = '';
-
-    switch (operation) {
-        case 'enregistrement':
-            text = 'Enregistrement réussi'
-            icon = 'success'
-            break;
-
-        case 'suppression':
-            text = 'Suppression réussi'
-            icon = 'success'
-            break;
-
-        case 'modification':
-            text = 'Modification réussi'
-            icon = 'success'
-            break;
-
-        default:
-            text = `Aucun personnel trouvé`
-            icon = 'error'
-            break;
-    }
-
-    Swal.fire({
-        text: text,
-        icon: icon,
-        confirmButtonText: 'ok',
-    });
+    
 </script>
 <?= $this->endSection() ?>

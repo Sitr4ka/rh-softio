@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\ContratModel;
 
 class PosteModel extends Model
 {
@@ -76,4 +77,33 @@ class PosteModel extends Model
         ->get()
         ->getResult();
     }
+
+    /**
+     * Delete Poste By ID
+     * @return void
+     */
+    function deletePosteById(int $idPoste) {
+        $contrats = new ContratModel();
+        $contrats = $contrats->findAllByPoste($idPoste);
+
+        foreach ($contrats as $contrat) {
+            $idContrat = $contrat['idContrat'];
+            $newContrat = new ContratModel();
+            $newContrat->deleteContratById($idContrat);
+        }
+        
+        return $this->delete($idPoste);
+    }
+
+    /**
+     * Delete Poste By Depart ID
+     * @return Poste
+     */
+    function findAllByDepart(int $idDepart) {
+        return $this->where('idDepart', $idDepart)->findAll();
+    }
+
+    /**
+     *
+     */
 }

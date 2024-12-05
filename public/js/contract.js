@@ -1,12 +1,12 @@
-let coordonnee = null 
+let coordonnee = null;
 $("#contactInput").change(function (e) {
-    coordonnee = $("#contactInput").val();
-    if (coordonnee == "") {
-        $("#lastNameGroup").addClass("d-none");
-        $("#firstNameGroup").addClass("d-none");
-    } else {
-        fetchEmployee();
-    }
+  coordonnee = $("#contactInput").val();
+  if (coordonnee == "") {
+    $("#lastNameGroup").addClass("d-none");
+    $("#firstNameGroup").addClass("d-none");
+  } else {
+    fetchEmployee();
+  }
 });
 
 function fetchEmployee() {
@@ -77,3 +77,12 @@ contrat.addEventListener("input", function () {
 dateDebut.addEventListener("input", function () {
   dateFin.setAttribute("min", this.value);
 });
+
+/**
+ * Modif
+ */
+const status = document.getElementById("status");
+const operation = status.value;
+alertMsg(operation)
+
+

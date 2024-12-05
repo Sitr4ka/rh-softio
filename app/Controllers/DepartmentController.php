@@ -6,6 +6,7 @@ use App\Models\DepartementModel;
 use App\Models\PosteModel;
 
 use App\Controllers\BaseController;
+use App\Models\ContratModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use PhpParser\Node\Expr\PostDec;
 
@@ -55,10 +56,10 @@ class DepartmentController extends BaseController
         return redirect('department')->with('status', 'modification');
     }
 
-    public function deleteDepartment($id = null)
+    public function deleteDepartment($idDepart = null)
     {
         $departements = new DepartementModel();
-        $departements->delete($id);
+        $departements->deleteDepartById($idDepart);
 
         return redirect()->back()->with('status', 'suppression');
     }
@@ -82,32 +83,28 @@ class DepartmentController extends BaseController
         return redirect('department')->with('status', 'enregistrement');
     }
 
-    public function updatePostionHeld($id = null)
+    public function updatePostionHeld($idPoste = null)
     {
-        $postes = new PosteModel();
-        $poste = $postes->where('idPoste', $id)->first();
+        $libelleDepart = $this->request->getPost('departement');
 
         $departements = new DepartementModel();
-
-
-        $libelleDepart = $this->request->getPost('departement');
         $departement = $departements->where('libelleDepart', $libelleDepart)->first();
-
         $idDepart = $departement['idDepart'];
 
         $data = [
             'poste' => $this->request->getPost('poste'),
             'idDepart' => $idDepart
         ];
-
-        $postes->update($id, $data);
+        
+        $postes = new PosteModel();
+        $postes->update($idPoste, $data);
         return redirect('department')->with('status', 'modification');
     }
 
-    public function deletePositionHeld($id = null)
+    public function deletePositionHeld($idPoste = null)
     {
         $postes = new PosteModel();
-        $postes->delete($id);
+        $postes->deletePosteById($idPoste);
 
         return redirect()->back()->with('status', 'suppression');
     }

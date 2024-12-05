@@ -117,14 +117,8 @@ class ContratController extends BaseController
 
     public function deleteContrat($idContrat = null)
     {
-
-        // Delete shedule
-        $horaire = new HoraireModel();
-        $horaire = $horaire->where('idContrat', $idContrat)->delete();
-
-        // Delete contract
         $contrat = new ContratModel();
-        $contrat->delete($idContrat);
+        $contrat->deleteContratById($idContrat);
 
         return redirect()->back()->with('status', 'suppression');
     }

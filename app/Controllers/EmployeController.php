@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ContratModel;
 use App\Models\EmployeModel;
 use App\Models\PointageModel;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -121,10 +122,23 @@ class EmployeController extends BaseController
         }
     }
 
-    public function delete($id = null)
+    public function delete($idEmploye = null)
     {
+        $contrats = new ContratModel();
+        $contrats = $contrats->where('idEmploye', $idEmploye)->findAll();
+
+        foreach ($contrats as $contrat) {
+            $idContrat = $contrat['idContrat'];
+            $newContrat = new ContratModel();
+            $newContrat->deleteContratById($idContrat);
+        }
+
+        //Delete Pointage
+        $pointages = new PointageModel();
+        $pointages->where('idEmploye', $idEmploye)->delete();
+
         $employee = new EmployeModel();
-        $employee->delete($id);
+        $employee->delete($idEmploye);
 
         return redirect()->back()->with('status', 'suppression');
     }

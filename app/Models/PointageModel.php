@@ -21,36 +21,6 @@ class PointageModel extends Model
         'idEmploye'
     ];
 
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
-
-    protected array $casts = [];
-    protected array $castHandlers = [];
-
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
-
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
-
     /**
      * 
      */
@@ -63,7 +33,8 @@ class PointageModel extends Model
     }
 
     /**
-     * 
+     * Get All Scoring By Date
+     * @return Pointage
      */
     function getScoringByDays(string $date)
     {
@@ -71,6 +42,7 @@ class PointageModel extends Model
     }
 
     /**
+     * Get all scoring according to the filter (startDate, endDate, contact)
      * @return array scoring filter by an interval of date
      */
     function getAllScoringById(int $idEmploye, string $startDate, string $endDate)
@@ -88,7 +60,6 @@ class PointageModel extends Model
      */
     function getScoringByDate(int $idEmploye, string $date)
     {
-
         return $this->where('idEmploye', $idEmploye)
             ->where('date', $date)
             ->first();
