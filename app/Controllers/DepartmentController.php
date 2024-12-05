@@ -23,11 +23,18 @@ class DepartmentController extends BaseController
 
         $departements = new DepartementModel();
         $postes = new PosteModel();
+        
+        $searchInput = $this->request->getGet('searchDepart');
+        
+        if ($searchInput) {
+            $postes->like('poste', $searchInput);
+        }
+        
         $data = [
-            'departements'  => $departements
-                ->orderBy('idDepart', 'ASC')
-                ->getAll(),
+            'departements'  => $departements->getAll(),
             'postes'        => $postes->getAll(),
+            'pager'         => $postes->pager,
+            'search'        => $searchInput,
             'user'          => $user,
         ];
         return view('department/index', $data);

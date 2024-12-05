@@ -23,18 +23,12 @@ class ContratController extends BaseController
         $postes = $postes->getAll();
 
         $contrats = new ContratModel();
-        $contrats = $contrats->getWithPositionHired();
-
-        $horaires = new HoraireModel();
-        foreach ($contrats as &$contrat) {
-            $horaireData = $horaires->where('idContrat', $contrat['idContrat'])->getAll();
-            $contrat["horaires"] = $horaireData;
-        }
         
         $data = [
             'user'      => $user,
             'currentDate' => $currentDate,
-            'contrats' => $contrats,
+            'contrats' => $contrats->getWithPositionHired(),
+            'pager'     => $contrats->pager,
             'postes' => $postes,
         ];
 

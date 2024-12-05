@@ -212,6 +212,14 @@
             </div>
         </form>
         <div class="container-fluid employeeTable overflow-x-auto">
+            <div class="headerEmployeeTable d-flex justify-content-end mb-3">
+                <form action="<?= base_url('employee') ?>" method="get">
+                    <div class="input-group">
+                        <button class="btn btn-primary" type="submit" id="searchBtn">Rechercher</button>
+                        <input type="search" class="form-control" name="searchEmployee" value="<?= ($search) ? $search :  "" ?>">
+                    </div>
+                </form>
+            </div>
             <table id="employeeTable" class="table table-borderless table-hover table-striped" style="width:100%">
                 <thead>
                     <tr>
@@ -344,6 +352,7 @@
                     } ?>
                 </tbody>
             </table>
+            <?= $pager->links('default', 'mypager') ?>
         </div>
     </div>
 </main>

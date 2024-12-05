@@ -23,7 +23,7 @@ class DepartementModel extends Model
      */
     function getAll()
     {
-        return $this->findAll();
+        return $this->orderBy('idDepart', 'ASC')->findAll();
     }
 
     /**

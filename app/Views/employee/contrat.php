@@ -206,7 +206,7 @@
                         <th class="text-center bg-info">Poste</th>
                         <th class="text-center bg-info">Début</th>
                         <th class="text-center bg-info">Fin</th>
-                        <th class="text-center bg-info">Salaire de base</th>
+                        <th class="text-center bg-info">Salaire de base (Ar)</th>
                         <th class="text-center bg-info">Action</th>
                     </tr>
                 </thead>
@@ -307,18 +307,15 @@
                                             </div>
                                             <div class="col mb-4">
                                                 <label for="dateDebut" class="form-label">Début :</label>
-                                                <input type="date" class="form-control" name="dateDebut" value="<?= $contrat['dateDebut'] ?>"
-                                                    aria-label="">
+                                                <input type="date" class="form-control" name="dateDebut" value="<?= $contrat['dateDebut'] ?>">
                                             </div>
                                             <div class="col mb-4">
                                                 <label for="dateFin" class="form-label">Fin :</label>
-                                                <input type="date" class="form-control" name="dateFin" value="<?= $contrat['dateFin'] ?>"
-                                                    aria-label="">
+                                                <input type="date" class="form-control" name="dateFin" value="<?= $contrat['dateFin'] ?>">
                                             </div>
                                             <div class="col mb-4">
                                                 <label for="lieuTravail" class="form-label">Lieu :</label>
-                                                <input type="text" class="form-control" name="lieuTravail" value="<?= $contrat['lieuTravail'] ?>"
-                                                    placeholder="" aria-label="">
+                                                <input type="text" class="form-control" name="lieuTravail" value="<?= $contrat['lieuTravail'] ?>">
                                             </div>
                                             <div class="col mb-4">
                                                 <label for="salaire" class="form-label">Salaire de base :</label>
@@ -403,21 +400,20 @@
                                                         value="<?= array_key_exists('Dimanche', $horaireData) ? $horaireData['Dimanche']['endTime'] : ""; ?>">
                                                 </div>
                                             </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                                    </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
-        </div>
-    <?php
+                    <?php
                     } ?>
-    </tbody>
-    </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 <?= $this->endSection() ?>

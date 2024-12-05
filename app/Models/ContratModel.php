@@ -30,10 +30,20 @@ class ContratModel extends Model
         return $this->findAll();
     }
 
-    function getWithPositionHired() {
-        return $this
-        ->join('postes', 'contrats.idPoste = postes.idPoste')
-        ->findAll();
+    function getWithPositionHired()
+    {
+        $newContrats = new ContratModel();
+        $newContrats = $newContrats
+            ->join('postes', 'contrats.idPoste = postes.idPoste')
+            ->findAll();
+
+        $horaires = new HoraireModel();
+        foreach ($newContrats as &$contrat) {
+            $horaireData = $horaires->where('idContrat', $contrat['idContrat'])->getAll();
+            $contrat["horaires"] = $horaireData;
+        }
+
+        return $newContrats;
     }
 
     /**
@@ -45,9 +55,9 @@ class ContratModel extends Model
             $this->select('contrats.idContrat')
             ->join('horaires', 'contrats.idContrat = horaires.idContrat')
             ->where('horaires.jours', $days)
-            ->findAll() ;
-        
-            return $contrats;
+            ->findAll();
+
+        return $contrats;
     }
 
     /**
@@ -55,7 +65,8 @@ class ContratModel extends Model
      * @param int idContrat
      * @return void
      */
-    function deleteContratById($idContrat) {
+    function deleteContratById($idContrat)
+    {
         $horaire = new HoraireModel();
         $horaire = $horaire->where('idContrat', $idContrat)->delete();
 
@@ -66,7 +77,8 @@ class ContratModel extends Model
      * Find all contrats by poste ID
      * @return Contrats
      */
-    function findAllByPoste(int $idPoste) {
+    function findAllByPoste(int $idPoste)
+    {
         return $this->where('idPoste', $idPoste)->findAll();
     }
 }

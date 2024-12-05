@@ -13,17 +13,26 @@ class EmployeController extends BaseController
     public function index()
     {
         $user = session()->get('user');
-
+        $today = today();
         if (!$user) {
             return redirect()->back()->with('errors', "Veuillez vous connecter");
         }
-
-        $today = today();
-
         $employee = new EmployeModel();
+
+        $searchInput = $this->request->getGet('searchEmployee');
+
+        if ($searchInput) {
+            $employee->like('nom', $searchInput)
+                ->orLike('prenoms', $searchInput)
+                ->orLike('adresse', $searchInput)
+                ->orLike('contact', $searchInput)
+                ->orLike('email', $searchInput);
+        }
 
         $data = [
             'employees' => $employee->getAll(),
+            'pager'     => $employee->pager,
+            'search'    => $searchInput,
             'user'      => $user,
             'today'     => $today
         ];
@@ -218,14 +227,13 @@ class EmployeController extends BaseController
                             'observation' => $pointage['observation']
                         ];
                     }
-                } 
+                }
                 $essai = $this->response->setJSON([
                     'lastname'      => $employee['nom'],
                     'firstname'     => $employee['prenoms'],
                     'idEmploye'     => $idEmploye,
                     'apointments'   => $pointageData
                 ]);
-
             } else {
 
                 return $this->response->setStatusCode(404)->setJSON(['error' => 'Employé introuvable']);
