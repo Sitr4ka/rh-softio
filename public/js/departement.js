@@ -1,0 +1,1 @@
+configNav.classList.add('active')

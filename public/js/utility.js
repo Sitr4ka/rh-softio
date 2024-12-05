@@ -31,3 +31,8 @@ function alertMsg(operation, text = "", icon = "") {
     confirmButtonText: "ok",
   });
 }
+
+// ALert Message
+const status = document.getElementById("status");
+const operation = status.value;
+alertMsg(operation)

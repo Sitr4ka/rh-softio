@@ -438,7 +438,4 @@
 
 <?= $this->section('script') ?>
 <script src="<?= base_url('js/contract.js') ?>"></script>
-<script>
-    
-</script>
 <?= $this->endSection() ?>

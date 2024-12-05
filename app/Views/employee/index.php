@@ -11,39 +11,7 @@
     $flashData = session()->getFlashdata("status");
     if ($flashData) {
     ?>
-        <script>
-            const operation = '<?= $flashData ?>'
-            let text = '';
-            let icon = '';
-
-            switch (operation) {
-                case 'enregistrement':
-                    text = 'Enregistrement réussi'
-                    icon = 'success'
-                    break;
-
-                case 'suppression':
-                    text = 'Suppression réussi'
-                    icon = 'success'
-                    break;
-
-                case 'modification':
-                    text = 'Modification réussi'
-                    icon = 'success'
-                    break;
-
-                default:
-                    text = `L'adresse email est déjà utilisé`
-                    icon = 'error'
-                    break;
-            }
-
-            Swal.fire({
-                text: text,
-                icon: icon,
-                confirmButtonText: 'ok',
-            });
-        </script>
+        <input type="hidden" name="status" value="<?= $flashData ? $flashData : null ?>" id="status">
     <?php
     }
     ?>
@@ -399,22 +367,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
-<script>
-    new DataTable('#employeeTable', {
-        "pageLength": 5,
-        "language": {
-            "search": "Rechercher : ",
-            "lengthMenu": '<select class="form-select">' +
-                '<option value="5">5</option>' +
-                '<option value="10">10</option>' +
-                '<option value="15">15</option>' +
-                '</select> éléments par page',
-            "info": "Affichage des résultats : _START_ à _END_ sur _TOTAL_ entrées",
-            "infoEmpty": "Aucune entrée à afficher",
-            "infoFiltered": "(filtré de _MAX_ entrées totales)",
-        }
-    });
-    infoPersoNav.classList.add('active')
-    employeeNav.classList.add('active')
-</script>
+<script src="<?= base_url('js/employee.js') ?>"></script>
 <?= $this->endSection() ?>

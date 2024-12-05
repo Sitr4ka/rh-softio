@@ -77,12 +77,3 @@ contrat.addEventListener("input", function () {
 dateDebut.addEventListener("input", function () {
   dateFin.setAttribute("min", this.value);
 });
-
-/**
- * Modif
- */
-const status = document.getElementById("status");
-const operation = status.value;
-alertMsg(operation)
-
-

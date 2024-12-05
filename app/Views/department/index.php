@@ -2,6 +2,17 @@
 
 <?= $this->section('content') ?>
 <main class="main container-fluid pt-3">
+
+    <!-- Message alert -->
+    <?php
+    $flashData = session()->getFlashdata("status");
+    if ($flashData) {
+    ?>
+        <input type="hidden" name="status" value="<?= $flashData ? $flashData : null ?>" id="status">
+    <?php
+    }
+    ?>
+
     <div class="row row-cols-1 row-cols-lg-2">
         <section class="department">
             <header class="d-flex justify-content-between">
@@ -282,9 +293,6 @@
 
 <!-- Script -->
 <?= $this->section('script') ?>
-
-<script>
-    configNav.classList.add('active')
-</script>
+<script src="<?= base_url('js/departement.js') ?>"></script>
 
 <?= $this->endSection() ?>
